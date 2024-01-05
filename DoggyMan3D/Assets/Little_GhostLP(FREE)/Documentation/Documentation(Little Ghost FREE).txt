@@ -1,0 +1,47 @@
+	
+--------------Little Ghost lowpoly(FREE)----------------------------
+
+This is a FREE edition of the asset "Little Ghost lowpoly".
+This pack contains 3d Model and Animation of a "Little Ghost".
+
+Technical Details:-
+		- Prefabs : 7		
+		- Vertex count : 288(Ghost), 318(Hat), 120(Axe), 254(Devil Head)
+		- Tris count : 572(Ghost), 632(Hat), 236(Axe), 476(Devil Head)
+		- Animations : 1 (Idle)
+		- Used Material(s) : Unity standard material
+		- Texture maps : Albedo/Base Color
+		- Texture Size : 2048
+
+Features:-
+	- Low poly design
+	- Mobile/AR Ready asset
+	- UV Unwrapped
+	- Smooth animations (loop & non-loop, Seamless)
+	- High quality textures
+	- Easy to edit/modify
+	- Demo scene & Scripts included
+		
+Folder details:-
+
+	Materials : Where the materials for the model located.
+	
+	Meshes : Contain FBX format of the 3d model.
+	
+	Textures : Contains Textures, that are in (.PNG) file format
+	
+	(Other folders - Prefabs, Scenes)
+
+How to use:-
+	
+	Simply drag and drop the prefab to your scene and use it.
+	(Prefab(s) located under 
+	Asset > Little Ghost lowpoly (FREE) > Prefabs).
+
+..................................................................................
+
+About Us : "SR Studios Kerala", Game developing company located in Alappuzha, Kerala, India
+
+Contact : srstudioskerala@gmail.com
+
+................Thanks for downloading this package................................
