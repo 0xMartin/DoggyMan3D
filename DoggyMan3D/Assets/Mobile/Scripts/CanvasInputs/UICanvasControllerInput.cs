@@ -6,7 +6,7 @@ namespace StarterAssets
     {
 
         [Header("Output")]
-        public StarterAssetsInputs starterAssetsInputs;
+        public GameInputs starterAssetsInputs;
 
         public void VirtualMoveInput(Vector2 virtualMoveDirection)
         {
