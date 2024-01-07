@@ -1,4 +1,5 @@
-﻿using Cinemachine;
+﻿using System.Linq;
+using Cinemachine;
 using UnityEditor;
 using UnityEngine;
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
@@ -76,6 +77,9 @@ public class PlayerController : MonoBehaviour
     // entity info
     private GameEntityObject _gameEntity;
 
+    // inventory controll
+    private bool _readyToUse;
+
     // player
     private float _speed;
     private float _animationBlend;
@@ -142,10 +146,59 @@ public class PlayerController : MonoBehaviour
         // zmena intezitu otresu kamery (pri chuzi, bezu, hitu, ...)
         UpdateCameraShaking();
 
+        // inventory events
+        InventoryEvents();
+
         // pohyb entity
         UpdateGravity();
         GroundedCheck();
         Move();
+    }
+
+    private void InventoryEvents()
+    {
+        PlayerSave ps = MainGameManager.GetPlayerSave();
+        if (ps == null)
+        {
+            return;
+        }
+
+        // slot inventare 1
+        if (_input.key1 && ps.Inventory.Count > 0 && _readyToUse)
+        {
+            _readyToUse = false;
+            if (_gameEntity.UseItem(ps.Inventory[0]))
+                ps.Inventory.RemoveAt(0);
+        }
+
+        // slot inventare 2
+        if (_input.key2 && ps.Inventory.Count > 1 && _readyToUse)
+        {
+            _readyToUse = false;
+            if (_gameEntity.UseItem(ps.Inventory[1]))
+                ps.Inventory.RemoveAt(1);
+        }
+
+        // slot inventare 3
+        if (_input.key3 && ps.Inventory.Count > 2 && _readyToUse)
+        {
+            _readyToUse = false;
+            if (_gameEntity.UseItem(ps.Inventory[2]))
+                ps.Inventory.RemoveAt(2);
+        }
+
+        // slot inventare 4
+        if (_input.key4 && ps.Inventory.Count > 3 && _readyToUse)
+        {
+            _readyToUse = false;
+            if (_gameEntity.UseItem(ps.Inventory[3]))
+                ps.Inventory.RemoveAt(3);
+        }
+
+        if (!_input.key1 && !_input.key2 && !_input.key3 && !_input.key4)
+        {
+            _readyToUse = true;
+        }
     }
 
     private void UpdateCameraShaking()
@@ -220,7 +273,7 @@ public class PlayerController : MonoBehaviour
                     if (_attackReady)
                     {
                         _attackReady = false;
-                        int id = Random.Range(1, 3);
+                        int id = Random.Range(1, _gameEntity.AttacksDamages.Count() + 1);
                         _gameEntity.DoAttack(id);
                     }
                 }

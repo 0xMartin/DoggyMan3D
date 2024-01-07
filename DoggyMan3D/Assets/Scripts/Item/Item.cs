@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Microsoft.Unity.VisualStudio.Editor;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Item : MonoBehaviour
@@ -9,23 +10,36 @@ public class Item : MonoBehaviour
 
     public enum ItemType
     {
-        POTION,
+        HEALTH_POTION,
+        STAMINA_POTION,
+        STRENGTH_POTION,
         KEY
     }
 
     public string Name;
-    public Image Icon;
+    public Sprite Icon;
     public Item.ItemType Type;
 
-    public List<string> ParameterNames;
     public List<float> ParameterValues;
+
+    public float Time { get; set; }
+
+    public GameObject ItemUseFX;
+
 
     private void OnTriggerEnter(Collider other)
     {
+        if (MainGameManager.GetPlayerSave() == null)
+        {
+            return;
+        }
+
         if (other.CompareTag("Player"))
         {
-            GameManager.GetPlayerSave().Inventory.Add(this);
-            Destroy(this.gameObject);
+            if (MainGameManager.GetPlayerSave().AddItem(this))
+            {
+                Destroy(this.gameObject);
+            }
         }
     }
 

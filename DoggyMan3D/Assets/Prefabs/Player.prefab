@@ -138,6 +138,10 @@ MonoBehaviour:
   sprint: 0
   attack: 0
   esc: 0
+  key1: 0
+  key2: 0
+  key3: 0
+  key4: 0
   analogMovement: 0
   cursorLocked: 1
   cursorInputForLook: 1
@@ -173,9 +177,16 @@ MonoBehaviour:
   Name: Player
   Lives: 100
   MaxStamina: 100
-  StaminaDownSpeed: 9
-  StaminaUpSpeed: 6
-  StartAddStaminaAfterSeconds: 2
+  AttacksDamages:
+  - 20
+  - 20
+  StaminaDownSpeed: 6.5
+  StaminaUpSpeed: 5
+  StartAddStaminaAfterSeconds: 3
+  DrinkPotionSound: {fileID: 8300000, guid: 69fde167e443984458604fa52065a34a, type: 3}
+  DrinkPotionSoundVolume: 1
+  TakeItemSound: {fileID: 8300000, guid: 6afa1e4a7a521eb43b43e76fa92dbfac, type: 3}
+  TakeItemSoundVolume: 1
 --- !u!1 &7814174498907822404
 GameObject:
   m_ObjectHideFlags: 0

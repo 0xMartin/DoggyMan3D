@@ -12,6 +12,10 @@ public class GameInputs : MonoBehaviour
 	public bool sprint;
 	public bool attack;
 	public bool esc;
+	public bool key1;
+	public bool key2;
+	public bool key3;
+	public bool key4;
 
 	[Header("Movement Settings")]
 	public bool analogMovement;
@@ -53,6 +57,26 @@ public class GameInputs : MonoBehaviour
 	{
 		AttackInput(value.isPressed);
 	}
+
+	public void OnKey1(InputValue value)
+	{
+		Key1Input(value.isPressed);
+	}
+
+	public void OnKey2(InputValue value)
+	{
+		Key2Input(value.isPressed);
+	}
+
+	public void OnKey3(InputValue value)
+	{
+		Key3Input(value.isPressed);
+	}
+
+	public void OnKey4(InputValue value)
+	{
+		Key4Input(value.isPressed);
+	}
 #endif
 
 
@@ -84,6 +108,26 @@ public class GameInputs : MonoBehaviour
 	public void AttackInput(bool newAttack)
 	{
 		attack = newAttack;
+	}
+
+	public void Key1Input(bool newValue)
+	{
+		key1 = newValue;
+	}
+
+	public void Key2Input(bool newValue)
+	{
+		key2 = newValue;
+	}
+
+	public void Key3Input(bool newValue)
+	{
+		key3 = newValue;
+	}
+
+	public void Key4Input(bool newValue)
+	{
+		key4 = newValue;
 	}
 
 	private void OnApplicationFocus(bool hasFocus)
