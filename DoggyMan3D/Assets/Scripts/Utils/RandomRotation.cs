@@ -3,16 +3,17 @@ using UnityEngine;
 public class RandomRotation : MonoBehaviour
 {
     public float rotationSpeed = 1f;
-
-    private Vector3 dir;
+    public bool GenerateRandomRotationDir = true;
+    public Vector3 RotationDir;
 
     private void Start()
     {
-        dir = Random.insideUnitSphere; ;
+        if (GenerateRandomRotationDir)
+            RotationDir = Random.insideUnitSphere;
     }
 
     private void Update()
     {
-        transform.Rotate(dir * rotationSpeed * Time.deltaTime);
+        transform.Rotate(RotationDir * rotationSpeed * Time.deltaTime);
     }
 }

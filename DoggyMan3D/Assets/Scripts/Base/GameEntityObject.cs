@@ -220,7 +220,7 @@ public class GameEntityObject : MonoBehaviour
         {
             if (DrinkPotionSound != null)
                 AudioSource.PlayClipAtPoint(DrinkPotionSound, transform.TransformPoint(transform.position), DrinkPotionSoundVolume);
-            ShowAuraEffect(item.ItemUseFX);
+            ShowAuraEffect(item.ItemUseFX, 3.0f);
             this.AddLives(this._maxLives);
             return true;
         }
@@ -239,7 +239,14 @@ public class GameEntityObject : MonoBehaviour
 
             if (DrinkPotionSound != null)
                 AudioSource.PlayClipAtPoint(DrinkPotionSound, transform.TransformPoint(transform.position), DrinkPotionSoundVolume);
-            ShowAuraEffect(item.ItemUseFX);
+            if (item.ParameterValues.Count > 0)
+            {
+                ShowAuraEffect(item.ItemUseFX, item.ParameterValues[0]);
+            }
+            else
+            {
+                ShowAuraEffect(item.ItemUseFX, 3.0f);
+            }
             ActivePotions.Add(item);
             return true;
         }
@@ -247,7 +254,7 @@ public class GameEntityObject : MonoBehaviour
         return false;
     }
 
-    public void ShowAuraEffect(GameObject fx)
+    public void ShowAuraEffect(GameObject fx, float activeTime)
     {
         if (fx != null)
         {
@@ -256,6 +263,7 @@ public class GameEntityObject : MonoBehaviour
             if (osfx != null)
             {
                 osfx.TargetEntity = this;
+                osfx.activeTime = activeTime;
             }
         }
     }

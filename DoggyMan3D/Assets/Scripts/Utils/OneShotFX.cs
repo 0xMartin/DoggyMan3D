@@ -20,7 +20,7 @@ public class OneShotFX : MonoBehaviour
     void Update() {
         if(TargetEntity != null) {
             transform.position = TargetEntity.transform.position;
-            transform.Translate(new Vector3(0.0f, -0.2f, 0.0f));
+            transform.Translate(new Vector3(0.0f, -0.6f, 0.0f));
         }
     }
 
