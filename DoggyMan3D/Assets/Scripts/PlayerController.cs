@@ -1,4 +1,5 @@
-﻿using UnityEditor;
+﻿using Cinemachine;
+using UnityEditor;
 using UnityEngine;
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
 using UnityEngine.InputSystem;
@@ -7,7 +8,7 @@ using UnityEngine.InputSystem;
 /* Note: animations are called via the controller for both the character and capsule using animator null checks
  */
 
-[RequireComponent(typeof(GameEntity))]
+[RequireComponent(typeof(GameEntityObject))]
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
 [RequireComponent(typeof(PlayerInput))]
 #endif
@@ -50,6 +51,9 @@ public class PlayerController : MonoBehaviour
     public LayerMask GroundLayers;
 
     [Header("Cinemachine")]
+    [Tooltip("Cinemachine virtual camera, used for setting of shake")]
+    public CinemachineVirtualCamera VirtualCamera;
+
     [Tooltip("The follow target set in the Cinemachine Virtual Camera that the camera will follow")]
     public GameObject CinemachineCameraTarget;
 
@@ -70,7 +74,7 @@ public class PlayerController : MonoBehaviour
     private float _cinemachineTargetPitch;
 
     // entity info
-    private GameEntity _gameEntity;
+    private GameEntityObject _gameEntity;
 
     // player
     private float _speed;
@@ -103,7 +107,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-
     private void Awake()
     {
         // get a reference to our main camera
@@ -117,7 +120,7 @@ public class PlayerController : MonoBehaviour
     {
         _cinemachineTargetYaw = CinemachineCameraTarget.transform.rotation.eulerAngles.y;
 
-        _gameEntity = GetComponent<GameEntity>();
+        _gameEntity = GetComponent<GameEntityObject>();
 
         _animator = PlayerModel.GetComponent<Animator>();
         _input = GetComponent<GameInputs>();
@@ -132,11 +135,12 @@ public class PlayerController : MonoBehaviour
     {
         // zmena utoku/spousteni utoku
         UpdateAttack();
+
         // zmena animaci podle aktualniho stavu entity
         UpdateAnimator();
 
-        // zvuky
-        SoundPlayer();
+        // zmena intezitu otresu kamery (pri chuzi, bezu, hitu, ...)
+        UpdateCameraShaking();
 
         // pohyb entity
         UpdateGravity();
@@ -144,12 +148,22 @@ public class PlayerController : MonoBehaviour
         Move();
     }
 
-    private void SoundPlayer()
+    private void UpdateCameraShaking()
     {
-        AnimatorStateInfo info = _animator.GetCurrentAnimatorStateInfo(0);
-        if (info.IsName("WalkForwardBattle"))
+        if (!_gameEntity.IsMoving() && !_gameEntity.IsSprinting())
         {
-            
+            SetCameraShaking(0.5f, 0.3f);
+        }
+        else
+        {
+            if (_gameEntity.IsSprinting())
+            {
+                SetCameraShaking(0.6f, 5.0f);
+            }
+            else
+            {
+                SetCameraShaking(0.52f, 2.5f);
+            }
         }
     }
 
@@ -258,17 +272,17 @@ public class PlayerController : MonoBehaviour
 
     private void Move()
     {
-        // update entity info
+        // update entity move
         _gameEntity.UpdateMove(_input.move != Vector2.zero, _input.sprint);
 
         // set target speed based on move speed, sprint speed and if sprint is pressed
-        float targetSpeed = _input.sprint ? SprintSpeed : MoveSpeed;
+        float targetSpeed = _gameEntity.IsSprinting() ? SprintSpeed : MoveSpeed;
 
         // a simplistic acceleration and deceleration designed to be easy to remove, replace, or iterate upon
 
         // note: Vector2's == operator uses approximation so is not floating point error prone, and is cheaper than magnitude
         // if there is no input, set the target speed to 0
-        if (_input.move == Vector2.zero || !_gameEntity.IsMovingEnabled()) targetSpeed = 0.0f;
+        if (!_gameEntity.IsMoving() || !_gameEntity.IsMovingEnabled()) targetSpeed = 0.0f;
 
         // a reference to the players current horizontal velocity
         float currentHorizontalSpeed = new Vector3(_gameEntity.GetCharacterController().velocity.x, 0.0f, _gameEntity.GetCharacterController().velocity.z).magnitude;
@@ -357,6 +371,22 @@ public class PlayerController : MonoBehaviour
         Gizmos.DrawSphere(
             new Vector3(transform.position.x, transform.position.y - GroundedOffset, transform.position.z),
             GroundedRadius);
+    }
+
+    private void SetCameraShaking(float amplitude, float frequency)
+    {
+        if (VirtualCamera != null)
+        {
+            // Získejte odkaz na komponentu CinemachineBasicMultiChannelPerlin v rámci Virtual Camera
+            var noiseSettings = VirtualCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
+
+            // Nastavte amplitudu a frekvenci šumu
+            if (noiseSettings != null)
+            {
+                noiseSettings.m_AmplitudeGain = amplitude;
+                noiseSettings.m_FrequencyGain = frequency;
+            }
+        }
     }
 
 }
