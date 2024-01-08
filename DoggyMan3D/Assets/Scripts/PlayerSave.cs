@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[Serializable]
 public class PlayerSave
 {
 
@@ -24,5 +26,7 @@ public class PlayerSave
         this.Inventory.Add(item);
         return true;
     }
+
+    
 
 }

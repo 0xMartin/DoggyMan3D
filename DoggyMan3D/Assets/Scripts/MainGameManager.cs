@@ -21,6 +21,8 @@ public class MainGameManager : MonoBehaviour
         _playerSave.PlayerRef = PlayerRef;
         
         PlayerRef.Name = _playerSave.Name;
+
+        SaveSystem.SavePlayer(_playerSave);
     }
 
     void Update()

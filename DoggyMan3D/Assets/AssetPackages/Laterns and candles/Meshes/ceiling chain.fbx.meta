@@ -1,0 +1,149 @@
+fileFormatVersion: 2
+guid: d119f9920a8205b45b1e51485a2163a5
+timeCreated: 1495464565
+licenseType: Store
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: Cube.032
+    100004: Cube.078
+    100006: Cube.079
+    100008: Cube.080
+    100010: Cube.081
+    100012: Cube.082
+    100014: Cube.083
+    100016: Cube.084
+    100018: Cube.085
+    100020: Cube.086
+    100022: Cube.087
+    100024: Cube.088
+    100026: Cube.089
+    100028: Torus.001
+    400000: //RootNode
+    400002: Cube.032
+    400004: Cube.078
+    400006: Cube.079
+    400008: Cube.080
+    400010: Cube.081
+    400012: Cube.082
+    400014: Cube.083
+    400016: Cube.084
+    400018: Cube.085
+    400020: Cube.086
+    400022: Cube.087
+    400024: Cube.088
+    400026: Cube.089
+    400028: Torus.001
+    2300000: Cube.032
+    2300002: Cube.078
+    2300004: Cube.079
+    2300006: Cube.080
+    2300008: Cube.081
+    2300010: Cube.082
+    2300012: Cube.083
+    2300014: Cube.084
+    2300016: Cube.085
+    2300018: Cube.086
+    2300020: Cube.087
+    2300022: Cube.088
+    2300024: Cube.089
+    2300026: Torus.001
+    3300000: Cube.032
+    3300002: Cube.078
+    3300004: Cube.079
+    3300006: Cube.080
+    3300008: Cube.081
+    3300010: Cube.082
+    3300012: Cube.083
+    3300014: Cube.084
+    3300016: Cube.085
+    3300018: Cube.086
+    3300020: Cube.087
+    3300022: Cube.088
+    3300024: Cube.089
+    3300026: Torus.001
+    4300000: Cube.089
+    4300002: Cube.088
+    4300004: Cube.087
+    4300006: Cube.086
+    4300008: Cube.085
+    4300010: Cube.084
+    4300012: Cube.083
+    4300014: Cube.082
+    4300016: Cube.081
+    4300018: Cube.080
+    4300020: Cube.079
+    4300022: Cube.078
+    4300024: Torus.001
+    4300026: Cube.032
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
