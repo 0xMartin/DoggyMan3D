@@ -7,6 +7,9 @@ using UnityEngine.UI;
 public class MenuScript : MonoBehaviour
 {
 
+    public AudioClip ButtonSound;
+    public float ButtonSoundVolume = 0.7f;
+
     [Header("Sections")]
     public GameObject MainSection;
     public GameObject NewGameSection;
@@ -65,6 +68,7 @@ public class MenuScript : MonoBehaviour
         NewGameSection.SetActive(false);
         LoadGameSection.SetActive(false);
         AboutSection.SetActive(false);
+        AudioSource.PlayClipAtPoint(ButtonSound, new Vector3(0.0f, 1.0f, -10.0f), ButtonSoundVolume);
     }
 
     // MAIN ################################################################
@@ -72,30 +76,34 @@ public class MenuScript : MonoBehaviour
     {
         MainSection.SetActive(false);
         NewGameSection.SetActive(true);
+        AudioSource.PlayClipAtPoint(ButtonSound, new Vector3(0.0f, 1.0f, -10.0f), ButtonSoundVolume);
     }
 
     private void ClickMainLoadGame()
     {
         MainSection.SetActive(false);
         LoadGameSection.SetActive(true);
+        AudioSource.PlayClipAtPoint(ButtonSound, new Vector3(0.0f, 1.0f, -10.0f), ButtonSoundVolume);
     }
 
     private void ClickMainAbout()
     {
         MainSection.SetActive(false);
         AboutSection.SetActive(true);
+        AudioSource.PlayClipAtPoint(ButtonSound, new Vector3(0.0f, 1.0f, -10.0f), ButtonSoundVolume);
     }
 
     private void ClickMainExit()
     {
         Application.Quit();
+        AudioSource.PlayClipAtPoint(ButtonSound, new Vector3(0.0f, 1.0f, -10.0f), ButtonSoundVolume);
     }
 
     // NEW ################################################################
 
     private void ClickNewGamePlay()
     {
-
+        AudioSource.PlayClipAtPoint(ButtonSound, new Vector3(0.0f, 1.0f, -10.0f), ButtonSoundVolume);
     }
 
     // LOAD ################################################################

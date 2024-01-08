@@ -25,6 +25,9 @@ public class PlayerUI : MonoBehaviour
     [Header("Inventory")]
     public Image[] InventoryItemImgs;
 
+    [Header("Level info")]
+    public TextMeshProUGUI LevelName;
+
 
     private Image _healthImage;
     private Image _staminaImage;
@@ -67,6 +70,13 @@ public class PlayerUI : MonoBehaviour
 
         // inventory
         RefreshInventory();
+
+        // level name
+        Level l = MainGameManager.GetCurrentLevel();
+        if (LevelName != null && l != null)
+        {
+            LevelName.text = l.Name;
+        }
     }
 
     private void RefreshInventory()

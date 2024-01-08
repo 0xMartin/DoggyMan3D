@@ -4,29 +4,81 @@ using UnityEngine;
 
 public class MainGameManager : MonoBehaviour
 {
-
+    [Header("Player")]
     public GameEntityObject PlayerRef;
 
-    private static PlayerSave _playerSave;
+    [Header("Levels")]
+    [Tooltip("Seznam vsech levelu. Zadava se nazev sceny vzdy. Index 0 - prvni level, 1 - druhy level a tak dale..")]
+    public string[] LevelNames;
+    [Tooltip("Cas jak dloho se bude trvat nez se level plne spusti (postupne odtmaveni obrazovky). Pocitano po nacteni levelu.")]
+    public float TimeToShowLevel;
+    [Tooltip("Cas jak dloho se bude trvat nez se level plne ukonci (postupne ztmaveni obrazovky).")]
+    public float TimeToHideLevel;
 
-    public static PlayerSave GetPlayerSave() {
+    private static PlayerSave _playerSave;
+    private static Level _currentLevel;
+
+    public static PlayerSave GetPlayerSave()
+    {
         return _playerSave;
     }
 
-    void Start()
+    public static Level GetCurrentLevel()
     {
+        return _currentLevel;
+    }
+
+    private void Start()
+    {
+        _playerSave = null;
+        _currentLevel = null;
+
         _playerSave = new PlayerSave();
         _playerSave.Name = "Player Name";
         _playerSave.Level = 1;
         _playerSave.PlayerRef = PlayerRef;
-        
+
         PlayerRef.Name = _playerSave.Name;
-
-        SaveSystem.SavePlayer(_playerSave);
     }
 
-    void Update()
+    private void Update()
     {
-        
+
     }
+
+    public void LoadPlayerSave()
+    {
+
+    }
+
+    public void SavePlayerSave()
+    {
+
+    }
+
+    public void LoadLevel(int levelId)
+    {
+
+    }
+
+    public void RemoveCurrentLevel()
+    {
+
+    }
+
+    public void SpawnPlayer()
+    {
+
+    }
+
+    public void GoToNextLevel()
+    {
+
+    }
+
+    public void QuitLevel()
+    {
+
+    }
+
 }
