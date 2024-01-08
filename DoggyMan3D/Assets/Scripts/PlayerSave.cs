@@ -9,10 +9,10 @@ public class PlayerSave
 
     public string Name = "";
     public int Level = 1;
-    public List<Item> Inventory = new List<Item>();
+    public List<Item.ItemData> Inventory = new List<Item.ItemData>();
     public GameEntityObject PlayerRef = null;
 
-    public bool AddItem(Item item)
+    public bool AddItem(Item.ItemData item)
     {
         if (this.Inventory.Count >= 4)
         {

@@ -85,7 +85,7 @@ public class PlayerUI : MonoBehaviour
         if (ps != null)
         {
             int index = 0;
-            foreach (Item item in ps.Inventory)
+            foreach (Item.ItemData item in ps.Inventory)
             {
                 InventoryItemImgs[index].enabled = true;
                 InventoryItemImgs[index].sprite = item.Icon;
@@ -121,7 +121,7 @@ public class PlayerUI : MonoBehaviour
         else
         {
             int index = 0;
-            foreach (Item potion in Player.GetActivePotions())
+            foreach (Item.ItemData potion in Player.GetActivePotions())
             {
                 PotionImgs[index].sprite = potion.Icon;
                 PotionNames[index].text = potion.Name;

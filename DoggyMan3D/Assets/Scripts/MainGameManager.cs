@@ -7,6 +7,9 @@ public class MainGameManager : MonoBehaviour
     [Header("Player")]
     public GameEntityObject PlayerRef;
 
+    [Header("Main Camera")]
+    public GameObject MainCamera;
+
     [Header("Levels")]
     [Tooltip("Seznam vsech levelu. Zadava se nazev sceny vzdy. Index 0 - prvni level, 1 - druhy level a tak dale..")]
     public string[] LevelNames;
@@ -17,6 +20,7 @@ public class MainGameManager : MonoBehaviour
 
     private static PlayerSave _playerSave;
     private static Level _currentLevel;
+    private static GameObject _camera;
 
     public static PlayerSave GetPlayerSave()
     {
@@ -28,10 +32,16 @@ public class MainGameManager : MonoBehaviour
         return _currentLevel;
     }
 
+    public static GameObject GetMainCamera()
+    {
+        return _camera;
+    }
+
     private void Start()
     {
         _playerSave = null;
         _currentLevel = null;
+        _camera = MainCamera;
 
         _playerSave = new PlayerSave();
         _playerSave.Name = "Player Name";
