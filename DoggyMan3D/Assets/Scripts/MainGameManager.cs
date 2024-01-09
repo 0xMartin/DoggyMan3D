@@ -43,6 +43,9 @@ public class MainGameManager : MonoBehaviour
     [Header("Player UI")]
     public GameObject PlayerUI;
 
+    [Header("Scene transition")]
+    public CircleTransition circleTransition;
+
     [Header("Game Input System")]
     public GameInputs GameInputSystem;
 
@@ -310,6 +313,9 @@ public class MainGameManager : MonoBehaviour
                     // bindovani eventu levelu
                     BindLevelEvents();
 
+                    // prechodovy efekt (odkryje overlay)
+                    circleTransition.HideOverlay();
+
                     Debug.Log("Level loading done");
                 }
                 else
@@ -343,13 +349,6 @@ public class MainGameManager : MonoBehaviour
 
         // deaktivace hrace
         DeactivePlayer();
-        if (PlayerRef != null)
-        {
-            PlayerRef.SetActive(false);
-        }
-
-        // reset hrace
-        ResetPlayer();
 
         // spusti reload sceny
         Scene sceneToUnload = SceneManager.GetSceneByBuildIndex(_currentLevelId);
@@ -372,6 +371,19 @@ public class MainGameManager : MonoBehaviour
 
     private IEnumerator ReloadSceneAsync(Scene sceneToRemove, int leveToLoadId)
     {
+        // prechodovy efekt (odkryje overlay)
+        circleTransition.ShowOverlay();
+        yield return new WaitForSeconds(circleTransition.Duration);
+
+        // deaktivace hrace
+        if (PlayerRef != null)
+        {
+            PlayerRef.SetActive(false);
+        }
+
+        // reset hrace
+        ResetPlayer();
+
         // skryje player UI
         PlayerUI.SetActive(false);
 
@@ -463,6 +475,7 @@ public class MainGameManager : MonoBehaviour
             if (entity != null)
             {
                 entity.IsEntityEnabled = true;
+                entity.EnableMovingStopped(true);
                 Debug.Log("Player activation done");
             }
             else
@@ -487,6 +500,7 @@ public class MainGameManager : MonoBehaviour
             if (entity != null)
             {
                 entity.IsEntityEnabled = false;
+                entity.EnableMovingStopped(false);
                 Debug.Log("Player deactivation done");
             }
             else

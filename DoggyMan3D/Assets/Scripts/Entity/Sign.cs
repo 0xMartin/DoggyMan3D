@@ -1,6 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
+
 using UnityEngine;
 
 public class Sign : MonoBehaviour
@@ -13,7 +11,7 @@ public class Sign : MonoBehaviour
 
     private GameObject _textInstance;
 
-    private void Start()
+    private void Awake()
     {
         _textInstance = null;
     }

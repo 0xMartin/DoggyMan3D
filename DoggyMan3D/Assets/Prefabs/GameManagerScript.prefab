@@ -59,4 +59,5 @@ MonoBehaviour:
   DeathMenuContinue: {fileID: 0}
   DeathMenuBackToMenu: {fileID: 0}
   PlayerUI: {fileID: 0}
+  circleTransition: {fileID: 0}
   GameInputSystem: {fileID: 0}

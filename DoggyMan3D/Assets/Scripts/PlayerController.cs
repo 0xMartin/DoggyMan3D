@@ -138,7 +138,7 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         if (MainGameManager.IsGamePaused()) return;
-        
+
         // zmena utoku/spousteni utoku
         UpdateAttack();
 
@@ -307,7 +307,7 @@ public class PlayerController : MonoBehaviour
     private void CameraRotation()
     {
         if (MainGameManager.IsGamePaused()) return;
-        
+
         // if there is an input and camera position is not fixed
         if (_input.look.sqrMagnitude >= _threshold && !LockCameraPosition)
         {
@@ -339,7 +339,7 @@ public class PlayerController : MonoBehaviour
 
         // note: Vector2's == operator uses approximation so is not floating point error prone, and is cheaper than magnitude
         // if there is no input, set the target speed to 0
-        if (!_gameEntity.IsMoving() || !_gameEntity.IsMovingEnabled()) targetSpeed = 0.0f;
+        if (!_gameEntity.IsMoving() || !_gameEntity.IsMovingEnabled() || !_gameEntity.IsEntityEnabled) targetSpeed = 0.0f;
 
         // a reference to the players current horizontal velocity
         float currentHorizontalSpeed = new Vector3(_gameEntity.GetCharacterController().velocity.x, 0.0f, _gameEntity.GetCharacterController().velocity.z).magnitude;
@@ -372,7 +372,7 @@ public class PlayerController : MonoBehaviour
 
         // note: Vector2's != operator uses approximation so is not floating point error prone, and is cheaper than magnitude
         // if there is a move input rotate player when the player is moving
-        if (_input.move != Vector2.zero && _gameEntity.IsAlive())
+        if (_input.move != Vector2.zero && _gameEntity.IsAlive() && _gameEntity.IsMovingEnabled() && _gameEntity.IsEntityEnabled)
         {
             _targetRotation = Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg +
                               _mainCamera.transform.eulerAngles.y;

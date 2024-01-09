@@ -231,12 +231,12 @@ public class GameEntityObject : MonoBehaviour
 
     public bool IsMoving()
     {
-        return this._isMoving && !MainGameManager.IsGamePaused() && IsAlive();
+        return this._isMoving && !MainGameManager.IsGamePaused() && IsAlive() && this.IsEntityEnabled && this._enabledMoving;
     }
 
     public bool IsSprinting()
     {
-        return this._isSprinting && this._stamina > 3 && !MainGameManager.IsGamePaused() && IsAlive();
+        return this._isSprinting && this._stamina > 3 && !MainGameManager.IsGamePaused() && IsAlive() && this.IsEntityEnabled && this._enabledMoving;
     }
 
     public bool IsAlive()
