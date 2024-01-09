@@ -42,6 +42,7 @@ public class GameEntityObject : MonoBehaviour
     private float _stamina;
     private float _noSprintTime = 0.0f;
     private List<Item.ItemData> _activePotions = new List<Item.ItemData>();
+    private bool _unableToReset = false;
 
     // callbacky
     public delegate void EnityDeathCallback();
@@ -53,7 +54,7 @@ public class GameEntityObject : MonoBehaviour
         _controller = GetComponent<CharacterController>();
         this._maxLives = Lives;
         this._stamina = MaxStamina;
-        ResetPlayer();
+        _unableToReset = true;
     }
 
     private void Update()
@@ -114,16 +115,19 @@ public class GameEntityObject : MonoBehaviour
 
     public void ResetPlayer()
     {
-        this.Lives = this._maxLives;
-        this._stamina = this.MaxStamina;
-        this._activePotions.Clear();
-        this.OnExternalItemUse.Clear();
-        this.OnDeath = null;
-        this._doAttackID = 0;
-        this._isMoving = false;
-        this._isSprinting = false;
-        this._enabledMoving = true;
-        this.IsEntityEnabled = true;
+        if (this._unableToReset)
+        {
+            this.Lives = this._maxLives;
+            this._stamina = this.MaxStamina;
+            this._activePotions.Clear();
+            this.OnExternalItemUse.Clear();
+            this.OnDeath = null;
+            this._doAttackID = 0;
+            this._isMoving = false;
+            this._isSprinting = false;
+            this._enabledMoving = true;
+            this.IsEntityEnabled = true;
+        }
     }
 
     public void UpdateMove(bool moving, bool sprinting)
@@ -225,12 +229,12 @@ public class GameEntityObject : MonoBehaviour
 
     public bool IsMoving()
     {
-        return this._isMoving;
+        return this._isMoving && IsAlive();
     }
 
     public bool IsSprinting()
     {
-        return this._isSprinting && this._stamina > 3;
+        return this._isSprinting && this._stamina > 3 && IsAlive();
     }
 
     public bool IsAlive()
@@ -350,7 +354,7 @@ public class GameEntityObject : MonoBehaviour
     public void ShowAuraEffect(GameObject fx, float activeTime)
     {
         if (!IsEntityEnabled) return;
-        
+
         if (fx != null)
         {
             GameObject instanceFx = Instantiate(fx);

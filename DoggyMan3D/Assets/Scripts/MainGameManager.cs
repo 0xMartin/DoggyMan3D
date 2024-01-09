@@ -82,6 +82,11 @@ public class MainGameManager : MonoBehaviour
     //      -> Menu Action: To Menu = On Level Cloese
     /***********************************************************************************************************************************/
 
+    private void Start()
+    {
+        MainGameManager.SetPlayerNameOnGameManagerStart("Martin");
+    }
+
     // On Awake (open game) 
     private void Awake()
     {
@@ -106,7 +111,7 @@ public class MainGameManager : MonoBehaviour
             if (_playerNameToSet != null)
             {
                 _playerSave.Name = _playerNameToSet;
-                PlayerRef.AddComponent<GameEntityObject>().Name = _playerSave.Name;
+                PlayerRef.GetComponent<GameEntityObject>().Name = _playerSave.Name;
             }
         }
 
@@ -148,122 +153,8 @@ public class MainGameManager : MonoBehaviour
     }
 
     /***********************************************************************************************************************************/
-    // GAME MANAGER UTILS
+    // GAME MANAGER SCENE LOAD FUNCTIONS
     /***********************************************************************************************************************************/
-
-    /// <summary>
-    /// Prejde do dalsiho levelu a ulozi hru. Nenacita vsak level, jen zmeni level index.
-    /// </summary>
-    private void GoToNextLevel()
-    {
-        if (_playerSave != null)
-        {
-            _playerSave.Level++;
-            SaveSystem.SavePlayer(_playerSave);
-            Debug.Log("Go to next level: " + _playerSave.Level);
-        }
-        else
-        {
-            Debug.LogError("Failed to go to the next level");
-        }
-    }
-
-    /// <summary>
-    /// Ukonci level. Deaktivuje hrace, zobrazi ukoncovaci prechodovy efekt, odstrani levelu.
-    /// </summary>
-    private void QuitLevel()
-    {
-
-    }
-
-    /// <summary>
-    /// Resetuje hrace
-    /// </summary>
-    private void ResetPlayer()
-    {
-        if (PlayerRef != null)
-        {
-            GameEntityObject entity = PlayerRef.AddComponent<GameEntityObject>();
-            if (entity != null)
-            {
-                entity.ResetPlayer();
-                Debug.Log("Player reset done");
-            }
-            else
-            {
-                Debug.LogError("Failed to reset player");
-            }
-        }
-        else
-        {
-            Debug.LogError("Failed to reset player");
-        }
-    }
-
-    /// <summary>
-    /// Aktivuje hrace. Aktivovany hrace muze provadet vsechny akce.
-    /// </summary>
-    private void ActivatePlayer()
-    {
-        if (PlayerRef != null)
-        {
-            GameEntityObject entity = PlayerRef.AddComponent<GameEntityObject>();
-            if (entity != null)
-            {
-                entity.IsEntityEnabled = true;
-                Debug.Log("Player activation done");
-            }
-            else
-            {
-                Debug.LogError("Failed to active player");
-            }
-        }
-        else
-        {
-            Debug.LogError("Failed to active player");
-        }
-    }
-
-    /// <summary>
-    /// Deaktivuje hrace. Deaktivovany hrac nemuze delat nic, nachazi se ve scene, ale neni mozne jej ovladat, nedostava zasahy, nautoci, ...
-    /// </summary>
-    private void DeactivePlayer()
-    {
-        if (PlayerRef != null)
-        {
-            GameEntityObject entity = PlayerRef.AddComponent<GameEntityObject>();
-            if (entity != null)
-            {
-                entity.IsEntityEnabled = false;
-                Debug.Log("Player deactivation done");
-            }
-            else
-            {
-                Debug.LogError("Failed to deactive player");
-            }
-        }
-        else
-        {
-            Debug.LogError("Failed to deactive player");
-        }
-    }
-
-    /// <summary>
-    /// Vytvori novy save/hru
-    /// </summary>
-    private void CreateNewSave()
-    {
-        GameEntityObject entity = PlayerRef.AddComponent<GameEntityObject>();
-        _playerSave = new PlayerSave
-        {
-            Name = _playerNameToSet == null ? "Doggy Man" : _playerNameToSet,
-            Level = 1,
-            PlayerRef = entity
-        };
-        entity.Name = _playerSave.Name;
-        SaveSystem.SavePlayer(_playerSave);
-        Debug.LogError("New save created");
-    }
 
     /// <summary>
     /// Nacte save/hru ze souboru. Pokud se nacteni nepodari je automaticky vytvoren a nastaven novy save.
@@ -274,7 +165,7 @@ public class MainGameManager : MonoBehaviour
         _playerSave = SaveSystem.LoadPlayer(_playerSaveToLoadPath);
         if (_playerSave != null)
         {
-            GameEntityObject entity = PlayerRef.AddComponent<GameEntityObject>();
+            GameEntityObject entity = PlayerRef.GetComponent<GameEntityObject>();
             _playerSave.PlayerRef = entity;
             entity.Name = _playerSave.Name;
             Debug.LogError("Save loading done");
@@ -307,6 +198,9 @@ public class MainGameManager : MonoBehaviour
     {
         if (levelId >= FirstLevelSceneID)
         {
+            // reset hrace
+            ResetPlayer();
+
             // zahaji nacitani levelu
             Debug.Log("Start loading scene with ID: " + levelId);
             AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(levelId, LoadSceneMode.Additive);
@@ -326,13 +220,8 @@ public class MainGameManager : MonoBehaviour
                     _currentLevelId = levelId;
                     Debug.Log("Level loading done");
                     // pripravi hrace
-                    ResetPlayer();
                     SpawnPlayer();
                     ActivatePlayer();
-                    if (PlayerRef != null)
-                    {
-                        PlayerRef.SetActive(true);
-                    }
                 }
                 else
                 {
@@ -351,26 +240,163 @@ public class MainGameManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Odstrani aktualni level, ktery je nacten ve scene.
+    /// Odstrani aktualni level, ktery je nacten ve scene. A pote nacte pozadovany level. Pokud aktualne neni nacteny zadny 
+    /// level ve tak se automaticky vola metoda pro nacteni levelu
     /// </summary>
-    private void UnloadCurrentLevel()
+    /// <param name="level">Level ktery bude nacten</param>
+    private void ReloadCurrentLevel(int level)
     {
-        Debug.Log("Start unloading scene with ID: " + _currentLevelId);
-        Scene sceneToUnload = SceneManager.GetSceneByBuildIndex(_currentLevelId);
-        if (sceneToUnload.isLoaded)
+        // deaktivace hrace
+        DeactivePlayer();
+        if (PlayerRef != null)
         {
-            StartCoroutine(UnloadSceneAsync(sceneToUnload));
+            PlayerRef.SetActive(false);
+        }
+
+        // reset hrace
+        ResetPlayer();
+
+        // spusti reload sceny
+        Scene sceneToUnload = SceneManager.GetSceneByBuildIndex(_currentLevelId);
+        if (sceneToUnload == null)
+        {
+            // aktualne neni nactena zadna scena/level ve hre => zavola metoda pro nacteni levelu
+            Debug.Log("No scene to unload! Calling load level function ...");
+            LoadLevel(level);
+        }
+        else
+        {
+            // spusti reaload sceny (prvni odstani aktlualne nactenou scenu ve hre a pak nacte pozadovanou scenu/level)
+            Debug.Log("Start unloading scene with ID: " + _currentLevelId);
+            if (sceneToUnload.isLoaded)
+            {
+                StartCoroutine(ReloadSceneAsync(sceneToUnload, level));
+            }
         }
     }
 
-    private IEnumerator UnloadSceneAsync(Scene scene)
+    private IEnumerator ReloadSceneAsync(Scene sceneToRemove, int leveToLoad)
     {
-        AsyncOperation asyncUnload = SceneManager.UnloadSceneAsync(scene);
+        // odstraneni aktualne nacteneho levelu
+        Debug.Log("Start with unloading current scene wit ID: " + _currentLevelId);
+        AsyncOperation asyncUnload = SceneManager.UnloadSceneAsync(sceneToRemove);
         while (!asyncUnload.isDone)
         {
             yield return null;
         }
         Debug.Log("Current level unloaded");
+
+        // nacteni noveho levelu
+    }
+
+    /***********************************************************************************************************************************/
+    // GAME MANAGER UTILS
+    /***********************************************************************************************************************************/
+
+    /// <summary>
+    /// Vytvori novy save/hru
+    /// </summary>
+    private void CreateNewSave()
+    {
+        GameEntityObject entity = PlayerRef.GetComponent<GameEntityObject>();
+        _playerSave = new PlayerSave
+        {
+            Name = _playerNameToSet == null ? "Doggy Man" : _playerNameToSet,
+            Level = 0,
+            PlayerRef = entity
+        };
+        entity.Name = _playerSave.Name;
+        SaveSystem.SavePlayer(_playerSave);
+        Debug.Log("New save created");
+    }
+
+    /// <summary>
+    /// Prejde do dalsiho levelu a ulozi hru. Nenacita vsak level, jen zmeni level index.
+    /// </summary>
+    private void GoToNextLevel()
+    {
+        if (_playerSave != null)
+        {
+            _playerSave.Level++;
+            SaveSystem.SavePlayer(_playerSave);
+            Debug.Log("Go to next level: " + _playerSave.Level);
+        }
+        else
+        {
+            Debug.LogError("Failed to go to the next level");
+        }
+    }
+
+    /// <summary>
+    /// Resetuje hrace
+    /// </summary>
+    private void ResetPlayer()
+    {
+        if (PlayerRef != null)
+        {
+            GameEntityObject entity = PlayerRef.GetComponent<GameEntityObject>();
+            if (entity != null)
+            {
+                entity.ResetPlayer();
+                Debug.Log("Player reset done");
+            }
+            else
+            {
+                Debug.LogError("Failed to reset player");
+            }
+        }
+        else
+        {
+            Debug.LogError("Failed to reset player");
+        }
+    }
+
+    /// <summary>
+    /// Aktivuje hrace. Aktivovany hrace muze provadet vsechny akce.
+    /// </summary>
+    private void ActivatePlayer()
+    {
+        if (PlayerRef != null)
+        {
+            GameEntityObject entity = PlayerRef.GetComponent<GameEntityObject>();
+            if (entity != null)
+            {
+                entity.IsEntityEnabled = true;
+                Debug.Log("Player activation done");
+            }
+            else
+            {
+                Debug.LogError("Failed to active player");
+            }
+        }
+        else
+        {
+            Debug.LogError("Failed to active player");
+        }
+    }
+
+    /// <summary>
+    /// Deaktivuje hrace. Deaktivovany hrac nemuze delat nic, nachazi se ve scene, ale neni mozne jej ovladat, nedostava zasahy, nautoci, ...
+    /// </summary>
+    private void DeactivePlayer()
+    {
+        if (PlayerRef != null)
+        {
+            GameEntityObject entity = PlayerRef.GetComponent<GameEntityObject>();
+            if (entity != null)
+            {
+                entity.IsEntityEnabled = false;
+                Debug.Log("Player deactivation done");
+            }
+            else
+            {
+                Debug.LogError("Failed to deactive player");
+            }
+        }
+        else
+        {
+            Debug.LogError("Failed to deactive player");
+        }
     }
 
     /// <summary>
@@ -378,32 +404,29 @@ public class MainGameManager : MonoBehaviour
     /// </summary>
     private void SpawnPlayer()
     {
+        if (PlayerRef == null || _currentLevel == null)
+        {
+            Debug.LogError("Failed to spawn player. Player of level descriptor is null");
+            return;
+        }
+        if (_currentLevel.SpawnPoint == null)
+        {
+            Debug.LogError("Failed to spawn player. Spawnpoint of current level is null");
+            return;
+        }
 
-    }
+        // nastavi hraci pozici a rotaci stejnou jako spawnpointu
+        PlayerRef.transform.position = _currentLevel.SpawnPoint.transform.position;
+        Quaternion sourceRotation = _currentLevel.SpawnPoint.transform.rotation;
+        PlayerRef.transform.rotation = Quaternion.Euler(0, sourceRotation.eulerAngles.y, 0);
 
-    /// <summary>
-    /// Ziska info o aktualnim levelu
-    /// </summary>
-    /// <returns>Deskriptor aktualniho levelu</returns>
-    private Level GetCurrentLevelInfo()
-    {
-        return null;
-    }
+        // aktivuje objekt hrace
+        if (PlayerRef != null)
+        {
+            PlayerRef.SetActive(true);
+        }
 
-    /// <summary>
-    /// Callback pro stav kdy je dokoncen level
-    /// </summary>
-    private void LevelFinishedCallback()
-    {
-
-    }
-
-    /// <summary>
-    /// Callback pro stav kdy je hra mrtev
-    /// </summary>
-    private void PlayerDeathCallback()
-    {
-
+        Debug.Log("Player spawned");
     }
 
 }

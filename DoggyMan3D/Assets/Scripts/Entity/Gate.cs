@@ -30,7 +30,7 @@ public class Gate : MonoBehaviour
     private bool _isOpened;
     private bool _initDone;
 
-    private void Start()
+    private void Awake()
     {
         _animator = GetComponent<Animator>();
         _entityDeathCount = 111;

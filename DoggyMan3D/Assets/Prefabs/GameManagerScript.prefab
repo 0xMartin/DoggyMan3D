@@ -46,6 +46,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerRef: {fileID: 0}
   MainCamera: {fileID: 0}
-  LevelNames: []
-  TimeToShowLevel: 0
-  TimeToHideLevel: 0
+  LevelsID: 02000000
+  TimeToShowLevel: 2
+  TimeToHideLevel: 2
+  LevelInfoObjName: LevelInfoObject
+  FirstLevelSceneID: 2
