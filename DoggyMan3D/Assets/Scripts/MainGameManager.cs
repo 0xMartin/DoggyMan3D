@@ -2,6 +2,7 @@ using System.Collections;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MainGameManager : MonoBehaviour
 {
@@ -27,6 +28,21 @@ public class MainGameManager : MonoBehaviour
     public string LevelInfoObjName = "LevelInfoObject";
     [Tooltip("ID sceny prvniho levelu ve hre. Vsechny sceny s levely musi mit indexy na konci")]
     public int FirstLevelSceneID = 2;
+
+    [Header("Game Pause Menu")]
+    public GameObject PauseMenu;
+    public Button PauseMenuResume;
+    public Button PauseMenuReset;
+    public Button PauseMenuBackToMenu;
+
+    [Header("Game Death Menu")]
+    public GameObject DeathMenu;
+    public Button DeathMenuContinue;
+    public Button DeathMenuBackToMenu;
+
+    [Header("Player UI")]
+    public GameObject PlayerUI;
+
 
     /***********************************************************************************************************************************/
     // GLOBAL VARIABLES SECTION
@@ -82,11 +98,6 @@ public class MainGameManager : MonoBehaviour
     //      -> Menu Action: To Menu = On Level Cloese
     /***********************************************************************************************************************************/
 
-    private void Start()
-    {
-        MainGameManager.SetPlayerNameOnGameManagerStart("Martin");
-    }
-
     // On Awake (open game) 
     private void Awake()
     {
@@ -122,34 +133,25 @@ public class MainGameManager : MonoBehaviour
     // On Level Finished
     public void OnLevelFinished()
     {
-        if (PlayerRef != null)
-        {
-            PlayerRef.SetActive(false);
-        }
+        Debug.Log("Action - Level Finished");
     }
 
     // On Level Close
     public void OnLevelClose()
     {
-        if (PlayerRef != null)
-        {
-            PlayerRef.SetActive(false);
-        }
+        Debug.Log("Action - Level Closed");
     }
 
     // On Level Reset
     public void OnLevelReset()
     {
-        if (PlayerRef != null)
-        {
-            PlayerRef.SetActive(false);
-        }
+        Debug.Log("Action - Level Reset");
     }
 
     // On Player Death
     public void OnPlayerDeath()
     {
-
+        Debug.Log("Action - Player Death");
     }
 
     /***********************************************************************************************************************************/
@@ -217,11 +219,17 @@ public class MainGameManager : MonoBehaviour
                 _currentLevel = levelInfo.GetComponent<Level>();
                 if (_currentLevel != null)
                 {
+                    // nastaveni id aktualne nactene sceny
                     _currentLevelId = levelId;
-                    Debug.Log("Level loading done");
+
                     // pripravi hrace
                     SpawnPlayer();
                     ActivatePlayer();
+
+                    // bindovani eventu levelu
+                    BindLevelEvents();
+
+                    Debug.Log("Level loading done");
                 }
                 else
                 {
@@ -427,6 +435,28 @@ public class MainGameManager : MonoBehaviour
         }
 
         Debug.Log("Player spawned");
+    }
+
+    private void BindLevelEvents()
+    {
+        if (_currentLevel != null)
+        {
+            // level finished event
+            _currentLevel.OnLevelFinished += this.OnLevelFinished;
+
+            // player death event
+            GameEntityObject entity = PlayerRef.GetComponent<GameEntityObject>();
+            if (entity != null)
+            {
+                entity.OnDeath += this.OnPlayerDeath;
+            }
+
+            Debug.Log("Level events binding done");
+        }
+        else
+        {
+            Debug.LogError("Failed to bind level event. Current level is null");
+        }
     }
 
 }

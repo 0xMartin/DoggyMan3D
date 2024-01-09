@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-[Serializable]
 public class Item : MonoBehaviour
 {
 
@@ -15,6 +14,7 @@ public class Item : MonoBehaviour
         KEY
     }
 
+    [Serializable]
     public class ItemData
     {
         public string Name;

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ColliderTrigger
+public class ColliderTrigger : MonoBehaviour
 {
     // callback
     public delegate void TriggerEvent();
