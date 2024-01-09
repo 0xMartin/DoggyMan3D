@@ -17,4 +17,25 @@ public class Level : MonoBehaviour
     [Tooltip("Soundtracky ktere budou v tomto levelu nahodne hrat")]
     public AudioClip[] LevelMusic;
 
+    // callback
+    public delegate void LevelFinished();
+    public LevelFinished OnLevelFinished;
+
+    private void Start()
+    {
+        if (EndPoint != null)
+        {
+            ColliderTrigger ct = EndPoint.GetComponent<ColliderTrigger>();
+            if (ct != null)
+            {
+                ct.OnEnter += OnEndPointEnter;
+            }
+        }
+    }
+
+    private void OnEndPointEnter()
+    {
+        OnLevelFinished?.Invoke();
+    }
+
 }

@@ -7,9 +7,24 @@ using UnityEngine;
 public class PlayerSave
 {
 
+    /// <summary>
+    /// Jmeno hrace
+    /// </summary>
     public string Name = "";
-    public int Level = 1;
+
+    /// <summary>
+    /// Level ve kterem se hrac nachazi
+    /// </summary>
+    public int Level = 0; 
+
+    /// <summary>
+    /// Inventar predmetu
+    /// </summary>
     public List<Item.ItemData> Inventory = new List<Item.ItemData>();
+
+    /// <summary>
+    /// Reference na entitu hrace
+    /// </summary>
     public GameEntityObject PlayerRef = null;
 
     public bool AddItem(Item.ItemData item)

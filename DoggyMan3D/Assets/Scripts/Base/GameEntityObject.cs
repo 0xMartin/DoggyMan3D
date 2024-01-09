@@ -8,6 +8,9 @@ public class GameEntityObject : MonoBehaviour
 {
 
     // nastaveni
+    [Header("Controll")]
+    public bool IsEntityEnabled = true;
+
     [Header("Default")]
     public string Name;
     public int Lives = 100;
@@ -55,6 +58,8 @@ public class GameEntityObject : MonoBehaviour
 
     private void Update()
     {
+        if (!IsEntityEnabled) return;
+
         // vypocet staminy
         if (_isSprinting)
         {
@@ -118,12 +123,16 @@ public class GameEntityObject : MonoBehaviour
         this._isMoving = false;
         this._isSprinting = false;
         this._enabledMoving = true;
+        this.IsEntityEnabled = true;
     }
 
     public void UpdateMove(bool moving, bool sprinting)
     {
-        this._isMoving = moving;
-        this._isSprinting = sprinting;
+        if (IsEntityEnabled && IsAlive())
+        {
+            this._isMoving = moving;
+            this._isSprinting = sprinting;
+        }
     }
 
     public CharacterController GetCharacterController()
@@ -138,6 +147,8 @@ public class GameEntityObject : MonoBehaviour
 
     public void AddLives(int lives)
     {
+        if (!IsEntityEnabled && IsAlive()) return;
+
         this.Lives = Math.Min(this._maxLives, this.Lives + lives);
         this._hit = false;
     }
@@ -149,6 +160,8 @@ public class GameEntityObject : MonoBehaviour
 
     public void HitEntity(int damage)
     {
+        if (!IsEntityEnabled || !IsAlive()) return;
+
         this.Lives = Math.Max(this.Lives - damage, 0);
         if (this.Lives <= 0)
         {
@@ -174,6 +187,7 @@ public class GameEntityObject : MonoBehaviour
 
     public void DoAttack(int attackID)
     {
+        if (!IsEntityEnabled || !IsAlive()) return;
         this._doAttackID = attackID;
     }
 
@@ -259,6 +273,8 @@ public class GameEntityObject : MonoBehaviour
 
     public bool UseItem(Item.ItemData item)
     {
+        if (!IsEntityEnabled || !IsAlive()) return false;
+
         // item s externim uziti (muze byt pouzit jen na jinem objektu) (klice, ...)
         if (item.Type == Item.ItemType.KEY)
         {
@@ -318,7 +334,7 @@ public class GameEntityObject : MonoBehaviour
         if (Text3DPrefab != null)
         {
             GameObject text3D = Instantiate(Text3DPrefab);
-            text3D.transform.position = transform.position + new Vector3(0.0f, 1.4f, 0.0f);;
+            text3D.transform.position = transform.position + new Vector3(0.0f, 1.1f, 0.0f); ;
             Text3D text = text3D.GetComponent<Text3D>();
             if (text != null)
             {
@@ -333,6 +349,8 @@ public class GameEntityObject : MonoBehaviour
 
     public void ShowAuraEffect(GameObject fx, float activeTime)
     {
+        if (!IsEntityEnabled) return;
+        
         if (fx != null)
         {
             GameObject instanceFx = Instantiate(fx);

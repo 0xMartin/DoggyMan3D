@@ -109,8 +109,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26e54e5a728a9234ab24fcf1460ed8a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MoveSpeed: 1.6
-  SprintSpeed: 5
+  MoveSpeed: 1.9
+  SprintSpeed: 5.2
   RotationSmoothTime: 0.12
   SpeedChangeRate: 10
   PlayerModel: {fileID: 1771505070107810942}
@@ -279,8 +279,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.3, y: 1.1, z: 1.3}
-  m_Center: {x: 0.4, y: 0, z: 0.8}
+  m_Size: {x: 1.6, y: 1.4, z: 1.5}
+  m_Center: {x: 0.2, y: 0, z: 0.9}
 --- !u!1001 &7814174498437990574
 PrefabInstance:
   m_ObjectHideFlags: 0
