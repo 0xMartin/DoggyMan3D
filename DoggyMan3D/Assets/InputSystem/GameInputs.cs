@@ -8,14 +8,14 @@ public class GameInputs : MonoBehaviour
 	[Header("Character Input Values")]
 	public Vector2 move;
 	public Vector2 look;
-	public bool jump;
-	public bool sprint;
-	public bool attack;
-	public bool esc;
-	public bool key1;
-	public bool key2;
-	public bool key3;
-	public bool key4;
+	public bool jump = false;
+	public bool sprint = false;
+	public bool attack = false;
+	public bool esc = false;
+	public bool key1 = false;
+	public bool key2 = false;
+	public bool key3 = false;
+	public bool key4 = false;
 
 	[Header("Movement Settings")]
 	public bool analogMovement;
@@ -135,8 +135,9 @@ public class GameInputs : MonoBehaviour
 		SetCursorState(cursorLocked);
 	}
 
-	public void SetCursorState(bool newState)
+	public void SetCursorState(bool isLocked)
 	{
-		Cursor.lockState = newState ? CursorLockMode.Locked : CursorLockMode.None;
+		Debug.Log(isLocked ? "Cursor locked" : "Cursor unlocked");
+		Cursor.lockState = isLocked ? CursorLockMode.Locked : CursorLockMode.None;
 	}
 }

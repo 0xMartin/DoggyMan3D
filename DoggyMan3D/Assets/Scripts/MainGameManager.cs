@@ -43,6 +43,8 @@ public class MainGameManager : MonoBehaviour
     [Header("Player UI")]
     public GameObject PlayerUI;
 
+    [Header("Game Input System")]
+    public GameInputs GameInputSystem;
 
     /***********************************************************************************************************************************/
     // GLOBAL VARIABLES SECTION
@@ -54,6 +56,9 @@ public class MainGameManager : MonoBehaviour
     private static GameObject _camera = null;
     private static string _playerSaveToLoadPath = null;
     private static string _playerNameToSet = null;
+    private static bool _escWasPressedLastTime = false;
+    private static bool _gamePauseMenuIsVisible = false;
+    private static bool _gameDeathMenuIsVisible = false;
 
     public static PlayerSave GetPlayerSave()
     {
@@ -85,6 +90,11 @@ public class MainGameManager : MonoBehaviour
         _playerNameToSet = name;
     }
 
+    public static bool IsGamePaused()
+    {
+        return _gamePauseMenuIsVisible || _gameDeathMenuIsVisible;
+    }
+
     /***********************************************************************************************************************************/
     // MAIN CONTROLL FUNCTIONS
     //
@@ -98,9 +108,30 @@ public class MainGameManager : MonoBehaviour
     //      -> Menu Action: To Menu = On Level Cloese
     /***********************************************************************************************************************************/
 
+    private void Start()
+    {
+        // dialog setup (Death menu)
+        DeathMenuBackToMenu.onClick.AddListener(OnLevelClose);
+        DeathMenuContinue.onClick.AddListener(OnLevelReset);
+
+        // dialog setup (Pause menu)
+        PauseMenuBackToMenu.onClick.AddListener(OnLevelClose);
+        PauseMenuReset.onClick.AddListener(OnLevelReset);
+        PauseMenuResume.onClick.AddListener(Resume);
+    }
+
     // On Awake (open game) 
     private void Awake()
     {
+        // dialogs setup
+        GameInputSystem.SetCursorState(true);
+        _gamePauseMenuIsVisible = false;
+        _gameDeathMenuIsVisible = false;
+        PauseMenu.SetActive(false);
+        DeathMenu.SetActive(false);
+        PlayerUI.SetActive(true);
+
+        // game setup
         _camera = MainCamera;
 
         if (PlayerRef != null)
@@ -130,28 +161,72 @@ public class MainGameManager : MonoBehaviour
         LoadLevel(_playerSave.Level);
     }
 
+    private void Update()
+    {
+        if (GameInputSystem != null)
+        {
+            if (GameInputSystem.esc && !_escWasPressedLastTime)
+            {
+                // zobrazi/skryje game pause menu
+                _gamePauseMenuIsVisible = !_gamePauseMenuIsVisible;
+                PauseMenu.SetActive(_gamePauseMenuIsVisible);
+                PlayerUI.SetActive(!_gamePauseMenuIsVisible);
+                GameInputSystem.SetCursorState(!_gamePauseMenuIsVisible);
+                Time.timeScale = IsGamePaused() ? 0.0f : 1.0f;
+            }
+            _escWasPressedLastTime = GameInputSystem.esc;
+        }
+    }
+
+    private void Resume()
+    {
+        // skryje game pause menu
+        _gamePauseMenuIsVisible = false;
+        PauseMenu.SetActive(_gamePauseMenuIsVisible);
+        PlayerUI.SetActive(!_gamePauseMenuIsVisible);
+        GameInputSystem.SetCursorState(!_gamePauseMenuIsVisible);
+        Time.timeScale = IsGamePaused() ? 0.0f : 1.0f;
+    }
+
     // On Level Finished
     public void OnLevelFinished()
     {
         Debug.Log("Action - Level Finished");
+
+        // jit do dalsiho levelu a ulozit hru
+        GoToNextLevel();
+
+        // reload levelu (aktualni odstrani a nacte dalsi level)
+        ReloadCurrentLevel(_playerSave.Level);
     }
 
     // On Level Close
     public void OnLevelClose()
     {
         Debug.Log("Action - Level Closed");
+        DeathMenu.SetActive(false);
+        PlayerUI.SetActive(false);
     }
 
     // On Level Reset
     public void OnLevelReset()
     {
         Debug.Log("Action - Level Reset");
+        DeathMenu.SetActive(false);
+        PlayerUI.SetActive(false);
+
+        // reload levelu (aktualni odstrani a nacte ten stejny level)
+        ReloadCurrentLevel(_playerSave.Level);
     }
 
     // On Player Death
     public void OnPlayerDeath()
     {
         Debug.Log("Action - Player Death");
+
+        // zobrazi game death menu
+        DeathMenu.SetActive(true);
+        PlayerUI.SetActive(false);
     }
 
     /***********************************************************************************************************************************/
@@ -200,6 +275,9 @@ public class MainGameManager : MonoBehaviour
     {
         if (levelId >= FirstLevelSceneID)
         {
+            // skryje player UI
+            PlayerUI.SetActive(false);
+
             // reset hrace
             ResetPlayer();
 
@@ -225,6 +303,9 @@ public class MainGameManager : MonoBehaviour
                     // pripravi hrace
                     SpawnPlayer();
                     ActivatePlayer();
+
+                    // zobrazi player UI
+                    PlayerUI.SetActive(true);
 
                     // bindovani eventu levelu
                     BindLevelEvents();
@@ -254,6 +335,12 @@ public class MainGameManager : MonoBehaviour
     /// <param name="level">Level ktery bude nacten</param>
     private void ReloadCurrentLevel(int level)
     {
+        // overeni existence levelu, ktery ma byt nacten
+        if (level >= LevelsID.Count())
+        {
+            Debug.LogError("Level with ID (" + level + ") not exists");
+        }
+
         // deaktivace hrace
         DeactivePlayer();
         if (PlayerRef != null)
@@ -275,16 +362,19 @@ public class MainGameManager : MonoBehaviour
         else
         {
             // spusti reaload sceny (prvni odstani aktlualne nactenou scenu ve hre a pak nacte pozadovanou scenu/level)
-            Debug.Log("Start unloading scene with ID: " + _currentLevelId);
+            Debug.Log("Start realoading scene");
             if (sceneToUnload.isLoaded)
             {
-                StartCoroutine(ReloadSceneAsync(sceneToUnload, level));
+                StartCoroutine(ReloadSceneAsync(sceneToUnload, LevelsID[level]));
             }
         }
     }
 
-    private IEnumerator ReloadSceneAsync(Scene sceneToRemove, int leveToLoad)
+    private IEnumerator ReloadSceneAsync(Scene sceneToRemove, int leveToLoadId)
     {
+        // skryje player UI
+        PlayerUI.SetActive(false);
+
         // odstraneni aktualne nacteneho levelu
         Debug.Log("Start with unloading current scene wit ID: " + _currentLevelId);
         AsyncOperation asyncUnload = SceneManager.UnloadSceneAsync(sceneToRemove);
@@ -295,6 +385,9 @@ public class MainGameManager : MonoBehaviour
         Debug.Log("Current level unloaded");
 
         // nacteni noveho levelu
+        yield return StartCoroutine(LoadLevelAsync(leveToLoadId));
+
+        Debug.Log("Scene reload done");
     }
 
     /***********************************************************************************************************************************/

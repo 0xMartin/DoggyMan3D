@@ -40,6 +40,8 @@ public class Gate : MonoBehaviour
 
     private void Update()
     {
+        if (MainGameManager.IsGamePaused()) return;
+        
         if (!_initDone)
         {
             switch (OpenRule)

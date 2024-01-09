@@ -46,8 +46,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerRef: {fileID: 0}
   MainCamera: {fileID: 0}
-  LevelsID: 02000000
+  LevelsID: 0200000003000000
   TimeToShowLevel: 2
   TimeToHideLevel: 2
   LevelInfoObjName: LevelInfoObject
   FirstLevelSceneID: 2
+  PauseMenu: {fileID: 0}
+  PauseMenuResume: {fileID: 0}
+  PauseMenuReset: {fileID: 0}
+  PauseMenuBackToMenu: {fileID: 0}
+  DeathMenu: {fileID: 0}
+  DeathMenuContinue: {fileID: 0}
+  DeathMenuBackToMenu: {fileID: 0}
+  PlayerUI: {fileID: 0}
+  GameInputSystem: {fileID: 0}

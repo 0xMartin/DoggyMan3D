@@ -42,6 +42,7 @@ public class GameEntityObject : MonoBehaviour
     private float _stamina;
     private float _noSprintTime = 0.0f;
     private List<Item.ItemData> _activePotions = new List<Item.ItemData>();
+    private List<GameObject> _instanceFxList = new List<GameObject>();
     private bool _unableToReset = false;
 
     // callbacky
@@ -121,6 +122,7 @@ public class GameEntityObject : MonoBehaviour
             this._stamina = this.MaxStamina;
             this._activePotions.Clear();
             this.OnExternalItemUse.Clear();
+            this._instanceFxList.Clear();
             this.OnDeath = null;
             this._doAttackID = 0;
             this._isMoving = false;
@@ -132,7 +134,7 @@ public class GameEntityObject : MonoBehaviour
 
     public void UpdateMove(bool moving, bool sprinting)
     {
-        if (IsEntityEnabled && IsAlive())
+        if (IsEntityEnabled && IsAlive() && !MainGameManager.IsGamePaused())
         {
             this._isMoving = moving;
             this._isSprinting = sprinting;
@@ -151,7 +153,7 @@ public class GameEntityObject : MonoBehaviour
 
     public void AddLives(int lives)
     {
-        if (!IsEntityEnabled && IsAlive()) return;
+        if (!IsEntityEnabled || !IsAlive() || MainGameManager.IsGamePaused()) return;
 
         this.Lives = Math.Min(this._maxLives, this.Lives + lives);
         this._hit = false;
@@ -164,7 +166,7 @@ public class GameEntityObject : MonoBehaviour
 
     public void HitEntity(int damage)
     {
-        if (!IsEntityEnabled || !IsAlive()) return;
+        if (!IsEntityEnabled || !IsAlive() || MainGameManager.IsGamePaused()) return;
 
         this.Lives = Math.Max(this.Lives - damage, 0);
         if (this.Lives <= 0)
@@ -191,7 +193,7 @@ public class GameEntityObject : MonoBehaviour
 
     public void DoAttack(int attackID)
     {
-        if (!IsEntityEnabled || !IsAlive()) return;
+        if (!IsEntityEnabled || !IsAlive() || MainGameManager.IsGamePaused()) return;
         this._doAttackID = attackID;
     }
 
@@ -229,12 +231,12 @@ public class GameEntityObject : MonoBehaviour
 
     public bool IsMoving()
     {
-        return this._isMoving && IsAlive();
+        return this._isMoving && !MainGameManager.IsGamePaused() && IsAlive();
     }
 
     public bool IsSprinting()
     {
-        return this._isSprinting && this._stamina > 3 && IsAlive();
+        return this._isSprinting && this._stamina > 3 && !MainGameManager.IsGamePaused() && IsAlive();
     }
 
     public bool IsAlive()
@@ -257,7 +259,7 @@ public class GameEntityObject : MonoBehaviour
 
     public bool IsAttacking()
     {
-        return this._doAttackID != 0;
+        return this._doAttackID != 0 && !MainGameManager.IsGamePaused() && IsAlive();
     }
 
     public int GetAttackID()
@@ -277,7 +279,7 @@ public class GameEntityObject : MonoBehaviour
 
     public bool UseItem(Item.ItemData item)
     {
-        if (!IsEntityEnabled || !IsAlive()) return false;
+        if (!IsEntityEnabled || !IsAlive() || MainGameManager.IsGamePaused()) return false;
 
         // item s externim uziti (muze byt pouzit jen na jinem objektu) (klice, ...)
         if (item.Type == Item.ItemType.KEY)
@@ -353,11 +355,12 @@ public class GameEntityObject : MonoBehaviour
 
     public void ShowAuraEffect(GameObject fx, float activeTime)
     {
-        if (!IsEntityEnabled) return;
+        if (MainGameManager.IsGamePaused()) return;
 
         if (fx != null)
         {
             GameObject instanceFx = Instantiate(fx);
+            _instanceFxList.Add(instanceFx);
             OneShotFX osfx = instanceFx.GetComponent<OneShotFX>();
             if (osfx != null)
             {

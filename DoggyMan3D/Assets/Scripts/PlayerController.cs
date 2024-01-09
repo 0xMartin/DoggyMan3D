@@ -137,6 +137,8 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        if (MainGameManager.IsGamePaused()) return;
+        
         // zmena utoku/spousteni utoku
         UpdateAttack();
 
@@ -304,6 +306,8 @@ public class PlayerController : MonoBehaviour
 
     private void CameraRotation()
     {
+        if (MainGameManager.IsGamePaused()) return;
+        
         // if there is an input and camera position is not fixed
         if (_input.look.sqrMagnitude >= _threshold && !LockCameraPosition)
         {
@@ -324,7 +328,7 @@ public class PlayerController : MonoBehaviour
     }
 
     private void Move()
-    {        
+    {
         // update entity move
         _gameEntity.UpdateMove(_input.move != Vector2.zero, _input.sprint);
 
