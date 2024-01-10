@@ -173,10 +173,12 @@ public class MenuScript : MonoBehaviour
         RectTransform contentPanelRect = scrollViewContent.GetComponent<RectTransform>();
         foreach (string savePath in saveList)
         {
+            if(!savePath.EndsWith(".json")) continue;
+
             GameObject fileButton = Instantiate(SaveFileButtonPrefab, scrollViewContent);
 
             TextMeshProUGUI buttonText = fileButton.GetComponentInChildren<TextMeshProUGUI>();
-            buttonText.text = Path.GetFileName(savePath);
+            buttonText.text = Path.GetFileNameWithoutExtension(savePath).Replace("_", " ");
 
             RectTransform rt = fileButton.GetComponent<RectTransform>();
             rt.anchoredPosition = new Vector2(horisontalSpacing, -index * (rt.sizeDelta.y + verticalSpacing));
@@ -188,12 +190,14 @@ public class MenuScript : MonoBehaviour
             Button button = fileButton.GetComponent<Button>();
             button.onClick.AddListener(() =>
             {
+                AudioSource.PlayClipAtPoint(ButtonSound, new Vector3(0.0f, 1.0f, -10.0f), ButtonSoundVolume);
                 StartCoroutine(LoadGamePlayAsync(savePath));
             });
         }
 
         UpdateContentHeight();
         RepositionButtons();
+        scrollbar.value = 1.0f;
     }
 
     private void UpdateContentHeight()
