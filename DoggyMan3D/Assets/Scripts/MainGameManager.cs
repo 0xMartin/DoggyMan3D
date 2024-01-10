@@ -10,6 +10,8 @@ public class MainGameManager : MonoBehaviour
     /***********************************************************************************************************************************/
     // GAME CONFIG
     /***********************************************************************************************************************************/
+    [Header("Bg music audio source")]
+    public AudioSource BgAudioSource;
 
     [Header("Player")]
     public GameObject PlayerRef;
@@ -43,8 +45,10 @@ public class MainGameManager : MonoBehaviour
     [Header("Player UI")]
     public GameObject PlayerUI;
 
-    [Header("Scene transition")]
-    public CircleTransition circleTransition;
+    [Header("Scene transitions")]
+    public GameObject LoadingScreen;
+    public CircleTransition CircleTransition;
+    public LevelNameScreen LevelScreen;
 
     [Header("Game Input System")]
     public GameInputs GameInputSystem;
@@ -53,6 +57,7 @@ public class MainGameManager : MonoBehaviour
     // GLOBAL VARIABLES SECTION
     /***********************************************************************************************************************************/
 
+    private static AudioSource _bgAudioSource = null;
     private static PlayerSave _playerSave = null;
     private static Level _currentLevel = null;
     private static int _currentLevelId = 0;
@@ -62,6 +67,12 @@ public class MainGameManager : MonoBehaviour
     private static bool _escWasPressedLastTime = false;
     private static bool _gamePauseMenuIsVisible = false;
     private static bool _gameDeathMenuIsVisible = false;
+    private static bool _levelLoadingDone = false;
+
+    public static AudioSource GetBgAudioSource()
+    {
+        return _bgAudioSource;
+    }
 
     public static PlayerSave GetPlayerSave()
     {
@@ -91,6 +102,10 @@ public class MainGameManager : MonoBehaviour
     public static void SetPlayerNameOnGameManagerStart(string name)
     {
         _playerNameToSet = name;
+        if (_playerNameToSet.Length == 0)
+        {
+            _playerNameToSet = "Doggy Man";
+        }
     }
 
     public static bool IsGamePaused()
@@ -113,6 +128,9 @@ public class MainGameManager : MonoBehaviour
 
     private void Start()
     {
+        // audio
+        _bgAudioSource = BgAudioSource;
+
         // dialog setup (Death menu)
         DeathMenuBackToMenu.onClick.AddListener(OnLevelClose);
         DeathMenuContinue.onClick.AddListener(OnLevelReset);
@@ -130,9 +148,12 @@ public class MainGameManager : MonoBehaviour
         GameInputSystem.SetCursorState(true);
         _gamePauseMenuIsVisible = false;
         _gameDeathMenuIsVisible = false;
+        _levelLoadingDone = false;
         PauseMenu.SetActive(false);
         DeathMenu.SetActive(false);
         PlayerUI.SetActive(true);
+        LoadingScreen.SetActive(false);
+        LevelScreen.HideScreen();
 
         // game setup
         _camera = MainCamera;
@@ -166,7 +187,7 @@ public class MainGameManager : MonoBehaviour
 
     private void Update()
     {
-        if (GameInputSystem != null)
+        if (GameInputSystem != null && _levelLoadingDone)
         {
             if (GameInputSystem.esc && !_escWasPressedLastTime)
             {
@@ -207,8 +228,11 @@ public class MainGameManager : MonoBehaviour
     public void OnLevelClose()
     {
         Debug.Log("Action - Level Closed");
+        Resume();
+        DeactivePlayer();
         DeathMenu.SetActive(false);
         PlayerUI.SetActive(false);
+        StartCoroutine(LevelCloseAsync());
     }
 
     // On Level Reset
@@ -219,6 +243,7 @@ public class MainGameManager : MonoBehaviour
         PlayerUI.SetActive(false);
 
         // reload levelu (aktualni odstrani a nacte ten stejny level)
+        Resume();
         ReloadCurrentLevel(_playerSave.Level);
     }
 
@@ -235,6 +260,13 @@ public class MainGameManager : MonoBehaviour
     /***********************************************************************************************************************************/
     // GAME MANAGER SCENE LOAD FUNCTIONS
     /***********************************************************************************************************************************/
+
+    private IEnumerator LevelCloseAsync()
+    {
+        CircleTransition.ShowOverlay();
+        yield return new WaitForSeconds(CircleTransition.Duration);
+        SceneManager.LoadScene(0);
+    }
 
     /// <summary>
     /// Nacte save/hru ze souboru. Pokud se nacteni nepodari je automaticky vytvoren a nastaven novy save.
@@ -278,6 +310,11 @@ public class MainGameManager : MonoBehaviour
     {
         if (levelId >= FirstLevelSceneID)
         {
+            _levelLoadingDone = false;
+
+            // zastavi prehravani hudby
+            BgAudioSource.Stop();
+
             // skryje player UI
             PlayerUI.SetActive(false);
 
@@ -286,12 +323,15 @@ public class MainGameManager : MonoBehaviour
 
             // zahaji nacitani levelu
             Debug.Log("Start loading scene with ID: " + levelId);
+            LoadingScreen.SetActive(true);
             AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(levelId, LoadSceneMode.Additive);
+
             // pocka neze je nacitani sceny/levelu dokonceno
             while (!asyncLoad.isDone)
             {
                 yield return null;
             }
+            LoadingScreen.SetActive(false);
 
             // najde LevelInfo objekt a ziska Level deskriptor
             GameObject levelInfo = GameObject.Find(LevelInfoObjName);
@@ -300,6 +340,10 @@ public class MainGameManager : MonoBehaviour
                 _currentLevel = levelInfo.GetComponent<Level>();
                 if (_currentLevel != null)
                 {
+                    // zobrazi nahled levelu
+                    LevelScreen.ShowScreen(_currentLevel.Name, null);
+                    yield return new WaitForSeconds(LevelScreen.Duration);
+
                     // nastaveni id aktualne nactene sceny
                     _currentLevelId = levelId;
 
@@ -313,8 +357,14 @@ public class MainGameManager : MonoBehaviour
                     // bindovani eventu levelu
                     BindLevelEvents();
 
+                    // skryje level info
+                    LevelScreen.HideScreen();
+
                     // prechodovy efekt (odkryje overlay)
-                    circleTransition.HideOverlay();
+                    CircleTransition.HideOverlay();
+
+                    // vyvola metodu v levelu (dokonceno nacitani levelu)
+                    _currentLevel.LevelLoadingDoneEvent();
 
                     Debug.Log("Level loading done");
                 }
@@ -327,6 +377,8 @@ public class MainGameManager : MonoBehaviour
             {
                 Debug.LogError("LevelInfo not found");
             }
+
+            _levelLoadingDone = true;
         }
         else
         {
@@ -371,9 +423,14 @@ public class MainGameManager : MonoBehaviour
 
     private IEnumerator ReloadSceneAsync(Scene sceneToRemove, int leveToLoadId)
     {
+        _levelLoadingDone = false;
+
         // prechodovy efekt (odkryje overlay)
-        circleTransition.ShowOverlay();
-        yield return new WaitForSeconds(circleTransition.Duration);
+        CircleTransition.ShowOverlay();
+        yield return new WaitForSeconds(CircleTransition.Duration);
+
+        // zastavi prehravani hudby
+        BgAudioSource.Stop();
 
         // deaktivace hrace
         if (PlayerRef != null)

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(BackgroundMusicManager))]
 public class Level : MonoBehaviour
 {
 
@@ -14,15 +15,15 @@ public class Level : MonoBehaviour
     [Tooltip("Konec levelu, kdyz se hrac priblizi k tomuto mistu tak je level dokoncen. Game manager automaticky tuto udalos zpracuje.")]
     public GameObject EndPoint;
 
-    [Tooltip("Soundtracky ktere budou v tomto levelu nahodne hrat")]
-    public AudioClip[] LevelMusic;
-
     // callback
     public delegate void LevelFinished();
     public LevelFinished OnLevelFinished;
 
-    private void Start()
+    private BackgroundMusicManager _randomAudioPlayer;
+
+    private void Awake()
     {
+        _randomAudioPlayer = GetComponent<BackgroundMusicManager>();
         if (EndPoint != null)
         {
             ColliderTrigger ct = EndPoint.GetComponent<ColliderTrigger>();
@@ -36,6 +37,12 @@ public class Level : MonoBehaviour
     private void OnEndPointEnter()
     {
         OnLevelFinished?.Invoke();
+    }
+
+    public void LevelLoadingDoneEvent()
+    {
+        Debug.Log("#################################");
+        _randomAudioPlayer.PlayNextMusic();
     }
 
 }

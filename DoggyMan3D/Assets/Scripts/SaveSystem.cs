@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SaveSystem
 {
-    private static string SavePath => Application.persistentDataPath;
+    public static string SavePath => Application.persistentDataPath;
 
     public static void SavePlayer(PlayerSave playerSave)
     {

@@ -1,7 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class MenuScript : MonoBehaviour
@@ -25,14 +28,26 @@ public class MenuScript : MonoBehaviour
     [Header("Components - New")]
     public Button NewGamePlay;
     public Button NewGameBack;
+    public TMP_InputField NewGamePlayerName;
 
     [Header("Components - Load")]
+    public Transform scrollViewContent;
+    public Scrollbar scrollbar;
+    public GameObject SaveFileButtonPrefab;
+    public int verticalSpacing = 5;
+    public int horisontalSpacing = 5;
+    public int topOffset = 5;
     public Button LoadGameBack;
 
     [Header("Components - About")]
     public Button AboutBack;
 
+    [Header("Transitions")]
+    public CircleTransition CircleTransition;
+
     private GameInputs _input;
+
+    private List<GameObject> _instantiatedButtons = new List<GameObject>();
 
     void Start()
     {
@@ -62,6 +77,21 @@ public class MenuScript : MonoBehaviour
 
     }
 
+    private void Awake()
+    {
+        AudioListener.volume = 0.0f;
+        StartCoroutine(AudioFadeInAsync());
+    }
+
+    private IEnumerator AudioFadeInAsync()
+    {
+        for (float v = 0.0f; v <= 1.0f; v += 0.02f)
+        {
+            yield return new WaitForSeconds(0.03f);
+            AudioListener.volume = v;
+        }
+    }
+
     private void ClickBack()
     {
         MainSection.SetActive(true);
@@ -84,6 +114,7 @@ public class MenuScript : MonoBehaviour
         MainSection.SetActive(false);
         LoadGameSection.SetActive(true);
         AudioSource.PlayClipAtPoint(ButtonSound, new Vector3(0.0f, 1.0f, -10.0f), ButtonSoundVolume);
+        reloadSaveList();
     }
 
     private void ClickMainAbout()
@@ -104,8 +135,98 @@ public class MenuScript : MonoBehaviour
     private void ClickNewGamePlay()
     {
         AudioSource.PlayClipAtPoint(ButtonSound, new Vector3(0.0f, 1.0f, -10.0f), ButtonSoundVolume);
+        StartCoroutine(NewGamePlayAsync());
+    }
+
+    private IEnumerator NewGamePlayAsync()
+    {
+        MainGameManager.SetPlayerNameOnGameManagerStart(NewGamePlayerName.text);
+        CircleTransition.ShowOverlay();
+        yield return new WaitForSeconds(CircleTransition.Duration);
+        SceneManager.LoadScene(1);
     }
 
     // LOAD ################################################################
+
+    private IEnumerator LoadGamePlayAsync(string savePath)
+    {
+        MainGameManager.SetPlayerSaveToLoadOnGameManagerStart(savePath);
+        CircleTransition.ShowOverlay();
+        yield return new WaitForSeconds(CircleTransition.Duration);
+        SceneManager.LoadScene(1);
+    }
+
+    private void reloadSaveList()
+    {
+        // Remove previously instantiated buttons
+        foreach (GameObject button in _instantiatedButtons)
+        {
+            Destroy(button);
+        }
+        _instantiatedButtons.Clear();
+
+        // Load all saves from game persistent directory
+        string[] saveList = SaveSystem.ListFilesInDirectory(SaveSystem.SavePath);
+
+        // show in list
+        int index = 0;
+        RectTransform contentPanelRect = scrollViewContent.GetComponent<RectTransform>();
+        foreach (string savePath in saveList)
+        {
+            GameObject fileButton = Instantiate(SaveFileButtonPrefab, scrollViewContent);
+
+            TextMeshProUGUI buttonText = fileButton.GetComponentInChildren<TextMeshProUGUI>();
+            buttonText.text = Path.GetFileName(savePath);
+
+            RectTransform rt = fileButton.GetComponent<RectTransform>();
+            rt.anchoredPosition = new Vector2(horisontalSpacing, -index * (rt.sizeDelta.y + verticalSpacing));
+            rt.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, contentPanelRect.rect.width - 4 * horisontalSpacing);
+            index++;
+
+            _instantiatedButtons.Add(fileButton);
+
+            Button button = fileButton.GetComponent<Button>();
+            button.onClick.AddListener(() =>
+            {
+                StartCoroutine(LoadGamePlayAsync(savePath));
+            });
+        }
+
+        UpdateContentHeight();
+        RepositionButtons();
+    }
+
+    private void UpdateContentHeight()
+    {
+        float totalHeight = topOffset * 2;
+
+        // Procházení všech potomků (tlačítek) v Content panelu
+        for (int i = 0; i < scrollViewContent.childCount; i++)
+        {
+            RectTransform child = scrollViewContent.GetChild(i).GetComponent<RectTransform>();
+
+            // Přičtení výšky tlačítka a mezery
+            totalHeight += child.sizeDelta.y + verticalSpacing;
+        }
+
+        // Nastavení vypočítané výšky Content panelu
+        scrollViewContent.GetComponent<RectTransform>().sizeDelta = new Vector2(
+            scrollViewContent.GetComponent<RectTransform>().sizeDelta.x,
+            totalHeight);
+    }
+
+    private void RepositionButtons()
+    {
+        float contentHeight = scrollViewContent.GetComponent<RectTransform>().sizeDelta.y;
+
+        // Posunutí tlačítek o polovinu výšky Content panelu nahoru
+        for (int i = 0; i < scrollViewContent.childCount; i++)
+        {
+            RectTransform child = scrollViewContent.GetChild(i).GetComponent<RectTransform>();
+
+            // Posun v ose Y o polovinu výšky obsahu
+            child.anchoredPosition += new Vector2(0, contentHeight * 0.5f - child.sizeDelta.y / 2 - topOffset);
+        }
+    }
 
 }

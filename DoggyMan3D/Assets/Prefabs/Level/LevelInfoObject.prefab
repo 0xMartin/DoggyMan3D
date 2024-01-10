@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 338736011667128224}
   - component: {fileID: 4208043161084127015}
+  - component: {fileID: 2774609971162784871}
   m_Layer: 0
   m_Name: LevelInfoObject
   m_TagString: Untagged
@@ -47,4 +48,17 @@ MonoBehaviour:
   Name: Level 1
   SpawnPoint: {fileID: 0}
   EndPoint: {fileID: 0}
-  LevelMusic: []
+--- !u!114 &2774609971162784871
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8231746644357582480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce15ddd73bdcd28468c96e0bc503d01d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  musicClips: []
+  BgAudioVolume: 0.25

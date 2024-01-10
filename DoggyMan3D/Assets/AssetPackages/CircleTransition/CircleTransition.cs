@@ -7,6 +7,7 @@ public class CircleTransition : MonoBehaviour
 {
     public float Duration = 3.0f;
     public bool IsBlackVisible = true;
+    public bool AudioFadeOutIn = true;
 
     public Action<bool> OnTransitionComplete;
 
@@ -23,7 +24,7 @@ public class CircleTransition : MonoBehaviour
 
     private void init()
     {
-        if(_initDone) return;
+        if (_initDone) return;
         _initDone = true;
 
         _canvas = GetComponent<Canvas>();
@@ -76,6 +77,11 @@ public class CircleTransition : MonoBehaviour
             var t = time / duration;
             var radius = Mathf.Lerp(beginRadius, endRadius, t);
             mat.SetFloat(RADIUS, radius);
+
+            if (AudioFadeOutIn)
+            {
+                AudioListener.volume = radius;
+            }
 
             yield return null;
         }

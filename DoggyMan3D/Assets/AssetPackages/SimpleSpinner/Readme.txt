@@ -1,0 +1,3 @@
+- Copy any spinner from [Demo.scene] to your scene.
+- Refer to [SimpleSpinner] component. You can enable and setup rotation and rainbow effect.
+- Use [Spinners.psd] to customize existing spinners or create your own spinner image.
