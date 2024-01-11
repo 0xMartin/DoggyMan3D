@@ -214,7 +214,7 @@ Transform:
   m_GameObject: {fileID: 253687370}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.2162354, y: -7.6608715, z: -1.3192031}
+  m_LocalPosition: {x: 0, y: -7.6608715, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -262,7 +262,7 @@ PrefabInstance:
     - target: {fileID: 7814174498851932442, guid: d363a04e145bda04ebcb5162faca0de9,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -3.48
       objectReference: {fileID: 0}
     - target: {fileID: 7814174498851932442, guid: d363a04e145bda04ebcb5162faca0de9,
         type: 3}
@@ -418,7 +418,7 @@ PrefabInstance:
     - target: {fileID: 8944336655422409503, guid: f6d148d888ffbf54b9afe9936dfaec1f,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -5.3
+      value: -8.780001
       objectReference: {fileID: 0}
     - target: {fileID: 8944336655422409503, guid: f6d148d888ffbf54b9afe9936dfaec1f,
         type: 3}
@@ -1166,7 +1166,7 @@ PrefabInstance:
     - target: {fileID: 2070925441746177912, guid: a1a802ecaf6775746bb2a929fb554ad8,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -5.3
+      value: -8.780001
       objectReference: {fileID: 0}
     - target: {fileID: 2070925441746177912, guid: a1a802ecaf6775746bb2a929fb554ad8,
         type: 3}
@@ -1568,30 +1568,15 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 253687371}
     m_Modifications:
-    - target: {fileID: -1247132048491375668, guid: 95a844cc3663f5d4e9c4eb04dbbdccce,
-        type: 3}
-      propertyPath: GroundedOffset
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -1247132048491375668, guid: 95a844cc3663f5d4e9c4eb04dbbdccce,
-        type: 3}
-      propertyPath: GroundedRadius
-      value: 0.4
-      objectReference: {fileID: 0}
     - target: {fileID: 6034301672019883721, guid: 95a844cc3663f5d4e9c4eb04dbbdccce,
         type: 3}
       propertyPath: m_Name
       value: Ghost_1
       objectReference: {fileID: 0}
-    - target: {fileID: 6034301672019883721, guid: 95a844cc3663f5d4e9c4eb04dbbdccce,
-        type: 3}
-      propertyPath: m_TagString
-      value: Enemy
-      objectReference: {fileID: 0}
     - target: {fileID: 9052160736190559089, guid: 95a844cc3663f5d4e9c4eb04dbbdccce,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 15.24
+      value: -0.28
       objectReference: {fileID: 0}
     - target: {fileID: 9052160736190559089, guid: 95a844cc3663f5d4e9c4eb04dbbdccce,
         type: 3}
@@ -1601,7 +1586,7 @@ PrefabInstance:
     - target: {fileID: 9052160736190559089, guid: 95a844cc3663f5d4e9c4eb04dbbdccce,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2.8236978
+      value: 15.12
       objectReference: {fileID: 0}
     - target: {fileID: 9052160736190559089, guid: 95a844cc3663f5d4e9c4eb04dbbdccce,
         type: 3}

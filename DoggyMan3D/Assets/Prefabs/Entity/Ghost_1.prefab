@@ -508,10 +508,10 @@ MonoBehaviour:
   GroundLayers:
     serializedVersion: 2
     m_Bits: 513
-  MaxWanderingRadius: 10
-  MaxWaitTime: 2
-  PlayerDetectionRadius: 5
-  MaxDistanceFromSpawn: 20
+  MaxWaitTime: 7
+  PlayerDetectionRadius: 8
+  MaxDistanceFromSpawn: 6
+  InTargetPointTolerance: 0.5
 --- !u!143 &8018152155753725461
 CharacterController:
   m_ObjectHideFlags: 0

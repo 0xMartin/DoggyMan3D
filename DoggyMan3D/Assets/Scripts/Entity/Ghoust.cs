@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using UnityEngine.AI;
+using System;
+using TMPro;
 
 [RequireComponent(typeof(GameEntityObject))]
 public class Ghoust : MonoBehaviour
@@ -22,13 +24,14 @@ public class Ghoust : MonoBehaviour
     public LayerMask GroundLayers;
 
     [Header("AI")]
-    public float MaxWanderingRadius = 10f;
-    public float MaxWaitTime = 2f;
-    public float PlayerDetectionRadius = 5f;
-    public float MaxDistanceFromSpawn = 20f;
+    public float MaxWaitTime = 7.0f;
+    public float PlayerDetectionRadius = 8.0f;
+    public float MaxDistanceFromSpawn = 6.0f;
+    public float InTargetPointTolerance = 0.5f;
 
     // main
     private GameEntityObject _gameEntity;
+    private bool _initDone = false;
     private float _speed;
     private float _animationBlend;
     private float _targetRotation = 0.0f;
@@ -38,15 +41,19 @@ public class Ghoust : MonoBehaviour
 
     // AI
     private Vector3 _spawnPoint;
+    private Vector3 _targetPoint;
+    private bool _inTargetPoint;
     private Transform _player;
-    private bool _isFollowingPlayer = false;
-    private float _waitTimer = 0f;
+    private float _nextMoveTime = 0f;
 
 
     private void Start()
     {
+        _initDone = true;
         _spawnPoint = transform.position;
+        Debug.Log("SPAWN POINT = " + _spawnPoint);
         _gameEntity = GetComponent<GameEntityObject>();
+        _inTargetPoint = true;
     }
 
     private void Update()
@@ -88,20 +95,6 @@ public class Ghoust : MonoBehaviour
             QueryTriggerInteraction.Ignore);
     }
 
-    private void OnDrawGizmosSelected()
-    {
-        Color transparentGreen = new Color(0.0f, 1.0f, 0.0f, 0.35f);
-        Color transparentRed = new Color(1.0f, 0.0f, 0.0f, 0.35f);
-
-        if (Grounded) Gizmos.color = transparentGreen;
-        else Gizmos.color = transparentRed;
-
-        // when selected, draw a gizmo in the position of, and matching radius of, the grounded collider
-        Gizmos.DrawSphere(
-            new Vector3(transform.position.x, transform.position.y - GroundedOffset, transform.position.z),
-            GroundedRadius);
-    }
-
     private void Move()
     {
         // update entity move
@@ -141,9 +134,6 @@ public class Ghoust : MonoBehaviour
         _animationBlend = Mathf.Lerp(_animationBlend, targetSpeed, Time.deltaTime * SpeedChangeRate);
         if (_animationBlend < 0.01f) _animationBlend = 0f;
 
-        // normalise input direction
-        Vector3 inputDirection = new Vector3(Moving ? 1.0f : 0.0f, 0.0f, 0.0f).normalized;
-
         // note: Vector2's != operator uses approximation so is not floating point error prone, and is cheaper than magnitude
         // if there is a move input rotate player when the player is moving
         if (Moving && _gameEntity.IsAlive() && _gameEntity.IsMovingEnabled() && _gameEntity.IsEntityEnabled)
@@ -181,9 +171,127 @@ public class Ghoust : MonoBehaviour
         }
     }
 
+    /***************************************************************************************************************************************/
+    // SIMPLE AI
+    // * pokud hrace neni pobliz tak se entita nahodne pohybuje v urcitych casovych intervalech v definovane kruhove oblasti od miste jejiho spawnu
+    // * pokud se hrac priblizi na definovanou vzdalenost tak jej entita zacne pronasledovat
+    /***************************************************************************************************************************************/
+
     private void UpdateAI()
     {
+        if (!Grounded || !_gameEntity.IsMovingEnabled() || !_gameEntity.IsEntityEnabled) return;
 
+        // vypocet vzdalenosti od hrace (pokud je na scene)
+        float playerDist = 999999;
+        if (_player != null)
+        {
+            playerDist = Mathf.Sqrt(Mathf.Pow(transform.position.x - _player.transform.position.x, 2) + Mathf.Pow(transform.position.z - _player.transform.position.z, 2));
+        }
+
+        // rohodovani pozice kam se entita bude pohybovat
+        if (playerDist < PlayerDetectionRadius)
+        {
+            // nasleduje hrace
+            SetTargetPoint(_player.transform.position);
+        }
+        else
+        {
+            // nahodne rozhodnuti smeru pohybu v kruhove oblasti od spawnu entity
+            if (Time.time > _nextMoveTime)
+            {
+                if (_inTargetPoint)
+                {
+                    SetTargetPoint(GenerateRandomPointInCircle());
+                }
+                _nextMoveTime = Time.time + MaxWaitTime;
+            }
+        }
+
+        // nasledovani nastavene target pozice
+        if (!_inTargetPoint)
+        {
+            // vypocet smeru & zahajeni pohybu
+            Direction = CalculateAngleToTarget();
+            Moving = true;
+
+            // kdyz uz je entita target bodu dostatecne blizko tak zrusi target point (je ignorovana slozka Y)
+            float distance = Mathf.Sqrt(Mathf.Pow(transform.position.x - _targetPoint.x, 2) + Mathf.Pow(transform.position.z - _targetPoint.z, 2));
+            if (distance <= InTargetPointTolerance)
+            {
+                _nextMoveTime = Time.time + MaxWaitTime;
+                _inTargetPoint = true;
+            }
+        }
+        else
+        {
+            Moving = false;
+        }
+    }
+
+    private Vector3 GenerateRandomPointInCircle()
+    {
+        // nahodne vygenerovani nahodneho uhlu a radiusu "vzdalenost od stredu"
+        float randomAngle = UnityEngine.Random.Range(0f, 2f * Mathf.PI);
+        float randomRadius = UnityEngine.Random.Range(0f, MaxDistanceFromSpawn);
+
+        // vypocet pozice nahodneho bodu v kruhove oblasti
+        float x = _spawnPoint.x + randomRadius * Mathf.Cos(randomAngle);
+        float z = _spawnPoint.z + randomRadius * Mathf.Sin(randomAngle);
+        return new Vector3(x, _spawnPoint.y, z);
+    }
+
+    private float CalculateAngleToTarget()
+    {
+        Vector3 direction = _targetPoint - transform.position;
+        float angle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
+        return angle;
+    }
+
+    private void SetTargetPoint(Vector3 target)
+    {
+        _targetPoint = target;
+        _inTargetPoint = false;
+    }
+
+    /*****************************************************************************************************************************************************/
+    // vykreslovani potrebnych nastavovatelnych parametru v editoru
+    /*****************************************************************************************************************************************************/
+
+    private void OnDrawGizmosSelected()
+    {
+        Color transparentGreen = new Color(0.0f, 1.0f, 0.0f, 0.35f);
+        Color transparentRed = new Color(1.0f, 0.0f, 0.0f, 0.35f);
+        if (Grounded) Gizmos.color = transparentGreen;
+        else Gizmos.color = transparentRed;
+        Gizmos.DrawSphere(
+            new Vector3(transform.position.x, transform.position.y - GroundedOffset, transform.position.z),
+            GroundedRadius);
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        DrawCircle(_initDone ? _spawnPoint : transform.position, MaxDistanceFromSpawn, 22);
+        if (!_inTargetPoint)
+        {
+            Gizmos.color = Color.cyan;
+            Gizmos.DrawCube(_targetPoint, new Vector3(0.3f, 0.3f, 0.3f));
+        }
+    }
+
+    private void DrawCircle(Vector3 center, float radius, int segments)
+    {
+        float angleIncrement = 360f / segments;
+        Vector3 prevPoint = center + new Vector3(radius, 0f, 0f);
+        for (int i = 1; i <= segments; i++)
+        {
+            float angle = i * angleIncrement;
+            float x = center.x + Mathf.Cos(Mathf.Deg2Rad * angle) * radius;
+            float z = center.z + Mathf.Sin(Mathf.Deg2Rad * angle) * radius;
+            Vector3 currentPoint = new Vector3(x, center.y, z);
+            Gizmos.DrawLine(prevPoint, currentPoint);
+            prevPoint = currentPoint;
+        }
     }
 
 }
