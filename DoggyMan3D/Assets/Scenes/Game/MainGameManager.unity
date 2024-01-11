@@ -1566,36 +1566,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2292056589848869972, guid: cdb4c159e2ffcb145a87047ef85b398d,
-        type: 3}
-      propertyPath: m_AdditionalShaderChannelsFlag
-      value: 25
-      objectReference: {fileID: 0}
-    - target: {fileID: 3857170222581921492, guid: cdb4c159e2ffcb145a87047ef85b398d,
-        type: 3}
-      propertyPath: m_UiScaleMode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3857170222581921492, guid: cdb4c159e2ffcb145a87047ef85b398d,
-        type: 3}
-      propertyPath: m_ReferenceResolution.x
-      value: 1920
-      objectReference: {fileID: 0}
-    - target: {fileID: 3857170222581921492, guid: cdb4c159e2ffcb145a87047ef85b398d,
-        type: 3}
-      propertyPath: m_ReferenceResolution.y
-      value: 1080
-      objectReference: {fileID: 0}
-    - target: {fileID: 6556301206693732460, guid: cdb4c159e2ffcb145a87047ef85b398d,
-        type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 2145.2603
-      objectReference: {fileID: 0}
-    - target: {fileID: 6556301206693732460, guid: cdb4c159e2ffcb145a87047ef85b398d,
-        type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 1258.3662
-      objectReference: {fileID: 0}
     - target: {fileID: 6867494520924591938, guid: cdb4c159e2ffcb145a87047ef85b398d,
         type: 3}
       propertyPath: m_Pivot.x

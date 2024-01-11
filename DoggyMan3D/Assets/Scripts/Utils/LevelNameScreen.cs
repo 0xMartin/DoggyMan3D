@@ -18,6 +18,11 @@ public class LevelNameScreen : MonoBehaviour
         if (levelImage != null)
         {
             this.LevelImage.sprite = levelImage;
+            this.LevelImage.enabled = true; 
+        }
+        else
+        {
+            this.LevelImage.enabled = false;    
         }
         this.gameObject.SetActive(true);
     }

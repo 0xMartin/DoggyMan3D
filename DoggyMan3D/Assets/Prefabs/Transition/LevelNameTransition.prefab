@@ -19,7 +19,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6867494520924591938
 RectTransform:
   m_ObjectHideFlags: 0
@@ -118,7 +118,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LevelName: {fileID: 3939152431993249235}
-  LevelImage: {fileID: 0}
+  LevelImage: {fileID: 1343335702693790880}
   Duration: 3
 --- !u!1 &1881077755751685011
 GameObject:

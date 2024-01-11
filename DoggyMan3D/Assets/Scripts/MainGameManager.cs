@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -77,6 +78,11 @@ public class MainGameManager : MonoBehaviour
     public static PlayerSave GetPlayerSave()
     {
         return _playerSave;
+    }
+
+    public static void SetPlayerSave(PlayerSave ps)
+    {
+        _playerSave = ps;
     }
 
     public static Level GetCurrentLevel()
