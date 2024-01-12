@@ -27,7 +27,6 @@ public class AttackColliderActivator : MonoBehaviour
     public void ActivateAttack1(float time)
     {
         attackCollider1.SetActive(true);
-        Debug.Log("Attack collider: " + _entity.GetActiveAttackDamage() + " / ID: " + _entity.GetAttackID());
         attackCollider1.GetComponent<AttackCollider>().Damage = _entity.GetActiveAttackDamage();
         startTime1 = 0;
         endTime1 = time;

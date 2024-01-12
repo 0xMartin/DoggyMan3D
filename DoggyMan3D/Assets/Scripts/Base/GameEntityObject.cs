@@ -186,6 +186,7 @@ public class GameEntityObject : MonoBehaviour
     {
         if (!IsEntityEnabled || !IsAlive() || MainGameManager.IsGamePaused()) return;
 
+        // odebere zivoty
         this.Lives = Math.Max(this.Lives - damage, 0);
         if (this.Lives <= 0)
         {
@@ -312,7 +313,7 @@ public class GameEntityObject : MonoBehaviour
         if (item.Type == Item.ItemType.HEALTH_POTION)
         {
             if (DrinkPotionSound != null)
-                AudioSource.PlayClipAtPoint(DrinkPotionSound, transform.TransformPoint(transform.position), DrinkPotionSoundVolume);
+                AudioSource.PlayClipAtPoint(DrinkPotionSound, transform.position, DrinkPotionSoundVolume);
             ShowAuraEffect(item.ItemUseFX, 3.0f);
             this.AddLives(this._maxLives);
             return true;
@@ -335,7 +336,7 @@ public class GameEntityObject : MonoBehaviour
             if (usePotions)
             {
                 if (DrinkPotionSound != null)
-                    AudioSource.PlayClipAtPoint(DrinkPotionSound, transform.TransformPoint(transform.position), DrinkPotionSoundVolume);
+                    AudioSource.PlayClipAtPoint(DrinkPotionSound, transform.position, DrinkPotionSoundVolume);
                 if (item.ParameterValues.Count > 0)
                 {
                     ShowAuraEffect(item.ItemUseFX, item.ParameterValues[0]);

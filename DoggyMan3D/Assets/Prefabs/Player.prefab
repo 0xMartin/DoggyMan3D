@@ -2520,6 +2520,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d7ec654269664849bb82e5f1355a1d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  YOffset: 1.4
   LandingAudioClips:
   - {fileID: 8300000, guid: fca85f58abc84094783294b7d6bfb210, type: 3}
   LandingAudioVolume: 0.8
@@ -2568,9 +2569,9 @@ MonoBehaviour:
   StaminaDownSpeed: 6.5
   StaminaUpSpeed: 5
   StartAddStaminaAfterSeconds: 3
-  DrinkPotionSound: {fileID: 0}
+  DrinkPotionSound: {fileID: 8300000, guid: 69fde167e443984458604fa52065a34a, type: 3}
   DrinkPotionSoundVolume: 1
-  TakeItemSound: {fileID: 0}
+  TakeItemSound: {fileID: 8300000, guid: 6afa1e4a7a521eb43b43e76fa92dbfac, type: 3}
   TakeItemSoundVolume: 1
   HitTextYOffset: 0.5
   Text3DPrefab: {fileID: 3961264228307655901, guid: d45d3a39511ab3247a4c7632cdeb6eb5,
