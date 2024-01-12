@@ -213,11 +213,11 @@ public class PlayerController : MonoBehaviour
         {
             if (_gameEntity.IsSprinting())
             {
-                SetCameraShaking(0.6f, 5.0f);
+                SetCameraShaking(0.55f, 4.0f);
             }
             else
             {
-                SetCameraShaking(0.52f, 2.5f);
+                SetCameraShaking(0.5f, 2.1f);
             }
         }
     }

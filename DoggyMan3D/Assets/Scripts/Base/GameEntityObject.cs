@@ -16,7 +16,7 @@ public class GameEntityObject : MonoBehaviour
     public string Name;
     public int Lives = 100;
     public int MaxStamina = 100;
-    public float[] AttacksDamages;
+    public int[] AttacksDamages;
 
     [Header("Stamina Config")]
     public float StaminaDownSpeed = 6.5f;
@@ -117,18 +117,21 @@ public class GameEntityObject : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        AttackCollider ac = other.GetComponent<AttackCollider>();
+        if (ac == null) return;
+
         switch (gameObject.tag)
         {
             case "Player":
                 if (other.CompareTag("AttackEnemy"))
                 {
-                    this.HitEntity(4);
+                    this.HitEntity(ac.Damage);
                 }
                 break;
             case "Enemy":
                 if (other.CompareTag("AttackPlayer"))
                 {
-                    this.HitEntity(4);
+                    this.HitEntity(ac.Damage);
                 }
                 break;
         }
@@ -212,11 +215,11 @@ public class GameEntityObject : MonoBehaviour
         this._doAttackID = attackID;
     }
 
-    public float GetActiveAttackDamage()
+    public int GetActiveAttackDamage()
     {
         if (this._doAttackID <= 0 || this._doAttackID > this.AttacksDamages.Count())
         {
-            return 0.0f;
+            return 0;
         }
 
         // random roll
@@ -228,10 +231,10 @@ public class GameEntityObject : MonoBehaviour
         // potion effect (2x more power)
         if (this._activePotions.Any(p => p.Type == Item.ItemType.STRENGTH_POTION))
         {
-            return this.AttacksDamages[this._doAttackID - 1] * 2.0f * rnd * (lowStamina ? 0.5f : 1.0f);
+            return (int)(this.AttacksDamages[this._doAttackID - 1] * 2.0f * rnd * (lowStamina ? 0.5f : 1.0f));
         }
 
-        return this.AttacksDamages[this._doAttackID - 1] * rnd * (lowStamina ? 0.5f : 1.0f);
+        return (int)(this.AttacksDamages[this._doAttackID - 1] * rnd * (lowStamina ? 0.5f : 1.0f));
     }
 
     public void StopAttack()

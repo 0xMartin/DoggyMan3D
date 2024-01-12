@@ -6,7 +6,7 @@ public class TestScene : MonoBehaviour
 {
 
     public GameEntityObject player;
-    public GameObject camera;
+    public GameObject cameraMain;
 
     void Start()
     {
@@ -20,7 +20,7 @@ public class TestScene : MonoBehaviour
         player.IsEntityEnabled = true;
         player.Name = ps.Name;
         MainGameManager.SetPlayerSave(ps);
-        MainGameManager.SetMainCamera(camera);
+        MainGameManager.SetMainCamera(cameraMain);
     }
 
 }

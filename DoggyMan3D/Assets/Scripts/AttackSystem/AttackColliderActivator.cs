@@ -1,17 +1,19 @@
 using UnityEngine;
 
+[RequireComponent(typeof(GameEntityObject))]
 public class AttackColliderActivator : MonoBehaviour
 {
 
     public GameObject attackCollider1;
-
     public GameObject attackCollider2;
 
+    private GameEntityObject _entity;
     private float startTime1, startTime2;
     private float endTime1, endTime2;
 
     public void Start()
     {
+        _entity = GetComponent<GameEntityObject>();
         if (attackCollider1 != null)
         {
             attackCollider1.SetActive(false);
@@ -25,13 +27,16 @@ public class AttackColliderActivator : MonoBehaviour
     public void ActivateAttack1(float time)
     {
         attackCollider1.SetActive(true);
+        Debug.Log("Attack collider: " + _entity.GetActiveAttackDamage() + " / ID: " + _entity.GetAttackID());
+        attackCollider1.GetComponent<AttackCollider>().Damage = _entity.GetActiveAttackDamage();
         startTime1 = 0;
         endTime1 = time;
     }
 
     public void ActivateAttack2(float time)
     {
-        attackCollider1.SetActive(true);
+        attackCollider2.SetActive(true);
+        attackCollider2.GetComponent<AttackCollider>().Damage = _entity.GetActiveAttackDamage();
         startTime2 = 0;
         endTime2 = time;
     }

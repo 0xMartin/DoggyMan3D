@@ -28,7 +28,7 @@ public class EnityAnimationSoundPlayer : MonoBehaviour
         if (FootstepAudioClips.Length > 0)
         {
             var index = UnityEngine.Random.Range(0, FootstepAudioClips.Length);
-            AudioSource.PlayClipAtPoint(FootstepAudioClips[index], transform.TransformPoint(gameObject.transform.position), FootstepAudioVolume);
+            AudioSource.PlayClipAtPoint(FootstepAudioClips[index], gameObject.transform.position, FootstepAudioVolume);
         }
     }
 
@@ -37,7 +37,7 @@ public class EnityAnimationSoundPlayer : MonoBehaviour
         if (LandingAudioClips.Length > 0)
         {
             var index = UnityEngine.Random.Range(0, LandingAudioClips.Length);
-            AudioSource.PlayClipAtPoint(LandingAudioClips[index], transform.TransformPoint(gameObject.transform.position), LandingAudioVolume);
+            AudioSource.PlayClipAtPoint(LandingAudioClips[index], gameObject.transform.position, LandingAudioVolume);
         }
     }
 
@@ -46,7 +46,7 @@ public class EnityAnimationSoundPlayer : MonoBehaviour
         if (AttackAudioClips.Length > 0)
         {
             var index = UnityEngine.Random.Range(0, AttackAudioClips.Length);
-            AudioSource.PlayClipAtPoint(AttackAudioClips[index], transform.TransformPoint(gameObject.transform.position), AttackAudioVolume);
+            AudioSource.PlayClipAtPoint(AttackAudioClips[index], gameObject.transform.position, AttackAudioVolume);
         }
     }
 
@@ -55,7 +55,7 @@ public class EnityAnimationSoundPlayer : MonoBehaviour
         if (HitAudioClips.Length > 0)
         {
             var index = UnityEngine.Random.Range(0, HitAudioClips.Length);
-            AudioSource.PlayClipAtPoint(HitAudioClips[index], transform.TransformPoint(gameObject.transform.position), HitAudioVolume);
+            AudioSource.PlayClipAtPoint(HitAudioClips[index], gameObject.transform.position, HitAudioVolume);
         }
     }
 
@@ -64,7 +64,7 @@ public class EnityAnimationSoundPlayer : MonoBehaviour
         if (DeathAudioClips.Length > 0)
         {
             var index = UnityEngine.Random.Range(0, DeathAudioClips.Length);
-            AudioSource.PlayClipAtPoint(DeathAudioClips[index], transform.TransformPoint(gameObject.transform.position), DeatAudioVolume);
+            AudioSource.PlayClipAtPoint(DeathAudioClips[index], gameObject.transform.position, DeatAudioVolume);
         }
     }
 }

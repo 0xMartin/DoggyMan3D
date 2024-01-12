@@ -76,6 +76,7 @@ GameObject:
   m_Component:
   - component: {fileID: 355453203632582276}
   - component: {fileID: 2077624115092304151}
+  - component: {fileID: 9056108270294808956}
   m_Layer: 0
   m_Name: AttackCollider
   m_TagString: AttackEnemy
@@ -119,6 +120,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.8, y: 1, z: 0.6}
   m_Center: {x: 0, y: 0.2, z: 0.55}
+--- !u!114 &9056108270294808956
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 307668557743163389}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 279f8e174aaaacb47b538ebbf917e0d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Damage: 10
 --- !u!1 &1484031029010669681
 GameObject:
   m_ObjectHideFlags: 0
@@ -488,9 +502,9 @@ GameObject:
   m_Component:
   - component: {fileID: 9052160736190559089}
   - component: {fileID: 601202298356770227}
-  - component: {fileID: -1247132048491375668}
   - component: {fileID: 8018152155753725461}
   - component: {fileID: 4775808785820443861}
+  - component: {fileID: -1247132048491375668}
   - component: {fileID: 5967347701648354794}
   m_Layer: 8
   m_Name: Ghost_1
@@ -539,35 +553,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &-1247132048491375668
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6034301672019883721}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 19351a6781825e24eabd957ac2f9d1ad, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Moving: 0
-  Direction: 0
-  Grounded: 1
-  MaxWaitTime: 7
-  PlayerDetectionRadius: 8
-  MaxDistanceFromSpawn: 6
-  InTargetPointTolerance: 0.5
-  MaxAttackDist: 1.1
-  MoveSpeed: 2.3
-  SpeedChangeRate: 10
-  RotationSmoothTime: 0.12
-  Gravity: -15
-  GroundedOffset: 0
-  GroundedRadius: 0.4
-  GroundLayers:
-    serializedVersion: 2
-    m_Bits: 513
 --- !u!143 &8018152155753725461
 CharacterController:
   m_ObjectHideFlags: 0
@@ -607,11 +592,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsEntityEnabled: 1
+  IsEnabledMoving: 1
   Name: Ghost
   Lives: 40
   MaxStamina: 100000
-  AttacksDamages:
-  - 8
+  AttacksDamages: 08000000
   StaminaDownSpeed: 6.5
   StaminaUpSpeed: 5
   StartAddStaminaAfterSeconds: 3
@@ -622,6 +607,35 @@ MonoBehaviour:
   HitTextYOffset: 1
   Text3DPrefab: {fileID: 3961264228307655901, guid: d45d3a39511ab3247a4c7632cdeb6eb5,
     type: 3}
+--- !u!114 &-1247132048491375668
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6034301672019883721}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19351a6781825e24eabd957ac2f9d1ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Moving: 0
+  Direction: 0
+  Grounded: 1
+  MaxWaitTime: 7
+  PlayerDetectionRadius: 10
+  MaxDistanceFromSpawn: 6
+  InTargetPointTolerance: 0.5
+  MaxAttackDist: 1.1
+  MoveSpeed: 2.7
+  SpeedChangeRate: 10
+  RotationSmoothTime: 0.12
+  Gravity: -15
+  GroundedOffset: 0
+  GroundedRadius: 0.4
+  GroundLayers:
+    serializedVersion: 2
+    m_Bits: 513
 --- !u!114 &5967347701648354794
 MonoBehaviour:
   m_ObjectHideFlags: 0
