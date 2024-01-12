@@ -3,7 +3,7 @@ using UnityEngine.Animations;
 
 public class Ghost : AICharacterBase
 {
-    [Header("Moving")]
+    [Header("Moving Settings")]
     public float MoveSpeed = 2.8f;
     public float SpeedChangeRate = 10.0f;
     public float RotationSmoothTime = 0.12f;
@@ -13,6 +13,9 @@ public class Ghost : AICharacterBase
     public float GroundedOffset = -0.14f;
     public float GroundedRadius = 0.28f;
     public LayerMask GroundLayers;
+
+    [Header("FX")]
+    public GameObject DeathFx;
 
     // main
     private Animator _animator;
@@ -147,7 +150,8 @@ public class Ghost : AICharacterBase
 
     private void DeathAnimationStart()
     {
-
+        GameObject fx = Instantiate(DeathFx);
+        fx.transform.position = transform.position;
     }
 
     private void DeathAnimationEnd()

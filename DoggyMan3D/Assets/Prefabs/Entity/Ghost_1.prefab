@@ -637,6 +637,7 @@ MonoBehaviour:
   GroundLayers:
     serializedVersion: 2
     m_Bits: 513
+  DeathFx: {fileID: 8624612796207050366, guid: 73bc0a9ed3c88f7459c350a37240b9d2, type: 3}
 --- !u!114 &5967347701648354794
 MonoBehaviour:
   m_ObjectHideFlags: 0

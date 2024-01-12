@@ -323,6 +323,9 @@ public class MainGameManager : MonoBehaviour
         {
             _levelLoadingDone = false;
 
+            // priprava prechodu sceny
+            CircleTransition.InstantShow();
+
             // zastavi prehravani hudby
             BgAudioSource.Stop();
 
@@ -370,6 +373,7 @@ public class MainGameManager : MonoBehaviour
 
                     // skryje level info
                     LevelScreen.HideScreen();
+                    yield return new WaitForSeconds(LevelScreen.FadeDuration + 0.1f);
 
                     // prechodovy efekt (odkryje overlay)
                     CircleTransition.HideOverlay();

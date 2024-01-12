@@ -19,10 +19,10 @@ public class CircleTransition : MonoBehaviour
 
     private void Start()
     {
-        init();
+        Init();
     }
 
-    private void init()
+    private void Init()
     {
         if (_initDone) return;
         _initDone = true;
@@ -45,11 +45,27 @@ public class CircleTransition : MonoBehaviour
         }
     }
 
+    public void InstantShow()
+    {
+        Init();
+        var mat = _blackScreen.material;
+        mat.SetFloat(RADIUS, 0.0f);
+        this.gameObject.SetActive(true);
+    }
+
+    public void InstantHide()
+    {
+        Init();
+        var mat = _blackScreen.material;
+        mat.SetFloat(RADIUS, 1.0f);
+        this.gameObject.SetActive(false);
+    }
+
     public void ShowOverlay()
     {
         if (!IsBlackVisible)
         {
-            init();
+            Init();
             IsBlackVisible = true;
             this.gameObject.SetActive(true);
             StartCoroutine(Transition(Duration, 1.0f, 0.0f));
@@ -60,7 +76,7 @@ public class CircleTransition : MonoBehaviour
     {
         if (IsBlackVisible)
         {
-            init();
+            Init();
             IsBlackVisible = false;
             this.gameObject.SetActive(true);
             StartCoroutine(Transition(Duration, 0.0f, 1.0f));

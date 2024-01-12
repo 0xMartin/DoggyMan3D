@@ -19,7 +19,7 @@ public class BackgroundMusicManager : MonoBehaviour
             return;
         }
 
-        int id = UnityEngine.Random.Range(0, musicClips.Count() + 1);
+        int id = UnityEngine.Random.Range(0, musicClips.Count());
         AudioClip nextMusicClip = musicClips[id];
         AudioSource bga = MainGameManager.GetBgAudioSource();
         bga.clip = nextMusicClip;

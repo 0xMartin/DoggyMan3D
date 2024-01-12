@@ -145,6 +145,10 @@ public class GameEntityObject : MonoBehaviour
             this._stamina = this.MaxStamina;
             this._activePotions.Clear();
             this.OnExternalItemUse.Clear();
+            foreach (GameObject fx in _instanceFxList)
+            {
+                Destroy(fx);
+            }
             this._instanceFxList.Clear();
             this.OnDeath = null;
             this._doAttackID = 0;

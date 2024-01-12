@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class OneShotFX : MonoBehaviour
 {
-    public ParticleSystem targetParticleSystem; 
-    public float activeTime = 5.0f;           
-    public float fadeTime = 2.0f;              
+    public ParticleSystem[] targetParticleSystem;
+    public float activeTime = 5.0f;
+    public float fadeTime = 2.0f;
     public GameEntityObject TargetEntity;
 
     void Start()
@@ -17,8 +17,10 @@ public class OneShotFX : MonoBehaviour
         }
     }
 
-    void Update() {
-        if(TargetEntity != null) {
+    void Update()
+    {
+        if (TargetEntity != null)
+        {
             transform.position = TargetEntity.transform.position;
             transform.Translate(new Vector3(0.0f, -0.6f, 0.0f));
         }
@@ -30,12 +32,18 @@ public class OneShotFX : MonoBehaviour
         yield return new WaitForSeconds(activeTime);
 
         // Zastaví tvorbu nových částic
-        targetParticleSystem.Stop();
+        foreach (ParticleSystem ps in targetParticleSystem)
+        {
+            ps.Stop();
+        }
 
         // Počká další určený časový úsek (fadeTime)
         yield return new WaitForSeconds(fadeTime);
 
         // Odstraní Particle System (nebo celý GameObject) ze scény
-        Destroy(targetParticleSystem.gameObject);
+        foreach (ParticleSystem ps in targetParticleSystem)
+        {
+            Destroy(ps.gameObject);
+        }
     }
 }

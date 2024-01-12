@@ -41,7 +41,6 @@ public class Level : MonoBehaviour
 
     public void LevelLoadingDoneEvent()
     {
-        Debug.Log("#################################");
         _randomAudioPlayer.PlayNextMusic();
     }
 
