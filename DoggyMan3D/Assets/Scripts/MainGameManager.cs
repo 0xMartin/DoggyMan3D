@@ -100,6 +100,11 @@ public class MainGameManager : MonoBehaviour
         return _camera;
     }
 
+    public static void SetMainCamera(GameObject camera)
+    {
+        _camera = camera;
+    }
+
     public static void SetPlayerSaveToLoadOnGameManagerStart(string savePath)
     {
         _playerSaveToLoadPath = savePath;
@@ -538,7 +543,7 @@ public class MainGameManager : MonoBehaviour
             if (entity != null)
             {
                 entity.IsEntityEnabled = true;
-                entity.EnableMovingStopped(true);
+                entity.IsEnabledMoving = true;
                 Debug.Log("Player activation done");
             }
             else
@@ -563,7 +568,7 @@ public class MainGameManager : MonoBehaviour
             if (entity != null)
             {
                 entity.IsEntityEnabled = false;
-                entity.EnableMovingStopped(false);
+                entity.IsEnabledMoving = false;
                 Debug.Log("Player deactivation done");
             }
             else

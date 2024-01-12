@@ -46,10 +46,14 @@ public class Ghost : AICharacterBase
 
     private void UpdateAnimator()
     {
-        if (_gameEntity.IsMoving() || _gameEntity.IsSprinting())
-        {
+        // utok
+        _animator.SetBool("Attack", _gameEntity.IsAttacking());
 
-        }
+        // hit
+        _animator.SetBool("Hit", _gameEntity.IsHited());
+
+        // smrt
+        _animator.SetBool("Death", !_gameEntity.IsAlive());
     }
 
     private void GroundedCheck()
@@ -73,7 +77,7 @@ public class Ghost : AICharacterBase
 
         // note: Vector2's == operator uses approximation so is not floating point error prone, and is cheaper than magnitude
         // if there is no input, set the target speed to 0
-        if (!_gameEntity.IsMoving() || !_gameEntity.IsMovingEnabled() || !_gameEntity.IsEntityEnabled) targetSpeed = 0.0f;
+        if (!_gameEntity.IsMoving() || !_gameEntity.IsEnabledMoving || !_gameEntity.IsEntityEnabled) targetSpeed = 0.0f;
 
         // a reference to the players current horizontal velocity
         float currentHorizontalSpeed = new Vector3(_gameEntity.GetCharacterController().velocity.x, 0.0f, _gameEntity.GetCharacterController().velocity.z).magnitude;
@@ -102,7 +106,7 @@ public class Ghost : AICharacterBase
 
         // note: Vector2's != operator uses approximation so is not floating point error prone, and is cheaper than magnitude
         // if there is a move input rotate player when the player is moving
-        if (Moving && _gameEntity.IsAlive() && _gameEntity.IsMovingEnabled() && _gameEntity.IsEntityEnabled)
+        if (Moving && _gameEntity.IsAlive() && _gameEntity.IsEnabledMoving && _gameEntity.IsEntityEnabled)
         {
             _targetRotation = Direction;
             float rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, _targetRotation, ref _rotationVelocity,

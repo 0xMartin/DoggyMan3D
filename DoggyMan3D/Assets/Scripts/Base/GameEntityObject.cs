@@ -10,6 +10,7 @@ public class GameEntityObject : MonoBehaviour
     // nastaveni
     [Header("Controll")]
     public bool IsEntityEnabled = true;
+    public bool IsEnabledMoving = true;
 
     [Header("Default")]
     public string Name;
@@ -28,7 +29,8 @@ public class GameEntityObject : MonoBehaviour
     public AudioClip TakeItemSound;
     public float TakeItemSoundVolume = 1.0f;
 
-    [Header("Prefabs")]
+    [Header("3D Info Text")]
+    public float HitTextYOffset = 0.5f;
     public GameObject Text3DPrefab;
 
     // interni vlastnosti entity
@@ -38,7 +40,6 @@ public class GameEntityObject : MonoBehaviour
     private bool _hit = false;
     private bool _isMoving = false;
     private bool _isSprinting = false;
-    private bool _enabledMoving = true;
     private float _stamina;
     private float _noSprintTime = 0.0f;
     private List<Item.ItemData> _activePotions = new List<Item.ItemData>();
@@ -114,6 +115,25 @@ public class GameEntityObject : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        switch (gameObject.tag)
+        {
+            case "Player":
+                if (other.CompareTag("AttackEnemy"))
+                {
+                    this.HitEntity(4);
+                }
+                break;
+            case "Enemy":
+                if (other.CompareTag("AttackPlayer"))
+                {
+                    this.HitEntity(4);
+                }
+                break;
+        }
+    }
+
     public void ResetPlayer()
     {
         if (this._unableToReset)
@@ -127,7 +147,7 @@ public class GameEntityObject : MonoBehaviour
             this._doAttackID = 0;
             this._isMoving = false;
             this._isSprinting = false;
-            this._enabledMoving = true;
+            this.IsEnabledMoving = true;
             this.IsEntityEnabled = true;
         }
     }
@@ -159,11 +179,6 @@ public class GameEntityObject : MonoBehaviour
         this._hit = false;
     }
 
-    public void EnableMovingStopped(bool state)
-    {
-        this._enabledMoving = state;
-    }
-
     public void HitEntity(int damage)
     {
         if (!IsEntityEnabled || !IsAlive() || MainGameManager.IsGamePaused()) return;
@@ -179,13 +194,13 @@ public class GameEntityObject : MonoBehaviour
         if (Text3DPrefab != null)
         {
             GameObject text3D = Instantiate(Text3DPrefab);
-            text3D.transform.position = transform.position;
+            text3D.transform.position = transform.position + Vector3.up * HitTextYOffset;
             Text3D text = text3D.GetComponent<Text3D>();
             if (text != null)
             {
                 text.TextMesh.text = damage.ToString();
                 text.TextColor = Color.red;
-                text.MoveSpeed = new Vector3(0.0f, -0.7f, 0.0f);
+                text.MoveSpeed = new Vector3(0.0f, -0.6f, 0.0f);
                 text.VisibleTime = 2.0f;
             }
         }
@@ -224,19 +239,14 @@ public class GameEntityObject : MonoBehaviour
         this._doAttackID = 0;
     }
 
-    public bool IsMovingEnabled()
-    {
-        return this._enabledMoving;
-    }
-
     public bool IsMoving()
     {
-        return this._isMoving && !MainGameManager.IsGamePaused() && IsAlive() && this.IsEntityEnabled && this._enabledMoving;
+        return this._isMoving && !MainGameManager.IsGamePaused() && IsAlive() && this.IsEntityEnabled && this.IsEnabledMoving;
     }
 
     public bool IsSprinting()
     {
-        return this._isSprinting && this._stamina > 3 && !MainGameManager.IsGamePaused() && IsAlive() && this.IsEntityEnabled && this._enabledMoving;
+        return this._isSprinting && this._stamina > 3 && !MainGameManager.IsGamePaused() && IsAlive() && this.IsEntityEnabled && this.IsEnabledMoving;
     }
 
     public bool IsAlive()

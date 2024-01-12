@@ -6,6 +6,7 @@ public class TestScene : MonoBehaviour
 {
 
     public GameEntityObject player;
+    public GameObject camera;
 
     void Start()
     {
@@ -15,10 +16,11 @@ public class TestScene : MonoBehaviour
             Level = 0,
             PlayerRef = player
         };
-        player.EnableMovingStopped(false);
+        player.IsEnabledMoving = true;
         player.IsEntityEnabled = true;
         player.Name = ps.Name;
         MainGameManager.SetPlayerSave(ps);
+        MainGameManager.SetMainCamera(camera);
     }
 
 }

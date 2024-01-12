@@ -256,14 +256,11 @@ public class PlayerController : MonoBehaviour
         if (_gameEntity.IsAttacking())
         {
             // ukonceni utoku po prehrani animace
-            AnimatorStateInfo info = _animator.GetCurrentAnimatorStateInfo(0);
+            AnimatorStateInfo info = _animator.GetCurrentAnimatorStateInfo(1);
             if (info.normalizedTime >= 1.0 && (info.IsName("Attack01") || info.IsName("Attack02")))
             {
                 _gameEntity.StopAttack();
             }
-
-            // deaktivuje pohyb hrace
-            _gameEntity.EnableMovingStopped(false);
         }
         else
         {
@@ -284,9 +281,6 @@ public class PlayerController : MonoBehaviour
                     _attackReady = true;
                 }
             }
-
-            // aktivuje pohyb hrace
-            _gameEntity.EnableMovingStopped(true);
         }
     }
 
@@ -339,7 +333,7 @@ public class PlayerController : MonoBehaviour
 
         // note: Vector2's == operator uses approximation so is not floating point error prone, and is cheaper than magnitude
         // if there is no input, set the target speed to 0
-        if (!_gameEntity.IsMoving() || !_gameEntity.IsMovingEnabled() || !_gameEntity.IsEntityEnabled) targetSpeed = 0.0f;
+        if (!_gameEntity.IsMoving() || !_gameEntity.IsEnabledMoving || !_gameEntity.IsEntityEnabled) targetSpeed = 0.0f;
 
         // a reference to the players current horizontal velocity
         float currentHorizontalSpeed = new Vector3(_gameEntity.GetCharacterController().velocity.x, 0.0f, _gameEntity.GetCharacterController().velocity.z).magnitude;
@@ -372,7 +366,7 @@ public class PlayerController : MonoBehaviour
 
         // note: Vector2's != operator uses approximation so is not floating point error prone, and is cheaper than magnitude
         // if there is a move input rotate player when the player is moving
-        if (_input.move != Vector2.zero && _gameEntity.IsAlive() && _gameEntity.IsMovingEnabled() && _gameEntity.IsEntityEnabled)
+        if (_input.move != Vector2.zero && _gameEntity.IsAlive() && _gameEntity.IsEnabledMoving && _gameEntity.IsEntityEnabled)
         {
             _targetRotation = Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg +
                               _mainCamera.transform.eulerAngles.y;

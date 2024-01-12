@@ -66,6 +66,59 @@ Transform:
   - {fileID: 6778003325933846468}
   m_Father: {fileID: 8840029044985028811}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &307668557743163389
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 355453203632582276}
+  - component: {fileID: 2077624115092304151}
+  m_Layer: 0
+  m_Name: AttackCollider
+  m_TagString: AttackEnemy
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &355453203632582276
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 307668557743163389}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.3, z: 0}
+  m_LocalScale: {x: 0.6666667, y: 0.6666667, z: 0.6666667}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 9052160736190559089}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &2077624115092304151
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 307668557743163389}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.8, y: 1, z: 0.6}
+  m_Center: {x: 0, y: 0.2, z: 0.55}
 --- !u!1 &1484031029010669681
 GameObject:
   m_ObjectHideFlags: 0
@@ -438,6 +491,7 @@ GameObject:
   - component: {fileID: -1247132048491375668}
   - component: {fileID: 8018152155753725461}
   - component: {fileID: 4775808785820443861}
+  - component: {fileID: 5967347701648354794}
   m_Layer: 8
   m_Name: Ghost_1
   m_TagString: Enemy
@@ -458,6 +512,7 @@ Transform:
   m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 355453203632582276}
   - {fileID: 6454766379551958458}
   - {fileID: 1004806522316807304}
   - {fileID: 7814015975128601004}
@@ -503,7 +558,8 @@ MonoBehaviour:
   PlayerDetectionRadius: 8
   MaxDistanceFromSpawn: 6
   InTargetPointTolerance: 0.5
-  MoveSpeed: 2.8
+  MaxAttackDist: 1.1
+  MoveSpeed: 2.3
   SpeedChangeRate: 10
   RotationSmoothTime: 0.12
   Gravity: -15
@@ -563,7 +619,23 @@ MonoBehaviour:
   DrinkPotionSoundVolume: 1
   TakeItemSound: {fileID: 0}
   TakeItemSoundVolume: 1
-  Text3DPrefab: {fileID: 0}
+  HitTextYOffset: 1
+  Text3DPrefab: {fileID: 3961264228307655901, guid: d45d3a39511ab3247a4c7632cdeb6eb5,
+    type: 3}
+--- !u!114 &5967347701648354794
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6034301672019883721}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d4e397dab80cb14a836268f698c7582, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackCollider1: {fileID: 307668557743163389}
+  attackCollider2: {fileID: 0}
 --- !u!1 &6824009792331923214
 GameObject:
   m_ObjectHideFlags: 0

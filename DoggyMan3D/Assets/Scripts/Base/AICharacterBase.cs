@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 [RequireComponent(typeof(GameEntityObject))]
@@ -15,6 +16,7 @@ public class AICharacterBase : MonoBehaviour
     public float PlayerDetectionRadius = 8.0f;
     public float MaxDistanceFromSpawn = 6.0f;
     public float InTargetPointTolerance = 0.5f;
+    public float MaxAttackDist = 1.1f;
 
     // Game Entity class
     protected GameEntityObject _gameEntity;
@@ -23,11 +25,13 @@ public class AICharacterBase : MonoBehaviour
     protected Vector3 _AI_spawnPoint;
     protected Vector3 _AI_targetPoint;
     protected bool _AI_inTargetPoint;
-    protected Transform _AI_player;
+    protected GameEntityObject _AI_playerRef;
     protected float _AI_nextMoveTime = 0f;
     protected bool _AI_initDone = false;
 
     /********************************************************************************************************/
+    // public func
+
     public void Init_AI()
     {
         _gameEntity = GetComponent<GameEntityObject>();
@@ -43,21 +47,44 @@ public class AICharacterBase : MonoBehaviour
 
         // update AI
         UpdateAI();
+
+        // attack
+        if (DistanceFromPlayer() < MaxAttackDist)
+        {
+            int id = Random.Range(1, _gameEntity.AttacksDamages.Count() + 1);
+            _gameEntity.DoAttack(id);
+            _gameEntity.IsEnabledMoving = false;
+        }
+        else
+        {
+            _gameEntity.StopAttack();
+            _gameEntity.IsEnabledMoving = true;
+        }
     }
+
+    public float DistanceFromPlayer()
+    {
+        if (_AI_playerRef == null)
+        {
+            return 0.0f;
+        }
+        if (!_AI_playerRef.IsAlive())
+        {
+            return 99999.0f;
+        }
+        return Mathf.Sqrt(Mathf.Pow(transform.position.x - _AI_playerRef.transform.position.x, 2) + Mathf.Pow(transform.position.z - _AI_playerRef.transform.position.z, 2));
+    }
+
     /********************************************************************************************************/
 
     private void GetPlayerReference()
     {
-        if (_AI_player == null)
+        if (_AI_playerRef == null)
         {
             PlayerSave ps = MainGameManager.GetPlayerSave();
             if (ps != null)
             {
-                GameEntityObject pl = ps.PlayerRef;
-                if (pl != null)
-                {
-                    _AI_player = pl.transform;
-                }
+                _AI_playerRef = ps.PlayerRef;
             }
         }
     }
@@ -71,20 +98,20 @@ public class AICharacterBase : MonoBehaviour
 
     private void UpdateAI()
     {
-        if (!Grounded || !_gameEntity.IsMovingEnabled() || !_gameEntity.IsEntityEnabled) return;
+        if (!Grounded || !_gameEntity.IsEnabledMoving || !_gameEntity.IsEntityEnabled) return;
 
         // vypocet vzdalenosti od hrace (pokud je na scene)
         float playerDist = 999999;
-        if (_AI_player != null)
+        if (_AI_playerRef != null)
         {
-            playerDist = Mathf.Sqrt(Mathf.Pow(transform.position.x - _AI_player.transform.position.x, 2) + Mathf.Pow(transform.position.z - _AI_player.transform.position.z, 2));
+            playerDist = Mathf.Sqrt(Mathf.Pow(transform.position.x - _AI_playerRef.transform.position.x, 2) + Mathf.Pow(transform.position.z - _AI_playerRef.transform.position.z, 2));
         }
 
         // rohodovani pozice kam se entita bude pohybovat
         if (playerDist < PlayerDetectionRadius)
         {
             // nasleduje hrace
-            SetTargetPoint(_AI_player.transform.position);
+            SetTargetPoint(_AI_playerRef.transform.position);
         }
         else
         {
