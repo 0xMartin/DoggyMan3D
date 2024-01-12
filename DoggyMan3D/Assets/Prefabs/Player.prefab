@@ -2520,7 +2520,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d7ec654269664849bb82e5f1355a1d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  YOffset: 1.4
+  AudioDistance: 15
   LandingAudioClips:
   - {fileID: 8300000, guid: fca85f58abc84094783294b7d6bfb210, type: 3}
   LandingAudioVolume: 0.8
@@ -2541,11 +2541,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 3f89f559e47e29f40815faac6cb9dde7, type: 3}
   - {fileID: 8300000, guid: bace80bda9d418144b360b2fd52bcefa, type: 3}
   AttackAudioVolume: 1
-  HitAudioClips:
-  - {fileID: 8300000, guid: 521a8ebeb9df7e243a9f2b74ed9ecf56, type: 3}
-  - {fileID: 8300000, guid: 85692eed63b67784c990b267208ed26c, type: 3}
-  - {fileID: 8300000, guid: d92339552de5ea94ca560db19190cd2a, type: 3}
-  HitAudioVolume: 1
   DeathAudioClips: []
   DeatAudioVolume: 1
 --- !u!114 &7261591387124534307
@@ -2690,8 +2685,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.3, y: 1.4, z: 1.5}
-  m_Center: {x: 0.5, y: 0, z: 1}
+  m_Size: {x: 1.6, y: 1.4, z: 1.5}
+  m_Center: {x: 0.2, y: 0, z: 0.9}
 --- !u!114 &6165419177288150354
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2705,6 +2700,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Damage: 10
+  HitAudioClips:
+  - {fileID: 8300000, guid: 53ffe149252e45249b2cebb85a2c8bf5, type: 3}
+  - {fileID: 8300000, guid: 981243f4d78d4564085c34e2aa537814, type: 3}
+  - {fileID: 8300000, guid: 0f11cd97723d0f84aa56c65275893234, type: 3}
+  HitAudioVolume: 0.796
+  AudioDistance: 18
 --- !u!1001 &568274740269813426
 PrefabInstance:
   m_ObjectHideFlags: 0

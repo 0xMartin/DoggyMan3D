@@ -49,6 +49,8 @@ public class GameEntityObject : MonoBehaviour
     // callbacky
     public delegate void EnityDeathCallback();
     public EnityDeathCallback OnDeath;
+    public delegate void EnityHitCallback();
+    public EnityDeathCallback OnHit;
     public List<Func<Item.ItemData, GameEntityObject, bool>> OnExternalItemUse = new List<Func<Item.ItemData, GameEntityObject, bool>>();
 
     private void Start()
@@ -119,18 +121,20 @@ public class GameEntityObject : MonoBehaviour
     {
         AttackCollider ac = other.GetComponent<AttackCollider>();
         if (ac == null) return;
-
+        
         switch (gameObject.tag)
         {
             case "Player":
                 if (other.CompareTag("AttackEnemy"))
                 {
+                    ac.PlayRandomHitSound();
                     this.HitEntity(ac.Damage);
                 }
                 break;
             case "Enemy":
                 if (other.CompareTag("AttackPlayer"))
                 {
+                    ac.PlayRandomHitSound();
                     this.HitEntity(ac.Damage);
                 }
                 break;
@@ -151,6 +155,7 @@ public class GameEntityObject : MonoBehaviour
             }
             this._instanceFxList.Clear();
             this.OnDeath = null;
+            this.OnHit = null;
             this._doAttackID = 0;
             this._isMoving = false;
             this._isSprinting = false;
@@ -197,6 +202,9 @@ public class GameEntityObject : MonoBehaviour
             OnDeath?.Invoke();
         }
         this._hit = true;
+
+        // callback
+        OnHit?.Invoke();
 
         // info text s velikosti damage
         if (Text3DPrefab != null)

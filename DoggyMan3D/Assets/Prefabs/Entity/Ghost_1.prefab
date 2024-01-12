@@ -133,6 +133,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Damage: 10
+  HitAudioClips:
+  - {fileID: 8300000, guid: 521a8ebeb9df7e243a9f2b74ed9ecf56, type: 3}
+  - {fileID: 8300000, guid: 85692eed63b67784c990b267208ed26c, type: 3}
+  - {fileID: 8300000, guid: d92339552de5ea94ca560db19190cd2a, type: 3}
+  HitAudioVolume: 1
+  AudioDistance: 18
 --- !u!1 &1484031029010669681
 GameObject:
   m_ObjectHideFlags: 0
@@ -638,6 +644,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 513
   DeathFx: {fileID: 8624612796207050366, guid: 73bc0a9ed3c88f7459c350a37240b9d2, type: 3}
+  LifeBarPrefab: {fileID: 7622198677257099184, guid: b6139e39f08ddf64687012f522121f1d,
+    type: 3}
 --- !u!114 &5967347701648354794
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -664,18 +672,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d7ec654269664849bb82e5f1355a1d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  YOffset: 1.4
+  AudioDistance: 15
   LandingAudioClips: []
   LandingAudioVolume: 0.8
   FootstepAudioClips: []
   FootstepAudioVolume: 0.5
   AttackAudioClips: []
   AttackAudioVolume: 1
-  HitAudioClips:
-  - {fileID: 8300000, guid: 521a8ebeb9df7e243a9f2b74ed9ecf56, type: 3}
-  - {fileID: 8300000, guid: 85692eed63b67784c990b267208ed26c, type: 3}
-  - {fileID: 8300000, guid: d92339552de5ea94ca560db19190cd2a, type: 3}
-  HitAudioVolume: 1
   DeathAudioClips: []
   DeatAudioVolume: 1
 --- !u!1 &6824009792331923214

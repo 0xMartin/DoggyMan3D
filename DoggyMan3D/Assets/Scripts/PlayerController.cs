@@ -88,6 +88,7 @@ public class PlayerController : MonoBehaviour
     private float _verticalVelocity;
     private float _terminalVelocity = 53.0f;
     private bool _attackReady;
+    private float _hitTime = 999.0f;
 
 
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
@@ -205,19 +206,27 @@ public class PlayerController : MonoBehaviour
 
     private void UpdateCameraShaking()
     {
-        if (!_gameEntity.IsMoving() && !_gameEntity.IsSprinting())
+        if (_hitTime < 0.2)
         {
-            SetCameraShaking(0.5f, 0.3f);
+            _hitTime += Time.deltaTime;
+            SetCameraShaking(0.72f, 5.3f);
         }
         else
         {
-            if (_gameEntity.IsSprinting())
+            if (!_gameEntity.IsMoving() && !_gameEntity.IsSprinting())
             {
-                SetCameraShaking(0.55f, 4.0f);
+                SetCameraShaking(0.5f, 0.3f);
             }
             else
             {
-                SetCameraShaking(0.5f, 2.1f);
+                if (_gameEntity.IsSprinting())
+                {
+                    SetCameraShaking(0.55f, 4.0f);
+                }
+                else
+                {
+                    SetCameraShaking(0.5f, 2.1f);
+                }
             }
         }
     }
@@ -248,7 +257,11 @@ public class PlayerController : MonoBehaviour
         }
 
         // death animation
-        _animator.SetBool("Hit", _gameEntity.IsHited());
+        bool hit = _gameEntity.IsHited();
+        _animator.SetBool("Hit", hit);
+        if(hit) {
+            _hitTime = 0.0f;
+        }
     }
 
     private void UpdateAttack()

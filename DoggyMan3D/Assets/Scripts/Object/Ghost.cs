@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Animations;
 
 public class Ghost : AICharacterBase
 {
@@ -17,6 +16,9 @@ public class Ghost : AICharacterBase
     [Header("FX")]
     public GameObject DeathFx;
 
+    [Header("Life Bar")]
+    public GameObject LifeBarPrefab;
+
     // main
     private Animator _animator;
     private float _speed;
@@ -30,7 +32,18 @@ public class Ghost : AICharacterBase
     private void Start()
     {
         _animator = GetComponent<Animator>();
+
+        // inicializace AI
         base.Init_AI();
+
+        // inicializace life baru
+        if (LifeBarPrefab != null)
+        {
+            GameObject lbo = Instantiate(LifeBarPrefab);
+            LifeBar lf = lbo.GetComponent<LifeBar>();
+            lf.TargetEntity = base._gameEntity;
+            lf.YOffset = 1.6f;
+        }
     }
 
     private void Update()
