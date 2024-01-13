@@ -674,6 +674,7 @@ GameObject:
   - component: {fileID: 7269606440142806432}
   - component: {fileID: 4779045267391943631}
   - component: {fileID: 6547183601789609386}
+  - component: {fileID: 4513743467084277845}
   m_Layer: 0
   m_Name: Ghost_4
   m_TagString: Enemy
@@ -821,6 +822,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackCollider1: {fileID: 5316510708048989775}
   attackCollider2: {fileID: 0}
+--- !u!114 &4513743467084277845
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7496268759227831896}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d7ec654269664849bb82e5f1355a1d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AudioDistance: 20
+  LandingAudioClips: []
+  LandingAudioVolume: 0.8
+  FootstepAudioClips: []
+  FootstepAudioVolume: 0.5
+  AttackAudioClips: []
+  AttackAudioVolume: 1
+  DeathAudioClips:
+  - {fileID: 8300000, guid: b5bb4447e187106428f09d4e9cbf9a49, type: 3}
+  DeatAudioVolume: 1
 --- !u!1 &7619849065328025681
 GameObject:
   m_ObjectHideFlags: 0
