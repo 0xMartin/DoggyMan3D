@@ -121,20 +121,31 @@ public class GameEntityObject : MonoBehaviour
     {
         AttackCollider ac = other.GetComponent<AttackCollider>();
         if (ac == null) return;
-        
+
+        Vector3 fxPosition;
         switch (gameObject.tag)
         {
             case "Player":
                 if (other.CompareTag("AttackEnemy"))
                 {
+                    // zvukovy efekt + vizualni efekt
                     ac.PlayRandomHitSound();
+                    fxPosition = Vector3.Lerp(transform.position, other.transform.position, 0.35f);
+                    fxPosition.y = other.transform.position.y;
+                    ac.CreateHitFx(fxPosition);
+                    // damage
                     this.HitEntity(ac.Damage);
                 }
                 break;
             case "Enemy":
                 if (other.CompareTag("AttackPlayer"))
                 {
+                    // zvukovy efekt + vizualni efekt
                     ac.PlayRandomHitSound();
+                    fxPosition = Vector3.Lerp(transform.position, other.transform.position, 0.35f);
+                    fxPosition.y = other.transform.position.y;
+                    ac.CreateHitFx(fxPosition);
+                    // damage
                     this.HitEntity(ac.Damage);
                 }
                 break;

@@ -1429,6 +1429,12 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6165419177288150354, guid: d363a04e145bda04ebcb5162faca0de9,
+        type: 3}
+      propertyPath: HitFx
+      value: 
+      objectReference: {fileID: 3022224825481508368, guid: 26ad773c363770343998a0ba0f413683,
+        type: 3}
     - target: {fileID: 7814174498851932442, guid: d363a04e145bda04ebcb5162faca0de9,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1489,6 +1495,11 @@ PrefabInstance:
       propertyPath: VirtualCamera
       value: 
       objectReference: {fileID: 2134397580}
+    - target: {fileID: 8688376983513201417, guid: d363a04e145bda04ebcb5162faca0de9,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1502,12 +1513,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 253687371}
     m_Modifications:
-    - target: {fileID: -1247132048491375668, guid: 95a844cc3663f5d4e9c4eb04dbbdccce,
-        type: 3}
-      propertyPath: LifeBarPrefab
-      value: 
-      objectReference: {fileID: 7622198677257099184, guid: b6139e39f08ddf64687012f522121f1d,
-        type: 3}
     - target: {fileID: 6034301672019883721, guid: 95a844cc3663f5d4e9c4eb04dbbdccce,
         type: 3}
       propertyPath: m_Name
@@ -1565,24 +1570,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9056108270294808956, guid: 95a844cc3663f5d4e9c4eb04dbbdccce,
         type: 3}
-      propertyPath: HitAudioClips.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 9056108270294808956, guid: 95a844cc3663f5d4e9c4eb04dbbdccce,
-        type: 3}
-      propertyPath: HitAudioClips.Array.data[0]
+      propertyPath: HitFx
       value: 
-      objectReference: {fileID: 8300000, guid: 521a8ebeb9df7e243a9f2b74ed9ecf56, type: 3}
-    - target: {fileID: 9056108270294808956, guid: 95a844cc3663f5d4e9c4eb04dbbdccce,
+      objectReference: {fileID: 2062164161222886550, guid: 758a36a4cf69d1c4e8a8b7f461466ecf,
         type: 3}
-      propertyPath: HitAudioClips.Array.data[1]
-      value: 
-      objectReference: {fileID: 8300000, guid: 85692eed63b67784c990b267208ed26c, type: 3}
-    - target: {fileID: 9056108270294808956, guid: 95a844cc3663f5d4e9c4eb04dbbdccce,
-        type: 3}
-      propertyPath: HitAudioClips.Array.data[2]
-      value: 
-      objectReference: {fileID: 8300000, guid: d92339552de5ea94ca560db19190cd2a, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

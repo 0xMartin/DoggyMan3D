@@ -24,13 +24,13 @@ public class AttackCollider : MonoBehaviour
         }
     }
 
-    public void CreateHitFx()
+    public void CreateHitFx(Vector3 fxPosition)
     {
         if (HitFx != null)
         {
             GameObject obj = Instantiate(HitFx);
-            obj.transform.position = this.transform.position;
-            obj.transform.rotation = this.transform.rotation;
+            obj.transform.position = fxPosition;
+            obj.transform.rotation = transform.rotation;
         }
     }
 }

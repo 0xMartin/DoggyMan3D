@@ -133,6 +133,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Damage: 10
+  HitFx: {fileID: 2062164161222886550, guid: 758a36a4cf69d1c4e8a8b7f461466ecf, type: 3}
   HitAudioClips:
   - {fileID: 8300000, guid: 521a8ebeb9df7e243a9f2b74ed9ecf56, type: 3}
   - {fileID: 8300000, guid: 85692eed63b67784c990b267208ed26c, type: 3}

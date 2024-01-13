@@ -2650,7 +2650,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8688376983513201416
 Transform:
   m_ObjectHideFlags: 0
@@ -2700,6 +2700,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Damage: 10
+  HitFx: {fileID: 3022224825481508368, guid: 26ad773c363770343998a0ba0f413683, type: 3}
   HitAudioClips:
   - {fileID: 8300000, guid: 53ffe149252e45249b2cebb85a2c8bf5, type: 3}
   - {fileID: 8300000, guid: 981243f4d78d4564085c34e2aa537814, type: 3}
