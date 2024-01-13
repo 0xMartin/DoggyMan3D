@@ -28,6 +28,7 @@ public class AICharacterBase : MonoBehaviour
     protected GameEntityObject _AI_playerRef;
     protected float _AI_nextMoveTime = 0f;
     protected bool _AI_initDone = false;
+    private bool _playerIsAlive;
 
     /********************************************************************************************************/
     // public func
@@ -85,6 +86,7 @@ public class AICharacterBase : MonoBehaviour
             if (ps != null)
             {
                 _AI_playerRef = ps.PlayerRef;
+                _playerIsAlive = _AI_playerRef.IsAlive();
             }
         }
     }
@@ -104,7 +106,18 @@ public class AICharacterBase : MonoBehaviour
         float playerDist = 999999;
         if (_AI_playerRef != null)
         {
-            playerDist = Mathf.Sqrt(Mathf.Pow(transform.position.x - _AI_playerRef.transform.position.x, 2) + Mathf.Pow(transform.position.z - _AI_playerRef.transform.position.z, 2));
+            if (_AI_playerRef.IsAlive())
+            {
+                playerDist = Mathf.Sqrt(Mathf.Pow(transform.position.x - _AI_playerRef.transform.position.x, 2) + Mathf.Pow(transform.position.z - _AI_playerRef.transform.position.z, 2));
+            }
+            else
+            {
+                if (_playerIsAlive && !_AI_playerRef.IsAlive())
+                {
+                    _AI_inTargetPoint = true;
+                }
+            }
+            _playerIsAlive = _AI_playerRef.IsAlive();
         }
 
         // rohodovani pozice kam se entita bude pohybovat

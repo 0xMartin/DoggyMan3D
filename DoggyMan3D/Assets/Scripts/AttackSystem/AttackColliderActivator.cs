@@ -26,16 +26,16 @@ public class AttackColliderActivator : MonoBehaviour
 
     public void ActivateAttack1(float time)
     {
-        attackCollider1.SetActive(true);
         attackCollider1.GetComponent<AttackCollider>().Damage = _entity.GetActiveAttackDamage();
+        attackCollider1.SetActive(true);
         startTime1 = 0;
         endTime1 = time;
     }
 
     public void ActivateAttack2(float time)
     {
-        attackCollider2.SetActive(true);
         attackCollider2.GetComponent<AttackCollider>().Damage = _entity.GetActiveAttackDamage();
+        attackCollider2.SetActive(true);
         startTime2 = 0;
         endTime2 = time;
     }

@@ -2342,10 +2342,10 @@ GameObject:
   - component: {fileID: 1519907895321455150}
   - component: {fileID: 8688376982632420260}
   - component: {fileID: 8688376982632420258}
-  - component: {fileID: 8688376982632420263}
   - component: {fileID: 8688376982632420259}
-  - component: {fileID: 9216956551789073287}
   - component: {fileID: 5820074024763047249}
+  - component: {fileID: 9216956551789073287}
+  - component: {fileID: 8688376982632420263}
   - component: {fileID: 7261591387124534307}
   - component: {fileID: 8688376982632420261}
   m_Layer: 8
@@ -2451,32 +2451,6 @@ MonoBehaviour:
   analogMovement: 0
   cursorLocked: 1
   cursorInputForLook: 1
---- !u!143 &8688376982632420263
-CharacterController:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7814174498851932443}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Height: 1.5
-  m_Radius: 0.5
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0.83, z: 0}
 --- !u!114 &8688376982632420259
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2494,20 +2468,6 @@ MonoBehaviour:
     m_Bits: 0
   canPush: 0
   strength: 1.1
---- !u!114 &9216956551789073287
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7814174498851932443}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d4e397dab80cb14a836268f698c7582, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attackCollider1: {fileID: 8688376983513201417}
-  attackCollider2: {fileID: 0}
 --- !u!114 &5820074024763047249
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2543,6 +2503,46 @@ MonoBehaviour:
   AttackAudioVolume: 1
   DeathAudioClips: []
   DeatAudioVolume: 1
+--- !u!114 &9216956551789073287
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7814174498851932443}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d4e397dab80cb14a836268f698c7582, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackCollider1: {fileID: 8688376983513201417}
+  attackCollider2: {fileID: 0}
+--- !u!143 &8688376982632420263
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7814174498851932443}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Height: 1.5
+  m_Radius: 0.5
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0.83, z: 0}
 --- !u!114 &7261591387124534307
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2558,8 +2558,8 @@ MonoBehaviour:
   IsEntityEnabled: 1
   IsEnabledMoving: 1
   Name: 
-  Lives: 100
-  MaxStamina: 100
+  Lives: 170
+  MaxStamina: 110
   AttacksDamages: 0f0000000f000000
   StaminaDownSpeed: 6.5
   StaminaUpSpeed: 5
