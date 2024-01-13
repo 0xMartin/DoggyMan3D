@@ -31,6 +31,12 @@ public class LifeBar : MonoBehaviour
 
     private void OnHitEntity()
     {
+        if(TargetEntity != null) {
+            if(TargetEntity.Lives == 0) {
+                Destroy(gameObject);
+                return;
+            }
+        }
         gameObject.SetActive(true);
     }
 

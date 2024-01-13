@@ -120,7 +120,7 @@ public class GameEntityObject : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         AttackCollider ac = other.GetComponent<AttackCollider>();
-        if (ac == null) return;
+        if (ac == null || !IsAlive()) return;
 
         Vector3 fxPosition;
         switch (gameObject.tag)
@@ -204,7 +204,7 @@ public class GameEntityObject : MonoBehaviour
 
     public void HitEntity(int damage)
     {
-        if (!IsEntityEnabled || !IsAlive() || MainGameManager.IsGamePaused()) return;
+        if (!IsEntityEnabled || !IsAlive() || MainGameManager.IsGamePaused() || !IsAlive()) return;
 
         // odebere zivoty
         this.Lives = Math.Max(this.Lives - damage, 0);
