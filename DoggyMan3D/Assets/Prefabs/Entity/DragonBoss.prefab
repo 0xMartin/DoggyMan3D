@@ -3200,7 +3200,7 @@ MonoBehaviour:
   InTargetPointTolerance: 5.9
   MaxBasicAttackDist: 5.2
   MaxFlameAttackDist: 12
-  PlayerFarDistance: 20
+  PlayerFarDistance: 18
   MoveSpeed: 3
   FlySpeed: 7
   SpeedChangeRate: 11
@@ -3212,7 +3212,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 513
   DeathFx: {fileID: 0}
-  LifeBarPrefab: {fileID: 0}
+  LifeBarPrefab: {fileID: 8916579319378640830, guid: 61b7a85eb0ff38246b4944bb17a8b7d5,
+    type: 3}
 --- !u!114 &5991178835279350843
 MonoBehaviour:
   m_ObjectHideFlags: 0

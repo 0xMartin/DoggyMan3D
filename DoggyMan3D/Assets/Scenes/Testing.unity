@@ -1578,26 +1578,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4010701243969151312, guid: 74a70b9e56820a0418f0641ea3210619,
+    - target: {fileID: 5341475264633809669, guid: 74a70b9e56820a0418f0641ea3210619,
         type: 3}
-      propertyPath: m_Size.x
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 4010701243969151312, guid: 74a70b9e56820a0418f0641ea3210619,
+      propertyPath: LifeBarPrefab
+      value: 
+      objectReference: {fileID: 8916579319378640830, guid: 61b7a85eb0ff38246b4944bb17a8b7d5,
         type: 3}
-      propertyPath: m_Size.z
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 4091235133388666532, guid: 74a70b9e56820a0418f0641ea3210619,
-        type: 3}
-      propertyPath: m_Radius
-      value: 4.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 4091235133388666532, guid: 74a70b9e56820a0418f0641ea3210619,
-        type: 3}
-      propertyPath: m_Center.y
-      value: 4.6
-      objectReference: {fileID: 0}
     - target: {fileID: 5341475264633809669, guid: 74a70b9e56820a0418f0641ea3210619,
         type: 3}
       propertyPath: PlayerFarDistance

@@ -29,6 +29,7 @@ public class Dragon : AIDragon
     private float _rotationVelocity;
     private float _verticalVelocity;
     private float _terminalVelocity = 53.0f;
+    private BigLifeBar _lifeBar;
 
     private void Start()
     {
@@ -41,9 +42,8 @@ public class Dragon : AIDragon
         if (LifeBarPrefab != null)
         {
             GameObject lbo = Instantiate(LifeBarPrefab);
-            LifeBar lf = lbo.GetComponent<LifeBar>();
-            lf.TargetEntity = base._gameEntity;
-            lf.YOffset = 1.9f;
+            _lifeBar = lbo.GetComponent<BigLifeBar>();
+            _lifeBar.TargetEntity = base._gameEntity;
         }
     }
 
@@ -64,8 +64,12 @@ public class Dragon : AIDragon
     private void UpdateAnimator()
     {
         // no active
-        _animator.SetBool("NoActive", _AI_isActive);
-        
+        _animator.SetBool("NoActive", !_AI_isActive);
+        if (_AI_isActive)
+        {
+            _lifeBar.ShowBar();
+        }
+
         // walk
         _animator.SetBool("Moving", _gameEntity.IsMoving() || _gameEntity.IsSprinting());
 
@@ -186,7 +190,8 @@ public class Dragon : AIDragon
         _AI_dragon_in_air = true;
     }
 
-    private void OnGroundLandingEvent() {
+    private void OnGroundLandingEvent()
+    {
         // drak z letu pristal uz na zem
         _AI_dragon_in_air = false;
     }
