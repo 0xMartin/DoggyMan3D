@@ -20,16 +20,7 @@
 
 # TODO
 
-* [ ] konec levelu (nejaky zajimavy efekt, aby neslo jen o ciste neviditelny bod)
-
-* [ ] velky life bar pro bosse
-
-* [ ] efekt chrleni ohne draka + spawnovani ohnu na zemi na nejakou dobu (colider na popaleni)
-
 * [ ] vyzkouseni death menu (pridat mozna nejaky efekt smrti, zobrazeni lebky a az pak zobrazi menu ??)
-
-* [ ] boss Drak
-
 * [ ] Level 1 - Hrac se spawne u sveho horiciho domu, a vydava se na cestu zabit drak a tak se pomstit. Dum se nachazi nekde v polich, hrace se na konci toho levelu dostane na zacetek lesa. (pouzivat jen nepratele: duch, naslapne pasti)
 * [ ] Level 2 - Level je cely v lese. Musi byt znat, ze level navazuje na predchozi (hrac za sebou na zacatku vidi ze prisel nekde z poli..). Level se cely odehrava v lese. (pouzivat jen nepratele: duch, pavouk, naslapne pasti)
 * [ ] Level 3 - Zacek levelu stale v lese. Po chvili se hrac dostane ne hribtov (zde pouzivat assety pro hrbitov...). Hribuv bude dalsi zbyla cas levelu. Ke konci levelu bude vstup do nejake oblasti "rujn hradu". (pouzivat jen nepratele: duch, pavouk, kostlivec, naslapne pasti)
