@@ -21,6 +21,11 @@ public class Dragon : AIDragon
     [Header("Life Bar")]
     public GameObject LifeBarPrefab;
 
+    [Header("Flame")]
+    public int FlameDamage = 60;
+    public Transform HeadPosition;
+    public GameObject DragonFlame;
+
     // main
     private Animator _animator;
     private float _speed;
@@ -64,8 +69,8 @@ public class Dragon : AIDragon
     private void UpdateAnimator()
     {
         // no active
-        _animator.SetBool("NoActive", !_AI_isActive);
-        if (_AI_isActive)
+        _animator.SetBool("NoActive", !AI_isActive || AI_isSleeping);
+        if (AI_isActive)
         {
             _lifeBar.ShowBar();
         }
@@ -75,11 +80,17 @@ public class Dragon : AIDragon
 
         // flying
         _animator.SetBool("Fly", Flying);
+        if (Flying)
+        {
+            this._gameEntity.IsHitEnabled = false;
+        }
 
         // utok
         _animator.SetBool("BasicAttack", _gameEntity.IsAttacking());
         AnimatorStateInfo info = _animator.GetCurrentAnimatorStateInfo(1);
         _gameEntity.IsEnabledMoving = !info.IsName("Basic Attack");
+
+        _animator.SetBool("FlameAttack", _AI_flameAttack);
 
         // hit
         _animator.SetBool("Hit", _gameEntity.IsHited());
@@ -102,11 +113,13 @@ public class Dragon : AIDragon
         // update entity move
         if (Flying)
         {
+            // pohyb ve vzduchu (jen kdyz je ve vzduchu)
             _gameEntity.UpdateMove(Moving && _AI_dragon_in_air, false);
         }
         else
         {
-            _gameEntity.UpdateMove(Moving, false);
+            // pohyb po zemi (jen kdyz neni ve vzduchu)
+            _gameEntity.UpdateMove(Moving && !_AI_dragon_in_air, false);
         }
 
         // set target speed based on move speed, sprint speed and if sprint is pressed
@@ -184,6 +197,7 @@ public class Dragon : AIDragon
     // animation events
     /*****************************************************************************************************************************************************/
 
+    // animation eventy pro letani 
     private void InAirEvent()
     {
         // drak se dostal plne do vzduchu a muze uz letat
@@ -194,7 +208,31 @@ public class Dragon : AIDragon
     {
         // drak z letu pristal uz na zem
         _AI_dragon_in_air = false;
+        this._gameEntity.IsHitEnabled = true;
     }
+
+    // animation eventy pro chrleni ohne
+
+    private void OnFlameSpawnEvent()
+    {
+        if (HeadPosition != null && DragonFlame != null)
+        {
+            GameObject flameObj = Instantiate(DragonFlame);
+            DragonFlame flame = flameObj.GetComponent<DragonFlame>();
+            if (flame != null)
+            {
+                flame.SetTargetTransform(
+                    HeadPosition,
+                    new Vector3(0.0f, 1.2f, 0.35f),
+                    new Vector3(100.0f, 0.0f, 0.0f)
+                    );
+            }
+            AttackCollider ac = flameObj.GetComponent<AttackCollider>();
+            ac.Damage = FlameDamage;
+        }
+    }
+
+    // animation eventy pro smrt
 
     private void DeathAnimationStart()
     {
@@ -204,7 +242,11 @@ public class Dragon : AIDragon
 
     private void DeathAnimationEnd()
     {
-        Destroy(gameObject);
+        Collider[] colliders = GetComponentsInChildren<Collider>();
+        foreach (Collider collider in colliders)
+        {
+            collider.enabled = false;
+        }
     }
 
 

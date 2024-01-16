@@ -6,7 +6,9 @@ using UnityEngine;
 [RequireComponent(typeof(GameEntityObject))]
 public class AIDragon : MonoBehaviour
 {
-    [Header("Entity move controll")]
+    [Header("AI Entity controll")]
+    public bool AI_isActive = false; // je AI aktivni ?
+    public bool AI_isSleeping = false;
     public bool Moving = false;
     public bool Flying = false;
     public float Direction = 0.0f;
@@ -31,7 +33,9 @@ public class AIDragon : MonoBehaviour
     protected bool _AI_inTargetPoint; // false pokud drak jeste nedosel na danou target pozici
     protected bool _playerIsAlive; // true pokud je hrac zivi
     protected bool _AI_dragon_in_air;  // drak muze utocit jen pokud neni ve vzduchu = false (properta je ovladane externe s child tridy)
-    protected bool _AI_isActive; // je AI aktivni ?
+    protected bool _AI_flameAttack; // chrleni ohne pokud je true
+    private float _flameAttackCooldownTime = 0.0f; // cool down cas, chrlit bude moct az bude 0
+    private float _timeToAISleep = 0.0f; // cas za jak dlouho bude AI uspano na nejakou dobu
 
     /********************************************************************************************************/
     // public func
@@ -43,14 +47,30 @@ public class AIDragon : MonoBehaviour
         _AI_dragon_in_air = false;
         _AI_inTargetPoint = true;
         _AI_initDone = true;
-        _AI_isActive = true;
+        _AI_flameAttack = false;
+        _flameAttackCooldownTime = Random.Range(8.0f, 37.0f);
+        _timeToAISleep = Random.Range(30.0f, 70.0f);
     }
 
     public void Update_AI()
     {
         // neaktivni stav
-        if (!_AI_isActive)
+        if (!AI_isActive)
         {
+            Moving = false;
+            Flying = false;
+            return;
+        }
+
+        // neaktivni cas
+        if (AI_isSleeping)
+        {
+            _timeToAISleep -= Time.deltaTime;
+            if (_timeToAISleep <= 0.0f)
+            {
+                _timeToAISleep = Random.Range(30.0f, 70.0f);
+                AI_isSleeping = false;
+            }
             Moving = false;
             Flying = false;
             return;
@@ -65,7 +85,10 @@ public class AIDragon : MonoBehaviour
         // attack
         if (!_AI_dragon_in_air)
         {
-            if (DistanceFromPlayer() < MaxBasicAttackDist)
+            float dist = DistanceFromPlayer();
+
+            // basic attack
+            if (dist < MaxBasicAttackDist)
             {
                 int id = Random.Range(1, _gameEntity.AttacksDamages.Count() + 1);
                 _gameEntity.DoAttack(id);
@@ -76,6 +99,40 @@ public class AIDragon : MonoBehaviour
                 _gameEntity.StopAttack();
                 _gameEntity.IsEnabledMoving = true;
             }
+
+            // flame attack
+            if (dist < MaxFlameAttackDist)
+            {
+                if (_flameAttackCooldownTime <= 0.0f)
+                {
+                    _flameAttackCooldownTime = Random.Range(8.0f, 37.0f);
+                    _AI_flameAttack = true;
+                }
+                else
+                {
+                    _AI_flameAttack = false;
+                }
+            }
+            else
+            {
+                _AI_flameAttack = false;
+            }
+        }
+
+        // casovani flame utoku
+        if (_flameAttackCooldownTime > 0.0f)
+        {
+            _flameAttackCooldownTime -= Time.deltaTime;
+            _flameAttackCooldownTime = _flameAttackCooldownTime < 0.0f ? 0.0f : _flameAttackCooldownTime;
+        }
+
+        // casovani uspani
+        _timeToAISleep -= Time.deltaTime;
+        if (_timeToAISleep <= 0.0f)
+        {
+            _timeToAISleep = Random.Range(6.0f, 14.0f);
+            AI_isSleeping = true;
+            Flying = false;
         }
     }
 

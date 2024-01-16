@@ -11,6 +11,7 @@ public class GameEntityObject : MonoBehaviour
     [Header("Controll")]
     public bool IsEntityEnabled = true;
     public bool IsEnabledMoving = true;
+    public bool IsHitEnabled = true;
 
     [Header("Default")]
     public string Name;
@@ -119,6 +120,8 @@ public class GameEntityObject : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (!this.IsHitEnabled) return;
+
         AttackCollider ac = other.GetComponent<AttackCollider>();
         if (ac == null || !IsAlive()) return;
 
@@ -171,6 +174,7 @@ public class GameEntityObject : MonoBehaviour
             this._isMoving = false;
             this._isSprinting = false;
             this.IsEnabledMoving = true;
+            this.IsHitEnabled = true;
             this.IsEntityEnabled = true;
         }
     }
@@ -204,6 +208,7 @@ public class GameEntityObject : MonoBehaviour
 
     public void HitEntity(int damage)
     {
+        if (!this.IsHitEnabled) return;
         if (!IsEntityEnabled || !IsAlive() || MainGameManager.IsGamePaused() || !IsAlive()) return;
 
         // odebere zivoty

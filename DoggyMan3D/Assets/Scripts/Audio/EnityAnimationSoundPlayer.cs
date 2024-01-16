@@ -14,9 +14,17 @@ public class EnityAnimationSoundPlayer : MonoBehaviour
     public AudioClip[] FootstepAudioClips;
     [Range(0, 1)] public float FootstepAudioVolume = 0.5f;
 
+    [Header("Wing sounds")]
+    public AudioClip[] WingAudioClips;
+    [Range(0, 1)] public float WingAudioVolume = 0.5f;
+
     [Header("Attack sounds")]
     public AudioClip[] AttackAudioClips;
     [Range(0, 1)] public float AttackAudioVolume = 1.0f;
+
+    [Header("Attack 2 sounds")]
+    public AudioClip[] Attack2AudioClips;
+    [Range(0, 1)] public float Attack2AudioVolume = 1.0f;
 
     [Header("Death sounds")]
     public AudioClip[] DeathAudioClips;
@@ -28,6 +36,15 @@ public class EnityAnimationSoundPlayer : MonoBehaviour
         {
             var index = UnityEngine.Random.Range(0, FootstepAudioClips.Length);
             PlayClipAtPoint(FootstepAudioClips[index], gameObject.transform.position, FootstepAudioVolume, AudioDistance);
+        }
+    }
+
+    public void PlayOnWing()
+    {
+        if (WingAudioClips.Length > 0)
+        {
+            var index = UnityEngine.Random.Range(0, WingAudioClips.Length);
+            PlayClipAtPoint(WingAudioClips[index], gameObject.transform.position, WingAudioVolume, AudioDistance);
         }
     }
 
@@ -46,6 +63,15 @@ public class EnityAnimationSoundPlayer : MonoBehaviour
         {
             var index = UnityEngine.Random.Range(0, AttackAudioClips.Length);
             PlayClipAtPoint(AttackAudioClips[index], gameObject.transform.position, AttackAudioVolume, AudioDistance);
+        }
+    }
+
+    public void PlayOnAttack2()
+    {
+        if (Attack2AudioClips.Length > 0)
+        {
+            var index = UnityEngine.Random.Range(0, Attack2AudioClips.Length);
+            PlayClipAtPoint(Attack2AudioClips[index], gameObject.transform.position, Attack2AudioVolume, AudioDistance);
         }
     }
 
