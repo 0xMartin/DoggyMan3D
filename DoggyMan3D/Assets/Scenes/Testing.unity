@@ -1551,7 +1551,7 @@ PrefabInstance:
     - target: {fileID: 1993987158990686307, guid: 74a70b9e56820a0418f0641ea3210619,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.54
+      value: 11.72
       objectReference: {fileID: 0}
     - target: {fileID: 1993987158990686307, guid: 74a70b9e56820a0418f0641ea3210619,
         type: 3}
@@ -1592,6 +1592,11 @@ PrefabInstance:
         type: 3}
       propertyPath: MoveSpeed
       value: 2.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5341475264633809669, guid: 74a70b9e56820a0418f0641ea3210619,
+        type: 3}
+      propertyPath: AI_isActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6599516504725369698, guid: 74a70b9e56820a0418f0641ea3210619,
         type: 3}
