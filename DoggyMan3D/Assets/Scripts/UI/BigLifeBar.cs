@@ -3,13 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BigLifeBar : MonoBehaviour
 {
 
     public GameEntityObject TargetEntity;
-    public RectTransform BarFrame;
     public RectTransform LifeFrame;
+    public Image BarFramImage;
     public TextMeshProUGUI EntityName;
     public float ShowTime = 2.5f;
 
@@ -33,7 +34,9 @@ public class BigLifeBar : MonoBehaviour
         gameObject.SetActive(false);
         _isVisible = false;
         _show = false;
-        BarFrame.localScale = new Vector3(0.0f, BarFrame.localScale.y, BarFrame.localScale.z);
+
+        BarFramImage.color = new Color(1.0f, 1.0f, 1.0f, 0.0f);
+        LifeFrame.localScale = new Vector3(0.0f, LifeFrame.localScale.y, LifeFrame.localScale.z);
     }
 
     private void Update()
@@ -48,19 +51,22 @@ public class BigLifeBar : MonoBehaviour
                 _isVisible = true;
                 scale = 1.0f;
             }
-            BarFrame.localScale = new Vector3(scale, BarFrame.localScale.y, BarFrame.localScale.z);
+            LifeFrame.localScale = new Vector3(scale, LifeFrame.localScale.y, LifeFrame.localScale.z);
+            float alpha = scale * 3f;
+            alpha = alpha > 1.0f ? 1.0f : alpha;
+            BarFramImage.color = new Color(1.0f, 1.0f, 1.0f, alpha);
         }
 
         // postupne odstraneni
         if (_isVisible && _destroy)
         {
-            float scale = Mathf.Lerp(1.0f, 0.0f, _time / ShowTime);
+            float alpha = Mathf.Lerp(1.0f, 0.0f, _time / ShowTime);
             _time += Time.deltaTime;
-            if (scale <= 0.0f)
+            if (alpha <= 0.0f)
             {
                 Destroy(gameObject);
             }
-            BarFrame.localScale = new Vector3(scale, BarFrame.localScale.y, BarFrame.localScale.z);
+            BarFramImage.color = new Color(1.0f, 1.0f, 1.0f, alpha);
         }
     }
 
