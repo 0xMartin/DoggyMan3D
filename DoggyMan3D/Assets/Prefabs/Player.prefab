@@ -2496,11 +2496,15 @@ MonoBehaviour:
   - {fileID: 8300000, guid: d2619472b42462744b3d1cee621c2b41, type: 3}
   - {fileID: 8300000, guid: d0ca52c31d1c3d14aa2c84c9c2129d9d, type: 3}
   FootstepAudioVolume: 0.5
+  WingAudioClips: []
+  WingAudioVolume: 0.5
   AttackAudioClips:
   - {fileID: 8300000, guid: 3428701bf9bb1f845804f8ce52345f08, type: 3}
   - {fileID: 8300000, guid: 3f89f559e47e29f40815faac6cb9dde7, type: 3}
   - {fileID: 8300000, guid: bace80bda9d418144b360b2fd52bcefa, type: 3}
   AttackAudioVolume: 1
+  Attack2AudioClips: []
+  Attack2AudioVolume: 1
   DeathAudioClips: []
   DeatAudioVolume: 1
 --- !u!114 &9216956551789073287
@@ -2557,9 +2561,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsEntityEnabled: 1
   IsEnabledMoving: 1
+  IsHitEnabled: 1
   Name: 
   Lives: 170
-  MaxStamina: 110
+  MaxStamina: 150
   AttacksDamages: 0f0000000f000000
   StaminaDownSpeed: 6.5
   StaminaUpSpeed: 5

@@ -8,6 +8,8 @@ public class TestScene : MonoBehaviour
     public GameEntityObject player;
     public GameObject cameraMain;
 
+    public GameObject spawn;
+    
     void Start()
     {
         PlayerSave ps = new PlayerSave
@@ -19,6 +21,11 @@ public class TestScene : MonoBehaviour
         player.IsEnabledMoving = true;
         player.IsEntityEnabled = true;
         player.Name = ps.Name;
+        if (spawn != null)
+        {
+            player.transform.position = spawn.transform.position;
+            player.transform.rotation = spawn.transform.rotation;
+        }
         MainGameManager.SetPlayerSave(ps);
         MainGameManager.SetMainCamera(cameraMain);
     }
