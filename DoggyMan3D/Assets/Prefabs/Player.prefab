@@ -2567,7 +2567,7 @@ MonoBehaviour:
   MaxStamina: 150
   AttacksDamages: 0f0000000f000000
   StaminaDownSpeed: 6.5
-  StaminaUpSpeed: 5
+  StaminaUpSpeed: 7
   StartAddStaminaAfterSeconds: 3
   DrinkPotionSound: {fileID: 8300000, guid: 69fde167e443984458604fa52065a34a, type: 3}
   DrinkPotionSoundVolume: 1

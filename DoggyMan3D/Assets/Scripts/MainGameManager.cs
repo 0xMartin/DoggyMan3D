@@ -355,7 +355,7 @@ public class MainGameManager : MonoBehaviour
                 if (_currentLevel != null)
                 {
                     // zobrazi nahled levelu
-                    LevelScreen.ShowScreen(_currentLevel.Name, null);
+                    LevelScreen.ShowScreen(_currentLevel.Name, _currentLevel.LevelImage);
                     yield return new WaitForSeconds(LevelScreen.Duration);
 
                     // nastaveni id aktualne nactene sceny

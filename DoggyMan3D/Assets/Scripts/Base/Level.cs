@@ -8,6 +8,8 @@ public class Level : MonoBehaviour
 
     [Tooltip("Nazev levelu. To co uvidi hrac ve hre.")]
     public string Name;
+    [Tooltip("Nahledovy obrazek levelu")]
+    public Sprite LevelImage;
 
     [Tooltip("Spawnpoint levelu. Misto kde hrac zacina")]
     public GameObject SpawnPoint;
