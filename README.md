@@ -31,6 +31,12 @@
 * [ ] Vytvorit prezentaci ke hre
 * [ ] Zvuky prostredi: ambientni zvuky lesa, noc, ...
 
+# Preview of progress
+
+<img src="./doc/game_img_1.png">
+
+<img src="./doc/game_img_2.png">
+
 # About
 
 # Menu
