@@ -33,7 +33,10 @@ public class LevelNameScreen : MonoBehaviour
 
     public void HideScreen()
     {
-        StartCoroutine(FadeOut());
+        if (this.gameObject.activeSelf)
+        {
+            StartCoroutine(FadeOut());
+        }
     }
 
     private IEnumerator FadeIn()

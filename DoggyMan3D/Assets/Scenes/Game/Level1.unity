@@ -491,6 +491,37 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 15881338}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &25432011
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 25432012}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &25432012
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 25432011}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0.0843131, z: -0, w: 0.99643934}
+  m_LocalPosition: {x: -160.87, y: 47.73, z: 286.48}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -9.673, z: 0}
 --- !u!1001 &40810468
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9978,7 +10009,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 422120, guid: df19b0c01d0344648b4edfee104a45eb, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 399.13464
+      value: 399.51
       objectReference: {fileID: 0}
     - target: {fileID: 422120, guid: df19b0c01d0344648b4edfee104a45eb, type: 3}
       propertyPath: m_LocalPosition.z
@@ -10751,6 +10782,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3f005687a685da341ace1be63970f278, type: 3}
+--- !u!1 &1683334032 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3516107724710505748, guid: 3f005687a685da341ace1be63970f278,
+    type: 3}
+  m_PrefabInstance: {fileID: 1683334031}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1683817582
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13479,7 +13516,7 @@ PrefabInstance:
         type: 3}
       propertyPath: EndPoint
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1683334032}
     - target: {fileID: 4208043161084127015, guid: a688c8a03f3bc664ab3a22ea5023dc43,
         type: 3}
       propertyPath: LevelImage
@@ -13490,7 +13527,7 @@ PrefabInstance:
         type: 3}
       propertyPath: SpawnPoint
       value: 
-      objectReference: {fileID: 892010128}
+      objectReference: {fileID: 25432011}
     - target: {fileID: 8231746644357582480, guid: a688c8a03f3bc664ab3a22ea5023dc43,
         type: 3}
       propertyPath: m_Name
@@ -13671,3 +13708,4 @@ SceneRoots:
   - {fileID: 1922119870}
   - {fileID: 1432132386}
   - {fileID: 650708470}
+  - {fileID: 25432012}

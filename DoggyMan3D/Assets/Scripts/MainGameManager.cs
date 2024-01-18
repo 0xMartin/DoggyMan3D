@@ -160,6 +160,9 @@ public class MainGameManager : MonoBehaviour
         _gamePauseMenuIsVisible = false;
         _gameDeathMenuIsVisible = false;
         _levelLoadingDone = false;
+        _currentLevel = null;
+        _currentLevelId = 0;
+        _escWasPressedLastTime = false;
         PauseMenu.SetActive(false);
         DeathMenu.SetActive(false);
         PlayerUI.SetActive(true);
@@ -291,7 +294,7 @@ public class MainGameManager : MonoBehaviour
             GameEntityObject entity = PlayerRef.GetComponent<GameEntityObject>();
             _playerSave.PlayerRef = entity;
             entity.Name = _playerSave.Name;
-            Debug.LogError("Save loading done");
+            Debug.Log("Save loading done");
         }
         else
         {
@@ -315,7 +318,7 @@ public class MainGameManager : MonoBehaviour
         {
             Debug.LogError("Level with ID (" + level + ") not exists ... load credits scene");
             // prejde na scenu s titulkama
-            SceneManager.LoadScene(2);
+            StartCoroutine(GoToCreditsScene());
         }
     }
 
@@ -415,7 +418,8 @@ public class MainGameManager : MonoBehaviour
         {
             Debug.LogError("Level with ID (" + level + ") not exists ... load credits scene");
             // prejde na scenu s titulkama
-            SceneManager.LoadScene(2);
+            StartCoroutine(GoToCreditsScene());
+            return;
         }
 
         // deaktivace hrace
@@ -444,7 +448,7 @@ public class MainGameManager : MonoBehaviour
     {
         _levelLoadingDone = false;
 
-        // prechodovy efekt (odkryje overlay)
+        // prechodovy efekt
         CircleTransition.ShowOverlay();
         yield return new WaitForSeconds(CircleTransition.Duration);
 
@@ -478,6 +482,19 @@ public class MainGameManager : MonoBehaviour
         Debug.Log("Scene reload done");
     }
 
+    private IEnumerator GoToCreditsScene()
+    {
+        // prechodovy efekt (zobrazi overlay)
+        CircleTransition.ShowOverlay();
+        yield return new WaitForSeconds(CircleTransition.Duration);
+
+        // zastavi prehravani hudby
+        BgAudioSource.Stop();
+
+        // prejde do sceny titulek
+        SceneManager.LoadScene(2);
+    }
+
     /***********************************************************************************************************************************/
     // GAME MANAGER UTILS
     /***********************************************************************************************************************************/
@@ -507,7 +524,10 @@ public class MainGameManager : MonoBehaviour
         if (_playerSave != null)
         {
             _playerSave.Level++;
-            SaveSystem.SavePlayer(_playerSave);
+            if (_playerSave.Level < LevelsID.Count())
+            {
+                SaveSystem.SavePlayer(_playerSave);
+            }
             Debug.Log("Go to next level: " + _playerSave.Level);
         }
         else

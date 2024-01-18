@@ -111,39 +111,29 @@ public class PlayerUI : MonoBehaviour
             return;
         }
 
-        if (Player.GetActivePotions().Count == 0)
+        int index = 0;
+        foreach (Item.ItemData potion in Player.GetActivePotions())
         {
-            foreach (Image img in PotionImgs)
+            PotionImgs[index].sprite = potion.Icon;
+            PotionNames[index].text = potion.Name;
+            if (potion.ParameterValues.Count() > 0)
             {
-                img.enabled = false;
+                PotionTimes[index].text = TimeFormatter.FormatTimeMMSS(potion.ParameterValues[0] - potion.Time);
             }
+            else
+            {
+                PotionTimes[index].text = "undefined";
+            }
+            PotionImgs[index].enabled = true;
+            PotionNames[index].enabled = true;
+            PotionTimes[index].enabled = true;
+            index++;
         }
-        else
+        for (int i = index; i < PotionImgs.Count(); ++i)
         {
-            int index = 0;
-            foreach (Item.ItemData potion in Player.GetActivePotions())
-            {
-                PotionImgs[index].sprite = potion.Icon;
-                PotionNames[index].text = potion.Name;
-                if (potion.ParameterValues.Count() > 0)
-                {
-                    PotionTimes[index].text = TimeFormatter.FormatTimeMMSS(potion.ParameterValues[0] - potion.Time);
-                }
-                else
-                {
-                    PotionTimes[index].text = "undefined";
-                }
-                PotionImgs[index].enabled = true;
-                PotionNames[index].enabled = true;
-                PotionTimes[index].enabled = true;
-                index++;
-            }
-            for (int i = index; i < PotionImgs.Count(); ++i)
-            {
-                PotionImgs[i].enabled = false;
-                PotionNames[i].enabled = false;
-                PotionTimes[i].enabled = false;
-            }
+            PotionImgs[i].enabled = false;
+            PotionNames[i].enabled = false;
+            PotionTimes[i].enabled = false;
         }
     }
 }

@@ -79,8 +79,14 @@ public class MenuScript : MonoBehaviour
 
     }
 
+
     private void Awake()
     {
+        if (_input != null)
+        {
+            _input.SetCursorState(false);
+        }
+        
         AudioListener.volume = 0.0f;
         StartCoroutine(AudioFadeInAsync());
     }
@@ -119,7 +125,8 @@ public class MenuScript : MonoBehaviour
         reloadSaveList();
     }
 
-    private void ClickMainCredits() {
+    private void ClickMainCredits()
+    {
         // prejde na scenu s titulkama
         SceneManager.LoadScene(2);
     }
@@ -148,6 +155,8 @@ public class MenuScript : MonoBehaviour
     private IEnumerator NewGamePlayAsync()
     {
         MainGameManager.SetPlayerNameOnGameManagerStart(NewGamePlayerName.text);
+        // je nutne cestu k save nastavit na null, protoze pokud by predesla hra byla z nejakeho save tak by se ted nacetla znovu
+        MainGameManager.SetPlayerSaveToLoadOnGameManagerStart(null);    
         CircleTransition.ShowOverlay();
         yield return new WaitForSeconds(CircleTransition.Duration);
         SceneManager.LoadScene(1);
@@ -180,7 +189,7 @@ public class MenuScript : MonoBehaviour
         RectTransform contentPanelRect = scrollViewContent.GetComponent<RectTransform>();
         foreach (string savePath in saveList)
         {
-            if(!savePath.EndsWith(".json")) continue;
+            if (!savePath.EndsWith(".json")) continue;
 
             GameObject fileButton = Instantiate(SaveFileButtonPrefab, scrollViewContent);
 

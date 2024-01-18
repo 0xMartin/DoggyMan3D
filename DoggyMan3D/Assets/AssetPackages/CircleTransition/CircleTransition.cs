@@ -51,6 +51,7 @@ public class CircleTransition : MonoBehaviour
         var mat = _blackScreen.material;
         mat.SetFloat(RADIUS, 0.0f);
         this.gameObject.SetActive(true);
+        IsBlackVisible = true;
     }
 
     public void InstantHide()
@@ -59,6 +60,7 @@ public class CircleTransition : MonoBehaviour
         var mat = _blackScreen.material;
         mat.SetFloat(RADIUS, 1.0f);
         this.gameObject.SetActive(false);
+        IsBlackVisible = false;
     }
 
     public void ShowOverlay()

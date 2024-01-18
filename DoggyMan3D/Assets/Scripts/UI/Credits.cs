@@ -18,6 +18,12 @@ public class Credits : MonoBehaviour
         }
     }
 
+    private void Awake()
+    {
+        AudioListener.volume = 1.0f;
+        Cursor.lockState = CursorLockMode.None;
+    }
+
     public void OnCreditsEnd()
     {
         // prejde zpet do menu
