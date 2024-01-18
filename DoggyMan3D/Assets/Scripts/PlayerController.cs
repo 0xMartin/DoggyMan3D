@@ -313,7 +313,7 @@ public class PlayerController : MonoBehaviour
 
     private void CameraRotation()
     {
-        if (MainGameManager.IsGamePaused()) return;
+        if (MainGameManager.IsGamePaused() || !_gameEntity.IsAlive()) return;
 
         // if there is an input and camera position is not fixed
         if (_input.look.sqrMagnitude >= _threshold && !LockCameraPosition)

@@ -4945,9 +4945,11 @@ GameObject:
   - component: {fileID: 4167314667729497896}
   - component: {fileID: 6666315693629413441}
   - component: {fileID: 3212975937668055490}
+  - component: {fileID: -5411178743150892410}
+  - component: {fileID: 8384034240224897714}
   m_Layer: 0
   m_Name: VFX_Fire_Floor_01
-  m_TagString: Untagged
+  m_TagString: AttackEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9875,6 +9877,44 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!65 &-5411178743150892410
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1789084237432497459}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.4, y: 0.6, z: 0.4}
+  m_Center: {x: 0, y: 0.2, z: 0}
+--- !u!114 &8384034240224897714
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1789084237432497459}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 279f8e174aaaacb47b538ebbf917e0d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Damage: 11
+  HitFx: {fileID: 0}
+  HitAudioClips: []
+  HitAudioVolume: 1
+  AudioDistance: 18
 --- !u!1 &1886676774013321476
 GameObject:
   m_ObjectHideFlags: 0

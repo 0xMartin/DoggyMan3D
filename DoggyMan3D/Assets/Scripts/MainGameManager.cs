@@ -121,7 +121,7 @@ public class MainGameManager : MonoBehaviour
 
     public static bool IsGamePaused()
     {
-        return _gamePauseMenuIsVisible || _gameDeathMenuIsVisible;
+        return _gamePauseMenuIsVisible;
     }
 
     /***********************************************************************************************************************************/
@@ -246,6 +246,8 @@ public class MainGameManager : MonoBehaviour
         DeactivePlayer();
         DeathMenu.SetActive(false);
         PlayerUI.SetActive(false);
+        _gameDeathMenuIsVisible = false;
+        _gamePauseMenuIsVisible = false;
         StartCoroutine(LevelCloseAsync());
     }
 
@@ -255,6 +257,8 @@ public class MainGameManager : MonoBehaviour
         Debug.Log("Action - Level Reset");
         DeathMenu.SetActive(false);
         PlayerUI.SetActive(false);
+        Cursor.lockState = CursorLockMode.Locked;
+        _gameDeathMenuIsVisible = false;
 
         // reload levelu (aktualni odstrani a nacte ten stejny level)
         Resume();
@@ -266,9 +270,13 @@ public class MainGameManager : MonoBehaviour
     {
         Debug.Log("Action - Player Death");
 
+        // zobrazi kurzor
+        Cursor.lockState = CursorLockMode.None;
+
         // zobrazi game death menu
         DeathMenu.SetActive(true);
         PlayerUI.SetActive(false);
+        _gameDeathMenuIsVisible = true;
     }
 
     /***********************************************************************************************************************************/

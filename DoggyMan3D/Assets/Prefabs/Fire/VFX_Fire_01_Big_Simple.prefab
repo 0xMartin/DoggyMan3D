@@ -9793,9 +9793,11 @@ GameObject:
   - component: {fileID: 8426119933145108428}
   - component: {fileID: 510282752474567991}
   - component: {fileID: 4331891368944717279}
+  - component: {fileID: 3675059946918358315}
+  - component: {fileID: 3254019658802519769}
   m_Layer: 0
   m_Name: VFX_Fire_01_Big_Simple
-  m_TagString: Untagged
+  m_TagString: AttackEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -14722,6 +14724,44 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!65 &3675059946918358315
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3556461705709879177}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.8, y: 0.8, z: 0.8}
+  m_Center: {x: 0, y: 0.3, z: 0}
+--- !u!114 &3254019658802519769
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3556461705709879177}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 279f8e174aaaacb47b538ebbf917e0d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Damage: 30
+  HitFx: {fileID: 0}
+  HitAudioClips: []
+  HitAudioVolume: 1
+  AudioDistance: 18
 --- !u!1 &4943154112627809551
 GameObject:
   m_ObjectHideFlags: 0
