@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2882934190637141659}
   - component: {fileID: 210301379002860207}
-  - component: {fileID: 6639001495507203735}
   m_Layer: 0
   m_Name: SpawnPoint
   m_TagString: Untagged
@@ -48,20 +47,4 @@ MonoBehaviour:
   groundOffset: 1
   groundLayer:
     serializedVersion: 2
-    m_Bits: 0
---- !u!114 &6639001495507203735
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8374484095344554517}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4dcd82e29013d5542a9cc7c1602df780, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  groundOffset: 2
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 513
+    m_Bits: 1

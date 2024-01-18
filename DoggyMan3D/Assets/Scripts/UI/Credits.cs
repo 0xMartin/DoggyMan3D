@@ -14,11 +14,17 @@ public class Credits : MonoBehaviour
     {
         if (Exit != null)
         {
-            Exit.onClick.AddListener(OnCreditsEnd);
+            Exit.onClick.AddListener(OnBackButtonClick);
         }
     }
 
     public void OnCreditsEnd()
+    {
+        // prejde zpet do menu
+        SceneManager.LoadScene(0);
+    }
+
+    public void OnBackButtonClick()
     {
         AudioSource.PlayClipAtPoint(ButtonSound, new Vector3(0.0f, 1.0f, -10.0f), ButtonSoundVolume);
         // prejde zpet do menu
