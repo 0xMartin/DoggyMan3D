@@ -580,6 +580,7 @@ public class MainGameManager : MonoBehaviour
             {
                 entity.IsEntityEnabled = true;
                 entity.IsEnabledMoving = true;
+                Cursor.lockState = CursorLockMode.Locked;
                 Debug.Log("Player activation done");
             }
             else

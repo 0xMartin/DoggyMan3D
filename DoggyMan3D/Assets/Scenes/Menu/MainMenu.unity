@@ -6783,7 +6783,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1804227843}
   - component: {fileID: 1804227844}
-  - component: {fileID: 1804227845}
   m_Layer: 0
   m_Name: MenuScript
   m_TagString: Untagged
@@ -6842,31 +6841,6 @@ MonoBehaviour:
   LoadGameBack: {fileID: 1025717156}
   AboutBack: {fileID: 2010679017}
   CircleTransition: {fileID: 383739794}
---- !u!114 &1804227845
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1804227842}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e087ecce43ebbff45a1b360637807d93, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  move: {x: 0, y: 0}
-  look: {x: 0, y: 0}
-  jump: 0
-  sprint: 0
-  attack: 0
-  esc: 0
-  key1: 0
-  key2: 0
-  key3: 0
-  key4: 0
-  analogMovement: 0
-  cursorLocked: 0
-  cursorInputForLook: 0
 --- !u!1 &1832036027
 GameObject:
   m_ObjectHideFlags: 0

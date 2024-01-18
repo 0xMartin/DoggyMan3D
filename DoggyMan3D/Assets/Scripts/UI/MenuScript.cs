@@ -46,15 +46,10 @@ public class MenuScript : MonoBehaviour
     [Header("Transitions")]
     public CircleTransition CircleTransition;
 
-    private GameInputs _input;
-
     private List<GameObject> _instantiatedButtons = new List<GameObject>();
 
     void Start()
     {
-        _input = GetComponent<GameInputs>();
-        _input.SetCursorState(false);
-
         MainSection.SetActive(true);
         NewGameSection.SetActive(false);
         LoadGameSection.SetActive(false);
@@ -82,13 +77,14 @@ public class MenuScript : MonoBehaviour
 
     private void Awake()
     {
-        if (_input != null)
-        {
-            _input.SetCursorState(false);
-        }
-        
+        Cursor.lockState = CursorLockMode.None;
         AudioListener.volume = 0.0f;
         StartCoroutine(AudioFadeInAsync());
+    }
+
+    private void Update()
+    {
+        Cursor.lockState = CursorLockMode.None;
     }
 
     private IEnumerator AudioFadeInAsync()
@@ -156,7 +152,7 @@ public class MenuScript : MonoBehaviour
     {
         MainGameManager.SetPlayerNameOnGameManagerStart(NewGamePlayerName.text);
         // je nutne cestu k save nastavit na null, protoze pokud by predesla hra byla z nejakeho save tak by se ted nacetla znovu
-        MainGameManager.SetPlayerSaveToLoadOnGameManagerStart(null);    
+        MainGameManager.SetPlayerSaveToLoadOnGameManagerStart(null);
         CircleTransition.ShowOverlay();
         yield return new WaitForSeconds(CircleTransition.Duration);
         SceneManager.LoadScene(1);
