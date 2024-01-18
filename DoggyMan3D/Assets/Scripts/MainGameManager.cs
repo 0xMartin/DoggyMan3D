@@ -313,7 +313,9 @@ public class MainGameManager : MonoBehaviour
         }
         else
         {
-            Debug.LogError("Failed to load level: " + level);
+            Debug.LogError("Level with ID (" + level + ") not exists ... load credits scene");
+            // prejde na scenu s titulkama
+            SceneManager.LoadScene(2);
         }
     }
 
@@ -411,7 +413,9 @@ public class MainGameManager : MonoBehaviour
         // overeni existence levelu, ktery ma byt nacten
         if (level >= LevelsID.Count())
         {
-            Debug.LogError("Level with ID (" + level + ") not exists");
+            Debug.LogError("Level with ID (" + level + ") not exists ... load credits scene");
+            // prejde na scenu s titulkama
+            SceneManager.LoadScene(2);
         }
 
         // deaktivace hrace

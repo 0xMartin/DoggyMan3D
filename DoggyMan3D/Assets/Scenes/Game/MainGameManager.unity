@@ -298,7 +298,7 @@ PrefabInstance:
     - target: {fileID: 2070925441746177912, guid: a1a802ecaf6775746bb2a929fb554ad8,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -5.3
+      value: -4.3
       objectReference: {fileID: 0}
     - target: {fileID: 2070925441746177912, guid: a1a802ecaf6775746bb2a929fb554ad8,
         type: 3}
@@ -505,6 +505,11 @@ PrefabInstance:
       objectReference: {fileID: 209353902430132698}
     - target: {fileID: 2674418542757172969, guid: 725369b13c815124bb4918c54ad05844,
         type: 3}
+      propertyPath: LevelsID.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2674418542757172969, guid: 725369b13c815124bb4918c54ad05844,
+        type: 3}
       propertyPath: PauseMenuBackToMenu
       value: 
       objectReference: {fileID: 6793932081663303116}
@@ -536,6 +541,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: BgAudio
       objectReference: {fileID: 0}
+    - target: {fileID: 8944336655422409496, guid: f6d148d888ffbf54b9afe9936dfaec1f,
+        type: 3}
+      propertyPath: field of view
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 8944336655422409498, guid: f6d148d888ffbf54b9afe9936dfaec1f,
         type: 3}
       propertyPath: m_Name
@@ -554,7 +564,7 @@ PrefabInstance:
     - target: {fileID: 8944336655422409503, guid: f6d148d888ffbf54b9afe9936dfaec1f,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -5.3
+      value: -4.3
       objectReference: {fileID: 0}
     - target: {fileID: 8944336655422409503, guid: f6d148d888ffbf54b9afe9936dfaec1f,
         type: 3}
