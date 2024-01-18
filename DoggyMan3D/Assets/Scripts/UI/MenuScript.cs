@@ -23,6 +23,7 @@ public class MenuScript : MonoBehaviour
     public Button MainNewGame;
     public Button MainLoadGame;
     public Button MainAbout;
+    public Button MainCredits;
     public Button MainExit;
 
     [Header("Components - New")]
@@ -62,6 +63,7 @@ public class MenuScript : MonoBehaviour
         // main
         MainNewGame.onClick.AddListener(ClickMainNewGame);
         MainLoadGame.onClick.AddListener(ClickMainLoadGame);
+        MainCredits.onClick.AddListener(ClickMainCredits);
         MainAbout.onClick.AddListener(ClickMainAbout);
         MainExit.onClick.AddListener(ClickMainExit);
 
@@ -115,6 +117,11 @@ public class MenuScript : MonoBehaviour
         LoadGameSection.SetActive(true);
         AudioSource.PlayClipAtPoint(ButtonSound, new Vector3(0.0f, 1.0f, -10.0f), ButtonSoundVolume);
         reloadSaveList();
+    }
+
+    private void ClickMainCredits() {
+        // prejde na scenu s titulkama
+        SceneManager.LoadScene(2);
     }
 
     private void ClickMainAbout()

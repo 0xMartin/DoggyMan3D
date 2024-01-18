@@ -74,7 +74,7 @@ public class Gate : MonoBehaviour
     public void OpenGate()
     {
         _animator.SetBool("Open", true);
-        AudioSource.PlayClipAtPoint(OpenSound, new Vector3(0.0f, 1.0f, -10.0f), OpenSoundVolume);
+        AudioSource.PlayClipAtPoint(OpenSound, this.transform.position + Vector3.up * 1.0f, OpenSoundVolume);
     }
 
     private void OnEntityDeathEvent()
