@@ -506,13 +506,28 @@ PrefabInstance:
     - target: {fileID: 2674418542757172969, guid: 725369b13c815124bb4918c54ad05844,
         type: 3}
       propertyPath: LevelsID.Array.size
-      value: 2
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2674418542757172969, guid: 725369b13c815124bb4918c54ad05844,
         type: 3}
       propertyPath: PauseMenuBackToMenu
       value: 
       objectReference: {fileID: 6793932081663303116}
+    - target: {fileID: 2674418542757172969, guid: 725369b13c815124bb4918c54ad05844,
+        type: 3}
+      propertyPath: LevelsID.Array.data[2]
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2674418542757172969, guid: 725369b13c815124bb4918c54ad05844,
+        type: 3}
+      propertyPath: LevelsID.Array.data[3]
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2674418542757172969, guid: 725369b13c815124bb4918c54ad05844,
+        type: 3}
+      propertyPath: LevelsID.Array.data[4]
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 2674418542757172970, guid: 725369b13c815124bb4918c54ad05844,
         type: 3}
       propertyPath: m_Name
