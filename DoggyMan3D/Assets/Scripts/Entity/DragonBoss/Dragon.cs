@@ -110,6 +110,8 @@ public class Dragon : AIDragon
 
     private void Move()
     {
+        if (!_gameEntity.IsAlive()) return;
+
         // update entity move
         if (Flying)
         {

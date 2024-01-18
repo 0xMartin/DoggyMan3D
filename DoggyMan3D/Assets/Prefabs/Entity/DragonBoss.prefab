@@ -3167,7 +3167,7 @@ MonoBehaviour:
   IsEnabledMoving: 1
   IsHitEnabled: 1
   Name: Dragon
-  Lives: 40
+  Lives: 1200
   MaxStamina: 100000
   AttacksDamages: 16000000
   StaminaDownSpeed: 6.5
@@ -3193,6 +3193,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AI_isActive: 1
+  AI_isSleeping: 0
   Moving: 0
   Flying: 0
   Direction: 0

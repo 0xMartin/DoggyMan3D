@@ -23,6 +23,7 @@ public class BackgroundMusicManager : MonoBehaviour
         AudioClip nextMusicClip = musicClips[id];
         AudioSource bga = MainGameManager.GetBgAudioSource();
         bga.clip = nextMusicClip;
+        bga.loop = false;
         bga.volume = BgAudioVolume;
         bga.Play();
         Invoke("MusicFinished", nextMusicClip.length);
