@@ -6,26 +6,77 @@ namespace StarterAssets
     {
 
         [Header("Output")]
-        public GameInputs starterAssetsInputs;
+        public GameInputs InputSystem;
 
         public void VirtualMoveInput(Vector2 virtualMoveDirection)
         {
-            starterAssetsInputs.MoveInput(virtualMoveDirection);
+            InputSystem.SprintInput(virtualMoveDirection.magnitude >= 1.0);
+            InputSystem.MoveInput(virtualMoveDirection);
         }
 
         public void VirtualLookInput(Vector2 virtualLookDirection)
         {
-            starterAssetsInputs.LookInput(virtualLookDirection);
+            InputSystem.LookInput(virtualLookDirection);
         }
 
-        public void VirtualJumpInput(bool virtualJumpState)
+        public void VirtualActivateAttackInput()
         {
-            starterAssetsInputs.JumpInput(virtualJumpState);
+            InputSystem.AttackInput(true);
         }
 
-        public void VirtualSprintInput(bool virtualSprintState)
+        public void VirtualDeactivateAttackInput()
         {
-            starterAssetsInputs.SprintInput(virtualSprintState);
+            InputSystem.AttackInput(false);
+        }
+
+        public void VirtualActivateKey1Input()
+        {
+            InputSystem.Key1Input(true);
+        }
+
+        public void VirtualDeactivateKey1Input()
+        {
+            InputSystem.Key1Input(false);
+        }
+
+        public void VirtualActivateKey2Input()
+        {
+            InputSystem.Key2Input(true);
+        }
+
+        public void VirtualDeactivateKey2Input()
+        {
+            InputSystem.Key2Input(false);
+        }
+
+        public void VirtualActivateKey3Input()
+        {
+            InputSystem.Key3Input(true);
+        }
+
+        public void VirtualDeactivateKey3Input()
+        {
+            InputSystem.Key3Input(false);
+        }
+
+        public void VirtualActivateKey4Input()
+        {
+            InputSystem.Key4Input(true);
+        }
+
+        public void VirtualDeactivateKey4Input()
+        {
+            InputSystem.Key4Input(false);
+        }
+
+        public void VirtualActivateEscInput()
+        {
+            InputSystem.EscInput(true);
+        }
+
+        public void VirtualDeactivateEscInput()
+        {
+            InputSystem.EscInput(false);
         }
         
     }
