@@ -18,6 +18,14 @@
   <b>Create by SEMPA team</b> as open source university project
 </div>
 
+## Available on these platforms
+
+<div align="center">
+  <img src="./doc/windows_logo.png" width="20%">
+  <img src="./doc/linux_logo.png" width="20%">
+  <img src="./doc/android_logo.png" width="20%">
+</div>
+
 # TODO
 
 * [X] vyzkouseni death menu (pridat mozna nejaky efekt smrti, zobrazeni lebky a az pak zobrazi menu ??)
