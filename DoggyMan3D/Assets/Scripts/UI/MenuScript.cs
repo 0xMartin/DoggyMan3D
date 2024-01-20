@@ -124,6 +124,7 @@ public class MenuScript : MonoBehaviour
     private void ClickMainCredits()
     {
         // prejde na scenu s titulkama
+        AudioSource.PlayClipAtPoint(ButtonSound, new Vector3(0.0f, 1.0f, -10.0f), ButtonSoundVolume);
         SceneManager.LoadScene(2);
     }
 
@@ -191,6 +192,12 @@ public class MenuScript : MonoBehaviour
 
             TextMeshProUGUI buttonText = fileButton.GetComponentInChildren<TextMeshProUGUI>();
             buttonText.text = Path.GetFileNameWithoutExtension(savePath).Replace("_", " ");
+
+            PlayerSave ps = SaveSystem.LoadPlayer(savePath);
+            if (ps != null)
+            {
+                buttonText.text += "\nLevel: " + (int)(ps.Level + 1);
+            }
 
             RectTransform rt = fileButton.GetComponent<RectTransform>();
             rt.anchoredPosition = new Vector2(horisontalSpacing, -index * (rt.sizeDelta.y + verticalSpacing));
