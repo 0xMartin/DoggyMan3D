@@ -2471,6 +2471,16 @@ PrefabInstance:
       propertyPath: InputSystem
       value: 
       objectReference: {fileID: 1767631779}
+    - target: {fileID: 166868854162214642, guid: 2f7f3dde7ae722a4aafffe20691ad702,
+        type: 3}
+      propertyPath: buttonPressEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: VirtualActivateKey4Input
+      objectReference: {fileID: 0}
+    - target: {fileID: 166868854162214642, guid: 2f7f3dde7ae722a4aafffe20691ad702,
+        type: 3}
+      propertyPath: buttonReleaseEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: VirtualDeactivateKey4Input
+      objectReference: {fileID: 0}
     - target: {fileID: 597308369130767402, guid: 2f7f3dde7ae722a4aafffe20691ad702,
         type: 3}
       propertyPath: m_Pivot.x
@@ -2571,15 +2581,40 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4232429131113781086, guid: 2f7f3dde7ae722a4aafffe20691ad702,
+        type: 3}
+      propertyPath: buttonPressEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: VirtualActivateKey2Input
+      objectReference: {fileID: 0}
+    - target: {fileID: 4232429131113781086, guid: 2f7f3dde7ae722a4aafffe20691ad702,
+        type: 3}
+      propertyPath: buttonReleaseEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: VirtualDeactivateKey2Input
+      objectReference: {fileID: 0}
+    - target: {fileID: 4795813913134514852, guid: 2f7f3dde7ae722a4aafffe20691ad702,
+        type: 3}
+      propertyPath: buttonPressEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: VirtualActivateKey3Input
+      objectReference: {fileID: 0}
+    - target: {fileID: 4795813913134514852, guid: 2f7f3dde7ae722a4aafffe20691ad702,
+        type: 3}
+      propertyPath: buttonReleaseEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: VirtualDeactivateKey3Input
+      objectReference: {fileID: 0}
     - target: {fileID: 6751388636123340836, guid: 2f7f3dde7ae722a4aafffe20691ad702,
         type: 3}
       propertyPath: m_Name
       value: UI_Canvas_StarterAssetsInputs_Joysticks
       objectReference: {fileID: 0}
-    - target: {fileID: 7113428977333465798, guid: 2f7f3dde7ae722a4aafffe20691ad702,
+    - target: {fileID: 8817555224461622821, guid: 2f7f3dde7ae722a4aafffe20691ad702,
         type: 3}
-      propertyPath: magnitudeMultiplier
-      value: 35
+      propertyPath: buttonPressEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: VirtualActivateKey1Input
+      objectReference: {fileID: 0}
+    - target: {fileID: 8817555224461622821, guid: 2f7f3dde7ae722a4aafffe20691ad702,
+        type: 3}
+      propertyPath: buttonReleaseEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: VirtualDeactivateKey1Input
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
