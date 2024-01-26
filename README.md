@@ -37,7 +37,7 @@
 * [X] Level Finalni - Zde se hra spawn pred vchodem do areny kde bude bojovat s drakem. Arenam bude nejake prostory hradni rujny. V bitevnim poli areny nepouzivat zadne obejkty co by blokovali pohyb drak. Po zabiti se hraci otevre brana a odejde z levelu. 
 * [ ] Vytvorit nahledovy obrazek pri spousteni levelu pro level 2, level 3 a level 4. Obrazek vyfotit primo z hry, nejake zajimave misto v konkretnim levelu... Obrazek levelu musi mit pomer stran 1:1 a zaoblene okraje.
 * [ ] Vytvorit ukazkove video ze hry do prezentace. Vice zaberu, ze vsech lokaci hry, video sestrihat, doplnit o loga, text,  efekty, ...
-* [ ] Vytvorit prezentaci ke hre
+* [ ] Vytvorit prezentaci ke hre e
 * [ ] Zvuky prostredi: ambientni zvuky lesa, noc, ...
 
 # Preview of progress
