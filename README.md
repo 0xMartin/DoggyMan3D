@@ -46,7 +46,7 @@
 
 <img src="./doc/game_img_2.png">
 
-# About
+# About-
 
 # Menu
 
