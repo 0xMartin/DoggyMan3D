@@ -1633,17 +1633,17 @@ PrefabInstance:
     - target: {fileID: 8944336655422409503, guid: f6d148d888ffbf54b9afe9936dfaec1f,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 30.757387
       objectReference: {fileID: 0}
     - target: {fileID: 8944336655422409503, guid: f6d148d888ffbf54b9afe9936dfaec1f,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.0489998
+      value: -34.965427
       objectReference: {fileID: 0}
     - target: {fileID: 8944336655422409503, guid: f6d148d888ffbf54b9afe9936dfaec1f,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -4.3
+      value: -205.54465
       objectReference: {fileID: 0}
     - target: {fileID: 8944336655422409503, guid: f6d148d888ffbf54b9afe9936dfaec1f,
         type: 3}
@@ -1732,7 +1732,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1131904312
 Transform:
   m_ObjectHideFlags: 0
@@ -2083,6 +2083,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1686627669}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1686627672 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8688376982632420260, guid: d363a04e145bda04ebcb5162faca0de9,
+    type: 3}
+  m_PrefabInstance: {fileID: 1686627669}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1767631772}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1690062192
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2557,7 +2569,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1987931667
 Transform:
   m_ObjectHideFlags: 0
@@ -2763,6 +2775,11 @@ PrefabInstance:
       propertyPath: buttonReleaseEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: VirtualDeactivateKey1Input
       objectReference: {fileID: 0}
+    - target: {fileID: 8890774966862588244, guid: 2f7f3dde7ae722a4aafffe20691ad702,
+        type: 3}
+      propertyPath: playerInput
+      value: 
+      objectReference: {fileID: 1686627672}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
