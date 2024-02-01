@@ -1863,7 +1863,7 @@ PrefabInstance:
         type: 3}
       propertyPath: LevelImage
       value: 
-      objectReference: {fileID: 21300000, guid: c3c3349f08fcc82408ba888189331936,
+      objectReference: {fileID: 21300000, guid: 0e0ce9ddc6f050b449cde4298ea14581,
         type: 3}
     - target: {fileID: 4208043161084127015, guid: a688c8a03f3bc664ab3a22ea5023dc43,
         type: 3}
@@ -15729,8 +15729,8 @@ Terrain:
   m_Enabled: 1
   serializedVersion: 6
   m_TerrainData: {fileID: 15600000, guid: aa07952ea81466e49b8ac79fe5652772, type: 2}
-  m_TreeDistance: 500
-  m_TreeBillboardDistance: 400
+  m_TreeDistance: 300
+  m_TreeBillboardDistance: 200
   m_TreeCrossFadeLength: 5
   m_TreeMaximumFullLODCount: 50
   m_DetailObjectDistance: 80
