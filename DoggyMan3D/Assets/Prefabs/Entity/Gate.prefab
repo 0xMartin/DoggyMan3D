@@ -682,7 +682,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   OpenRule: 1
   EntitiesToKill: []
-  KeyID: 111
+  KeyID: 1923
   KeyUseMaxDist: 5
   OpenSound: {fileID: 8300000, guid: 163fb5bae999f3144aa984240ae32e89, type: 3}
   OpenSoundVolume: 1
