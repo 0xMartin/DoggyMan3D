@@ -23,7 +23,6 @@
 <div align="center">
   <img src="./doc/windows_logo.png" width="20%">
   <img src="./doc/linux_logo.png" width="20%">
-  <img src="./doc/macos_logo.png" width="20%">
   <img src="./doc/android_logo.png" width="20%">
 </div>
 
