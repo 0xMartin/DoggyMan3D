@@ -1823,6 +1823,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsEntityEnabled: 1
   IsEnabledMoving: 1
+  IsHitEnabled: 1
   Name: Skeleton
   Lives: 60
   MaxStamina: 100000
@@ -1867,8 +1868,8 @@ MonoBehaviour:
   Direction: 0
   Grounded: 1
   MaxWaitTime: 7
-  PlayerDetectionRadius: 8
-  MaxDistanceFromSpawn: 6
+  PlayerDetectionRadius: 12
+  MaxDistanceFromSpawn: 7
   InTargetPointTolerance: 0.5
   MaxAttackDist: 2
   MoveSpeed: 2.6
@@ -1911,8 +1912,12 @@ MonoBehaviour:
   - {fileID: 8300000, guid: d2619472b42462744b3d1cee621c2b41, type: 3}
   - {fileID: 8300000, guid: d0ca52c31d1c3d14aa2c84c9c2129d9d, type: 3}
   FootstepAudioVolume: 0.5
+  WingAudioClips: []
+  WingAudioVolume: 0.5
   AttackAudioClips: []
   AttackAudioVolume: 1
+  Attack2AudioClips: []
+  Attack2AudioVolume: 1
   DeathAudioClips:
   - {fileID: 8300000, guid: ea43cdcc2c75e444b8fa7f800395fb77, type: 3}
   DeatAudioVolume: 1

@@ -1371,6 +1371,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsEntityEnabled: 1
   IsEnabledMoving: 1
+  IsHitEnabled: 1
   Name: Spider
   Lives: 50
   MaxStamina: 100000
@@ -1401,8 +1402,8 @@ MonoBehaviour:
   Direction: 0
   Grounded: 1
   MaxWaitTime: 7
-  PlayerDetectionRadius: 8
-  MaxDistanceFromSpawn: 6
+  PlayerDetectionRadius: 11
+  MaxDistanceFromSpawn: 7
   InTargetPointTolerance: 0.5
   MaxAttackDist: 2
   MoveSpeed: 3.5
@@ -1447,8 +1448,12 @@ MonoBehaviour:
   LandingAudioVolume: 0.8
   FootstepAudioClips: []
   FootstepAudioVolume: 0.5
+  WingAudioClips: []
+  WingAudioVolume: 0.5
   AttackAudioClips: []
   AttackAudioVolume: 1
+  Attack2AudioClips: []
+  Attack2AudioVolume: 1
   DeathAudioClips:
   - {fileID: 8300000, guid: 733f4d3ee9ca12441a64e28c6523fd2c, type: 3}
   DeatAudioVolume: 1
