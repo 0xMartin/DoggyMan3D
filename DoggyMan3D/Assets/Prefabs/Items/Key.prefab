@@ -4818,7 +4818,6 @@ GameObject:
   - component: {fileID: 6107742364482435015}
   - component: {fileID: 576326863985543998}
   - component: {fileID: 1941876338804595084}
-  - component: {fileID: 1941876338804595087}
   - component: {fileID: 1941876338804595086}
   - component: {fileID: -7067860320528299646}
   - component: {fileID: 2091981016883030211}
@@ -4910,20 +4909,6 @@ MonoBehaviour:
   rotationSpeed: 110
   GenerateRandomRotationDir: 0
   RotationDir: {x: 0, y: 0, z: 1}
---- !u!114 &1941876338804595087
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2288761228623724514}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f3826ae2468c3e43a31a36bfbe62373, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  amplitude: 0.12
-  frequency: 4
 --- !u!114 &1941876338804595086
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4953,7 +4938,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4dcd82e29013d5542a9cc7c1602df780, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  groundOffset: -0.3
+  groundOffset: 0.9
   groundLayer:
     serializedVersion: 2
     m_Bits: 513

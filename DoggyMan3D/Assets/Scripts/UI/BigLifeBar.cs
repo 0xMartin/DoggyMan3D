@@ -31,12 +31,14 @@ public class BigLifeBar : MonoBehaviour
             Destroy(gameObject);
         }
 
-        gameObject.SetActive(false);
         _isVisible = false;
         _show = false;
 
         BarFramImage.color = new Color(1.0f, 1.0f, 1.0f, 0.0f);
         LifeFrame.localScale = new Vector3(0.0f, LifeFrame.localScale.y, LifeFrame.localScale.z);
+
+        MainGameManager.AddTempGameObject(this.gameObject);
+        gameObject.SetActive(false);
     }
 
     private void Update()

@@ -26,6 +26,8 @@ public class LifeBar : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        
+        MainGameManager.AddTempGameObject(this.gameObject);
         gameObject.SetActive(false);
     }
 

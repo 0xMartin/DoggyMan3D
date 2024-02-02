@@ -1,4 +1,6 @@
+using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -69,6 +71,12 @@ public class MainGameManager : MonoBehaviour
     private static bool _gamePauseMenuIsVisible = false;
     private static bool _gameDeathMenuIsVisible = false;
     private static bool _levelLoadingDone = false;
+    private static List<GameObject> _gameObjectTemp = new List<GameObject>();
+
+    public static void AddTempGameObject(GameObject obj)
+    {
+        _gameObjectTemp.Add(obj);
+    }
 
     public static AudioSource GetBgAudioSource()
     {
@@ -348,6 +356,9 @@ public class MainGameManager : MonoBehaviour
             // reset hrace
             ResetPlayer();
 
+            // odstraneni docasnych game objektu
+            ClearTempObjects();
+
             // zahaji nacitani levelu
             Debug.Log("Start loading scene with ID: " + levelId);
             LoadingScreen.SetActive(true);
@@ -545,10 +556,21 @@ public class MainGameManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Resetuje hrace
+    /// Resetuje hrace + reset inventare hrace
     /// </summary>
     private void ResetPlayer()
     {
+        // reset player inventory
+        if (_playerSave != null)
+        {
+            _playerSave.Inventory.Clear();
+            Debug.Log("Player invetory reset done");
+        }
+        else
+        {
+            Debug.LogError("Failed to reset player invetory");
+        }
+        // reset player
         if (PlayerRef != null)
         {
             GameEntityObject entity = PlayerRef.GetComponent<GameEntityObject>();
@@ -669,6 +691,23 @@ public class MainGameManager : MonoBehaviour
         {
             Debug.LogError("Failed to bind level event. Current level is null");
         }
+    }
+
+    private void ClearTempObjects()
+    {
+        foreach (GameObject obj in _gameObjectTemp)
+        {
+            try
+            {
+                if (obj != null)
+                {
+                    Destroy(obj);
+                }
+            }
+            catch (Exception) { }
+        }
+        Debug.Log("All temporary game objects destroyed [count: " + _gameObjectTemp.Count + "]");
+        _gameObjectTemp.Clear();
     }
 
 }
