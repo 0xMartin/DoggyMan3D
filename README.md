@@ -41,12 +41,12 @@ Doggy Man game is stylized with a dark aesthetic, immersing players in a visuall
 ### Main Menu:
 The main menu offers essential options to enhance your gaming experience. From here, you can embark on a new adventure by creating a new game, resume your journey by loading a previous save. You can also adjust the game's resolution to suit your preferences.
 
-<img src="./doc/menu.png">
+<img src="./doc/menu.png" width="100%">
 
 ### In Game Menu:
 The in-game menu provides: reset the current level for a fresh start, or dive back into the action by resuming your adventure or go back to menu.
 
-<img src="./doc/game_img_2.png">
+<img src="./doc/game_img_2.png" width="100%">
 
 # Game
 
@@ -58,11 +58,15 @@ All pertinent information, including health, stamina, and inventory status, is r
 
 Within the game, player have the opportunity to collect various items strewn across the landscape. These items can prove invaluable on their journey and can be stored in an inventory with a capacity limit of four slots. Once the inventory is full, players must decide which items to keep and which to leave/use, adding an element of strategy to their exploration.
 
-<img src="./doc/in_game.png">
+<img src="./doc/in_game.png" width="100%">
 
 ### Next screenshot from game:
 
-<img src="./doc/game_img_1.png">
+<img src="./doc/game_img_1.png" width="100%">
+
+### Screenshot from android version of game:
+
+<img src="./doc/android_screenshot.jpg" width="100%">
 
 # Levels
 
@@ -71,27 +75,63 @@ Doggy Man 3D features a total of 5 levels, each escalating in difficulty as play
 Explore diverse environments, confront formidable foes, and uncover the mysteries that await in each level of this epic adventure.
 
 <div align="center">
-  <img src="./DoggyMan3D/Assets/Image/Level/level1.png" width="32%">
-  <img src="./DoggyMan3D/Assets/Image/Level/level2.png" width="32%">
-  <img src="./DoggyMan3D/Assets/Image/Level/level3.png" width="32%">
+  <img src="./DoggyMan3D/Assets/Image/Level/level1.png" width="28%">
+  <img src="./DoggyMan3D/Assets/Image/Level/level2.png" width="28%">
+  <img src="./DoggyMan3D/Assets/Image/Level/level3.png" width="28%">
 </div>
 <div align="center">
-  <img src="./DoggyMan3D/Assets/Image/Level/level4.png" width="32%">
-  <img src="./DoggyMan3D/Assets/Image/Level/boss_level.png" width="32%">
+  <img src="./DoggyMan3D/Assets/Image/Level/level4.png" width="28%">
+  <img src="./DoggyMan3D/Assets/Image/Level/boss_level.png" width="28%">
 </div>
-
-# Enemies
-
-### Ghost
-
-### Spider
-
-### Skeleton
-
-### Dragon
-
-### Trap
 
 # Items
 
+* __Health Potion (Red potion)__ - Recognized by its distinctive red flask, the health potion restores the player's health, providing a much-needed boost in dire situations.
+* __Stamina Potion (Greeb potion)__ - With its revitalizing effects, the stamina potion grants players the ability to sprint without depleting their stamina reserves for a limited duration, allowing for swift maneuvers and escapes when needed most.
+* __Strength Potion (Blue potion)__ - The strength potion, identifiable by its potent aura, temporarily enhances the player's combat prowess, increasing the damage inflicted upon adversaries for a set period.
+* __Key__ - The key serves as the means to unlock gates and doors scattered throughout the game world, granting access to new areas.
+
+# Enemies
+
+* __Ghosts__ - These diminutive creatures are the most common foes, known for their relentless attacks and cunning tactics. While individually weak, they often swarm in numbers, presenting a formidable challenge to the unwary adventurer.
+* __Spiders__ - Larger and more menacing than ghost, spiders lurk in the shadows, ready to ensnare unsuspecting prey with their venomous bites. Agile and resilient, they require skillful maneuvering and precise strikes to overcome.
+* __Skeletons__ - Among the most formidable adversaries, skeletons are reanimated warriors fueled by dark magic. Possessing formidable strength and resilience, they present a formidable challenge to even the most seasoned warriors.
+* __Dragon Boss__ - The ultimate foe, the dragon is a towering force of destruction, its fiery breath and massive claws posing a threat to all who dare to challenge it. Defeating this ancient beast will require cunning strategy and unwavering courage.
+
+In addition to these foes, players must navigate treacherous traps and hazards scattered throughout the game world. From hidden pitfalls to lethal spikes, each obstacle presents a new test of the player's skill and agility.
+
+### Ghost
+
+<img src="./doc/ghost.png" width="40%">
+
+### Spider
+
+<img src="./doc/spider.png" width="40%">
+
+### Skeleton
+
+<img src="./doc/skeleton.png" width="40%">
+
+### Dragon
+
+<img src="./doc/dragon.png" width="40%">
+
+### Trap
+
+<img src="./doc/trap.png" width="40%">
+
 # Gates
+
+Players will encounter gates that obstruct passage to further sections of the level. These gates serve as barriers that must be overcome to progress.
+There are two primary methods by which players can open these gates:
+
+* __Key Activation:__ Certain gates are secured by locks that can only be opened with the corresponding keys. Players must search the environment diligently to locate these keys, using them to unlock the gates and gain access to new areas.
+* __Enemy Defeat:__ In some instances, gates may be guarded by formidable adversaries. By defeating these enemies in combat, players can remove the obstacle blocking their path and advance to the next part of the level.
+
+<img src="./doc/gate.png" width="40%">
+
+# Authors
+
+[![0xMartin](https://github.com/0xMartin.png?size=100)](https://github.com/0xMartin)
+[![eobadalova](https://github.com/eobadalova.png?size=100)](https://github.com/eobadalova)
+[![PaulieBossCZ](https://github.com/PaulieBossCZ.png?size=100)](https://github.com/PaulieBossCZ)
