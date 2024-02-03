@@ -18,12 +18,14 @@ public class MenuScript : MonoBehaviour
     public GameObject NewGameSection;
     public GameObject LoadGameSection;
     public GameObject AboutSection;
+    public GameObject SettigsSection;
 
     [Header("Components - Main")]
     public Button MainNewGame;
     public Button MainLoadGame;
     public Button MainAbout;
     public Button MainCredits;
+    public Button MainSettings;
     public Button MainExit;
 
     [Header("Components - New")]
@@ -42,6 +44,8 @@ public class MenuScript : MonoBehaviour
 
     [Header("Components - About")]
     public Button AboutBack;
+    [Header("Components - Settings")]
+    public Button SettingsBack;
 
     [Header("Transitions")]
     public CircleTransition CircleTransition;
@@ -54,11 +58,13 @@ public class MenuScript : MonoBehaviour
         NewGameSection.SetActive(false);
         LoadGameSection.SetActive(false);
         AboutSection.SetActive(false);
+        SettigsSection.SetActive(false);
 
         // main
         MainNewGame.onClick.AddListener(ClickMainNewGame);
         MainLoadGame.onClick.AddListener(ClickMainLoadGame);
         MainCredits.onClick.AddListener(ClickMainCredits);
+        MainSettings.onClick.AddListener(ClickMainSettings);
         MainAbout.onClick.AddListener(ClickMainAbout);
         MainExit.onClick.AddListener(ClickMainExit);
 
@@ -72,6 +78,8 @@ public class MenuScript : MonoBehaviour
         // about
         AboutBack.onClick.AddListener(ClickBack);
 
+        // settings
+        SettingsBack.onClick.AddListener(ClickBack);
     }
 
 
@@ -102,6 +110,7 @@ public class MenuScript : MonoBehaviour
         NewGameSection.SetActive(false);
         LoadGameSection.SetActive(false);
         AboutSection.SetActive(false);
+        SettigsSection.SetActive(false);
         AudioSource.PlayClipAtPoint(ButtonSound, new Vector3(0.0f, 1.0f, -10.0f), ButtonSoundVolume);
     }
 
@@ -126,6 +135,12 @@ public class MenuScript : MonoBehaviour
         // prejde na scenu s titulkama
         AudioSource.PlayClipAtPoint(ButtonSound, new Vector3(0.0f, 1.0f, -10.0f), ButtonSoundVolume);
         SceneManager.LoadScene(2);
+    }
+
+    private void ClickMainSettings()
+    {
+        MainSection.SetActive(false);
+        SettigsSection.SetActive(true);
     }
 
     private void ClickMainAbout()
