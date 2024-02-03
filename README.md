@@ -26,30 +26,43 @@
   <img src="./doc/android_logo.png" width="20%">
 </div>
 
-# TODO
-
-* [X] vyzkouseni death menu (pridat mozna nejaky efekt smrti, zobrazeni lebky a az pak zobrazi menu ??)
-* [X] Level 1 - Hrac se spawne u sveho horiciho domu, a vydava se na cestu zabit drak a tak se pomstit. Dum se nachazi nekde v polich, hrace se na konci toho levelu dostane na zacetek lesa. (pouzivat jen nepratele: duch, naslapne pasti)
-* [ ] Level 2 - Level je cely v lese. Musi byt znat, ze level navazuje na predchozi (hrac za sebou na zacatku vidi ze prisel nekde z poli..). Level se cely odehrava v lese. (pouzivat jen nepratele: duch, pavouk, naslapne pasti)
-* [ ] Level 3 - Zacek levelu stale v lese. Po chvili se hrac dostane ne hribtov (zde pouzivat assety pro hrbitov...). Hribuv bude dalsi zbyla cas levelu. Ke konci levelu bude vstup do nejake oblasti "rujn hradu". (pouzivat jen nepratele: duch, pavouk, kostlivec, naslapne pasti)
-* [ ] Level 4 - Tento level se odehrava nekde v oblasti rujn stareho hradu, hrad se stale nachazi v tom samem lesek jak hrac vesel na zacatku. Zde pouzivat ty stejne nepratele jak predtim jen vic aby to bylo narocnejsi. Level bude ukoncen nejakou branou.
-* [X] Level Finalni - Zde se hra spawn pred vchodem do areny kde bude bojovat s drakem. Arenam bude nejake prostory hradni rujny. V bitevnim poli areny nepouzivat zadne obejkty co by blokovali pohyb drak. Po zabiti se hraci otevre brana a odejde z levelu. 
-* [ ] Vytvorit nahledovy obrazek pri spousteni levelu pro level 2, level 3 a level 4. Obrazek vyfotit primo z hry, nejake zajimave misto v konkretnim levelu... Obrazek levelu musi mit pomer stran 1:1 a zaoblene okraje.
-* [ ] Vytvorit ukazkove video ze hry do prezentace. Vice zaberu, ze vsech lokaci hry, video sestrihat, doplnit o loga, text,  efekty, ...
-* [ ] Vytvorit prezentaci ke hre e
-* [ ] Zvuky prostredi: ambientni zvuky lesa, noc, ...
-
-# Preview of progress
-
-<img src="./doc/game_img_1.png">
-
-<img src="./doc/game_img_2.png">
-
 # About
+
+Doggy Man 3D is an open-source RPG created as a collaborative project by the SEMPA team during their university game-dev course. Immerse yourself in a dark and captivating world as you take on the role of Doggy Man, a valiant warrior on a mission for revenge.
+
+The tale unfolds as Doggy Man's home is razed to the ground by a powerful dragon. Driven by the flames of vengeance, our hero embarks on a perilous journey to seek justice and slay the mighty beast that wrought destruction upon his abode.
+
+Venture through a treacherous landscape filled with formidable foes, engaging in epic battles and overcoming challenges to reach the heart of the dragon's lair. The game is divided into 5 levels, each progressively more challenging, testing your skills and determination.
+
+Doggy Man game is stylized with a dark aesthetic, immersing players in a visually striking and atmospheric world. Experience the thrill of a classic RPG with a gripping narrative, intense combat, and a satisfying conclusion as Doggy Man fulfills his quest by defeating the formidable dragon.
 
 # Menu
 
+### Main Menu:
+The main menu offers essential options to enhance your gaming experience. From here, you can embark on a new adventure by creating a new game, resume your journey by loading a previous save. You can also adjust the game's resolution to suit your preferences.
+
+<img src="./doc/menu.png">
+
+### In Game Menu:
+The in-game menu provides: reset the current level for a fresh start, or dive back into the action by resuming your adventure or go back to menu.
+
+<img src="./doc/game_img_2.png">
+
 # Game
+
+Main character is controlled from a third-person perspective. The player starts with a full number of lives, and if he runs out of lives, his journey ends, requiring a restart of the current level.
+
+Player have the freedom to traverse the game world by walking or running, but with every dash, his stamina diminishes. When stamina runs out, player is unable to sprint until it replenishes, forcing them to wait for a brief moment. Additionally, low stamina levels decrease the effectiveness of attacks, making strategic management of this vital resource essential.
+
+All pertinent information, including health, stamina, and inventory status, is readily displayed in the game's user interface (UI).
+
+Within the game, player have the opportunity to collect various items strewn across the landscape. These items can prove invaluable on their journey and can be stored in an inventory with a capacity limit of four slots. Once the inventory is full, players must decide which items to keep and which to leave/use, adding an element of strategy to their exploration.
+
+<img src="./doc/in_game.png">
+
+### Next screenshot from game:
+
+<img src="./doc/game_img_1.png">
 
 # Levels
 
