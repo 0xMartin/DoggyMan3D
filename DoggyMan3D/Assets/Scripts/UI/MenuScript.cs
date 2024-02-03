@@ -58,13 +58,15 @@ public class MenuScript : MonoBehaviour
         NewGameSection.SetActive(false);
         LoadGameSection.SetActive(false);
         AboutSection.SetActive(false);
-        SettigsSection.SetActive(false);
+        if (SettigsSection != null)
+            SettigsSection.SetActive(false);
 
         // main
         MainNewGame.onClick.AddListener(ClickMainNewGame);
         MainLoadGame.onClick.AddListener(ClickMainLoadGame);
         MainCredits.onClick.AddListener(ClickMainCredits);
-        MainSettings.onClick.AddListener(ClickMainSettings);
+        if (MainSettings != null)
+            MainSettings.onClick.AddListener(ClickMainSettings);
         MainAbout.onClick.AddListener(ClickMainAbout);
         MainExit.onClick.AddListener(ClickMainExit);
 
@@ -79,7 +81,8 @@ public class MenuScript : MonoBehaviour
         AboutBack.onClick.AddListener(ClickBack);
 
         // settings
-        SettingsBack.onClick.AddListener(ClickBack);
+        if (SettingsBack != null)
+            SettingsBack.onClick.AddListener(ClickBack);
     }
 
 
@@ -110,7 +113,8 @@ public class MenuScript : MonoBehaviour
         NewGameSection.SetActive(false);
         LoadGameSection.SetActive(false);
         AboutSection.SetActive(false);
-        SettigsSection.SetActive(false);
+        if (SettigsSection != null)
+            SettigsSection?.SetActive(false);
         AudioSource.PlayClipAtPoint(ButtonSound, new Vector3(0.0f, 1.0f, -10.0f), ButtonSoundVolume);
     }
 
@@ -140,7 +144,7 @@ public class MenuScript : MonoBehaviour
     private void ClickMainSettings()
     {
         MainSection.SetActive(false);
-        SettigsSection.SetActive(true);
+        SettigsSection?.SetActive(true);
     }
 
     private void ClickMainAbout()
