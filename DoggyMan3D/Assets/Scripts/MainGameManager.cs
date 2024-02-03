@@ -55,6 +55,9 @@ public class MainGameManager : MonoBehaviour
 
     [Header("Game Input System")]
     public GameInputs GameInputSystem;
+    
+    [Header("Graphics")]
+    public bool RefreshResolutionOnAwake = false;
 
     /***********************************************************************************************************************************/
     // GLOBAL VARIABLES SECTION
@@ -163,6 +166,15 @@ public class MainGameManager : MonoBehaviour
     // On Awake (open game) 
     private void Awake()
     {
+        // refresh screen resolution (only if is enabled)
+        if (RefreshResolutionOnAwake)
+        {
+            List<Resolution> resolutions = new List<Resolution>(Screen.resolutions);
+            Resolution resolution = resolutions[PlayerPrefs.GetInt("resolutionIndex", 0)];
+            Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
+            Debug.Log("SCREEN RESOLUTION SET ON: " + resolution.width + " x " + resolution.height);
+        }
+
         // dialogs setup
         GameInputSystem.SetCursorState(true);
         _gamePauseMenuIsVisible = false;
