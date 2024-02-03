@@ -21,10 +21,14 @@
 ## Available on these platforms
 
 <div align="center">
-  <img src="./doc/windows_logo.png" width="20%">
-  <img src="./doc/linux_logo.png" width="20%">
-  <img src="./doc/android_logo.png" width="20%">
+  <img src="./doc/windows_logo.png" width="15%">
+  <img src="./doc/linux_logo.png" width="15%">
+  <img src="./doc/android_logo.png" width="15%">
 </div>
+
+## Teaser Trailer (YouTube)
+
+[![Crows and Nests Trailer](https://img.youtube.com/vi/iurHWjnuU00/0.jpg)](https://youtu.be/iurHWjnuU00)
 
 # About
 
