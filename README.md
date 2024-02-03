@@ -66,5 +66,32 @@ Within the game, player have the opportunity to collect various items strewn acr
 
 # Levels
 
-# Authors
+Doggy Man 3D features a total of 5 levels, each escalating in difficulty as player progress through the game. With each new level, players encounter increasingly challenging obstacles and enemies, putting their skills and determination to the test.
 
+Explore diverse environments, confront formidable foes, and uncover the mysteries that await in each level of this epic adventure.
+
+<div align="center">
+  <img src="./DoggyMan3D/Assets/Image/Level/level1.png" width="32%">
+  <img src="./DoggyMan3D/Assets/Image/Level/level2.png" width="32%">
+  <img src="./DoggyMan3D/Assets/Image/Level/level3.png" width="32%">
+</div>
+<div align="center">
+  <img src="./DoggyMan3D/Assets/Image/Level/level4.png" width="32%">
+  <img src="./DoggyMan3D/Assets/Image/Level/boss_level.png" width="32%">
+</div>
+
+# Enemies
+
+### Ghost
+
+### Spider
+
+### Skeleton
+
+### Dragon
+
+### Trap
+
+# Items
+
+# Gates
