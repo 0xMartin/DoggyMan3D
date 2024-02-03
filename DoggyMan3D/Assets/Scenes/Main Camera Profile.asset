@@ -129,7 +129,7 @@ MonoBehaviour:
     value: 1
   intensity:
     overrideState: 1
-    value: 1
+    value: 0.6
   color:
     overrideState: 0
     value: {r: 0, g: 0, b: 0, a: 1}
@@ -147,7 +147,7 @@ MonoBehaviour:
     value: -12
   thicknessModifier:
     overrideState: 1
-    value: 1.5
+    value: 2
   directLightingStrength:
     overrideState: 0
     value: 0
@@ -182,7 +182,7 @@ MonoBehaviour:
     defaultState: 1
   tonemapper:
     overrideState: 0
-    value: 0
+    value: 1
   toneCurveToeStrength:
     overrideState: 0
     value: 0
@@ -210,19 +210,19 @@ MonoBehaviour:
     value: 1
   temperature:
     overrideState: 0
-    value: 0
+    value: -22
   tint:
     overrideState: 0
-    value: 0
+    value: -63
   colorFilter:
     overrideState: 1
-    value: {r: 0.6320754, g: 0.6335953, b: 1, a: 1}
+    value: {r: 0.6198148, g: 0.62602556, b: 0.9924528, a: 1}
   hueShift:
     overrideState: 0
-    value: 0
+    value: -32
   saturation:
-    overrideState: 0
-    value: -25
+    overrideState: 1
+    value: -21
   brightness:
     overrideState: 0
     value: 0
@@ -233,14 +233,14 @@ MonoBehaviour:
     overrideState: 1
     value: 6
   mixerRedOutRedIn:
-    overrideState: 0
-    value: 100
+    overrideState: 1
+    value: 68
   mixerRedOutGreenIn:
     overrideState: 0
-    value: 0
+    value: -54
   mixerRedOutBlueIn:
     overrideState: 0
-    value: 0
+    value: -2
   mixerGreenOutRedIn:
     overrideState: 0
     value: 0
@@ -258,7 +258,7 @@ MonoBehaviour:
     value: 0
   mixerBlueOutBlueIn:
     overrideState: 0
-    value: 100
+    value: 119
   lift:
     overrideState: 0
     value: {x: 1, y: 1, z: 1, w: 0}

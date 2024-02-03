@@ -160,11 +160,11 @@ public class Dragon : AIDragon
 
         // note: Vector2's != operator uses approximation so is not floating point error prone, and is cheaper than magnitude
         // if there is a move input rotate player when the player is moving
-        if (Moving && _gameEntity.IsAlive() && _gameEntity.IsEnabledMoving && _gameEntity.IsEntityEnabled)
+        if ((Moving || _AI_rotateOnly) && _gameEntity.IsAlive() && _gameEntity.IsEntityEnabled)
         {
             _targetRotation = Direction;
             float rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, _targetRotation, ref _rotationVelocity,
-                RotationSmoothTime);
+                RotationSmoothTime * (_AI_rotateOnly ? 2.0f : 1.0f));
 
             // rotate to face input direction relative to camera position
             transform.rotation = Quaternion.Euler(0.0f, rotation, 0.0f);

@@ -669,6 +669,9 @@ AnimatorStateTransition:
   - m_ConditionMode: 1
     m_ConditionEvent: FlameAttack
     m_EventTreshold: 0
+  - m_ConditionMode: 2
+    m_ConditionEvent: NoActive
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -577352592641750081}
   m_Solo: 0
@@ -721,6 +724,9 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 1
     m_ConditionEvent: BasicAttack
+    m_EventTreshold: 0
+  - m_ConditionMode: 2
+    m_ConditionEvent: NoActive
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -7873204586507588212}

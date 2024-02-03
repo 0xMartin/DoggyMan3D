@@ -34,6 +34,7 @@ public class AIDragon : MonoBehaviour
     protected bool _playerIsAlive; // true pokud je hrac zivi
     protected bool _AI_dragon_in_air;  // drak muze utocit jen pokud neni ve vzduchu = false (properta je ovladane externe s child tridy)
     protected bool _AI_flameAttack; // chrleni ohne pokud je true
+    protected bool _AI_rotateOnly; // true -> drak se bude pouze otacet na miste, bez chuze
     private float _flameAttackCooldownTime = 0.0f; // cool down cas, chrlit bude moct az bude 0
     private float _timeToAISleep = 0.0f; // cas za jak dlouho bude AI uspano na nejakou dobu
 
@@ -47,6 +48,7 @@ public class AIDragon : MonoBehaviour
         _AI_dragon_in_air = false;
         _AI_inTargetPoint = true;
         _AI_initDone = true;
+        _AI_rotateOnly = false;
         _AI_flameAttack = false;
         _flameAttackCooldownTime = Random.Range(8.0f, 37.0f);
         _timeToAISleep = Random.Range(30.0f, 70.0f);
@@ -88,7 +90,7 @@ public class AIDragon : MonoBehaviour
             float dist = DistanceFromPlayer();
 
             // basic attack
-            if (dist < MaxBasicAttackDist)
+            if (dist < MaxBasicAttackDist && !AI_isSleeping)
             {
                 int id = Random.Range(1, _gameEntity.AttacksDamages.Count() + 1);
                 _gameEntity.DoAttack(id);
@@ -101,7 +103,7 @@ public class AIDragon : MonoBehaviour
             }
 
             // flame attack
-            if (dist < MaxFlameAttackDist)
+            if (dist < MaxFlameAttackDist && !AI_isSleeping)
             {
                 if (_flameAttackCooldownTime <= 0.0f)
                 {
@@ -164,7 +166,6 @@ public class AIDragon : MonoBehaviour
         }
     }
 
-
     /***************************************************************************************************************************************/
     // SIMPLE AI
     // * pokud hrace neni pobliz tak se entita nahodne pohybuje v urcitych casovych intervalech v definovane kruhove oblasti od miste jejiho spawnu
@@ -173,6 +174,10 @@ public class AIDragon : MonoBehaviour
 
     private void UpdateAI()
     {
+        // pokud je uz blizko hrace a drak uz se nebude dele pohybovat, tak se jen na miste bude otacet za hracem
+        RotateOnPlayerWhenAttacking();
+
+        // pohyb za hracem / na urcite misto
         if (!Grounded || !_gameEntity.IsEnabledMoving || !_gameEntity.IsEntityEnabled) return;
 
         // vypocet vzdalenosti od hrace (pokud je na scene)
@@ -251,6 +256,21 @@ public class AIDragon : MonoBehaviour
     {
         _AI_targetPoint = target;
         _AI_inTargetPoint = false;
+    }
+
+    private void RotateOnPlayerWhenAttacking()
+    {
+        Vector3 player_pos = _AI_playerRef.transform.position;
+        if (Mathf.Sqrt(Mathf.Pow(transform.position.x - player_pos.x, 2) + Mathf.Pow(transform.position.z - player_pos.z, 2)) <= InTargetPointTolerance)
+        {
+            Vector3 direction = player_pos - transform.position;
+            Direction = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
+            _AI_rotateOnly = true;
+        }
+        else
+        {
+            _AI_rotateOnly = false;
+        }
     }
 
     /*****************************************************************************************************************************************************/
