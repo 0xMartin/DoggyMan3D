@@ -18,6 +18,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Cinematic/Intro.unity
     guid: 59ffc11fcb8caa14fae2f59030101c18
   - enabled: 1
+    path: Assets/Scenes/Cinematic/Outro.unity
+    guid: 6accb8547c2f8484b8395b53840cb8a0
+  - enabled: 1
     path: Assets/Scenes/Game/Level1.unity
     guid: 9eb3936cad83d7a4d8c7190a64e5b71a
   - enabled: 1
