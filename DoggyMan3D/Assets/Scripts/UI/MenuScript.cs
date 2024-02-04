@@ -175,7 +175,8 @@ public class MenuScript : MonoBehaviour
         MainGameManager.SetPlayerSaveToLoadOnGameManagerStart(null);
         CircleTransition.ShowOverlay();
         yield return new WaitForSeconds(CircleTransition.Duration);
-        SceneManager.LoadScene(1);
+        // kdyz jde o new game tak prejde to sceny 3 (intro cinematic ... pak po prehrani tohoto intra prejde do sceny game manageru (1))
+        SceneManager.LoadScene(3);
     }
 
     // LOAD ################################################################

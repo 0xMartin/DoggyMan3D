@@ -72,7 +72,9 @@ public class Dragon : AIDragon
         _animator.SetBool("NoActive", !AI_isActive || AI_isSleeping);
         if (AI_isActive)
         {
-            _lifeBar.ShowBar();
+            if(_lifeBar != null) {
+                _lifeBar.ShowBar();
+            }
         }
 
         // walk

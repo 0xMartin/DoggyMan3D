@@ -47,11 +47,11 @@ MonoBehaviour:
   BgAudioSource: {fileID: 0}
   PlayerRef: {fileID: 0}
   MainCamera: {fileID: 0}
-  LevelsID: 0300000004000000050000000600000007000000
+  LevelsID: 0400000005000000060000000700000008000000
   TimeToShowLevel: 2
   TimeToHideLevel: 2
   LevelInfoObjName: LevelInfoObject
-  FirstLevelSceneID: 3
+  FirstLevelSceneID: 4
   PauseMenu: {fileID: 0}
   PauseMenuResume: {fileID: 0}
   PauseMenuReset: {fileID: 0}
@@ -64,3 +64,4 @@ MonoBehaviour:
   CircleTransition: {fileID: 0}
   LevelScreen: {fileID: 0}
   GameInputSystem: {fileID: 0}
+  RefreshResolutionOnAwake: 0

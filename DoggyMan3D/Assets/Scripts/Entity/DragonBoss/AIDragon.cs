@@ -33,7 +33,7 @@ public class AIDragon : MonoBehaviour
     protected bool _AI_inTargetPoint; // false pokud drak jeste nedosel na danou target pozici
     protected bool _playerIsAlive; // true pokud je hrac zivi
     protected bool _AI_dragon_in_air;  // drak muze utocit jen pokud neni ve vzduchu = false (properta je ovladane externe s child tridy)
-    protected bool _AI_flameAttack; // chrleni ohne pokud je true
+    public bool _AI_flameAttack; // chrleni ohne pokud je true
     protected bool _AI_rotateOnly; // true -> drak se bude pouze otacet na miste, bez chuze
     private float _flameAttackCooldownTime = 0.0f; // cool down cas, chrlit bude moct az bude 0
     private float _timeToAISleep = 0.0f; // cas za jak dlouho bude AI uspano na nejakou dobu
@@ -56,6 +56,8 @@ public class AIDragon : MonoBehaviour
 
     public void Update_AI()
     {
+        if(_AI_playerRef == null) return;
+
         // neaktivni stav
         if (!AI_isActive)
         {
@@ -142,7 +144,7 @@ public class AIDragon : MonoBehaviour
     {
         if (_AI_playerRef == null)
         {
-            return 0.0f;
+            return 99999.0f;
         }
         if (!_AI_playerRef.IsAlive())
         {
@@ -173,7 +175,7 @@ public class AIDragon : MonoBehaviour
     /***************************************************************************************************************************************/
 
     private void UpdateAI()
-    {
+    {        
         // pokud je uz blizko hrace a drak uz se nebude dele pohybovat, tak se jen na miste bude otacet za hracem
         RotateOnPlayerWhenAttacking();
 
@@ -260,6 +262,7 @@ public class AIDragon : MonoBehaviour
 
     private void RotateOnPlayerWhenAttacking()
     {
+        if(_AI_playerRef == null) return;
         Vector3 player_pos = _AI_playerRef.transform.position;
         if (Mathf.Sqrt(Mathf.Pow(transform.position.x - player_pos.x, 2) + Mathf.Pow(transform.position.z - player_pos.z, 2)) <= InTargetPointTolerance)
         {
