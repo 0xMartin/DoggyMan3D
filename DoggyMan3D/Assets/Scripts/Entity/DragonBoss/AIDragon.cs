@@ -56,8 +56,6 @@ public class AIDragon : MonoBehaviour
 
     public void Update_AI()
     {
-        if(_AI_playerRef == null) return;
-
         // neaktivni stav
         if (!AI_isActive)
         {
@@ -82,6 +80,7 @@ public class AIDragon : MonoBehaviour
 
         // ziskani reference hrace ve scene
         GetPlayerReference();
+        if (_AI_playerRef == null) return;
 
         // update AI
         UpdateAI();
@@ -175,7 +174,7 @@ public class AIDragon : MonoBehaviour
     /***************************************************************************************************************************************/
 
     private void UpdateAI()
-    {        
+    {
         // pokud je uz blizko hrace a drak uz se nebude dele pohybovat, tak se jen na miste bude otacet za hracem
         RotateOnPlayerWhenAttacking();
 
@@ -262,7 +261,7 @@ public class AIDragon : MonoBehaviour
 
     private void RotateOnPlayerWhenAttacking()
     {
-        if(_AI_playerRef == null) return;
+        if (_AI_playerRef == null) return;
         Vector3 player_pos = _AI_playerRef.transform.position;
         if (Mathf.Sqrt(Mathf.Pow(transform.position.x - player_pos.x, 2) + Mathf.Pow(transform.position.z - player_pos.z, 2)) <= InTargetPointTolerance)
         {
