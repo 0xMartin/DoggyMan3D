@@ -307,7 +307,7 @@ public class MainGameManager : MonoBehaviour
     {
         CircleTransition.ShowOverlay();
         yield return new WaitForSeconds(CircleTransition.Duration);
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(SceneList.MAIN_MENU);
     }
 
     /// <summary>
@@ -522,8 +522,8 @@ public class MainGameManager : MonoBehaviour
         // zastavi prehravani hudby
         BgAudioSource.Stop();
 
-        // prejde do sceny titulek
-        SceneManager.LoadScene(2);
+        // prejde do outro cinematic scena (pak nakonec z ni prejde do sceny s titulky)
+        SceneManager.LoadScene(SceneList.GAME_OUTRO);
     }
 
     /***********************************************************************************************************************************/

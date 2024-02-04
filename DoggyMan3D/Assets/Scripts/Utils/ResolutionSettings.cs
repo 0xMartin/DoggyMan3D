@@ -6,6 +6,9 @@ using UnityEngine.UI;
 
 public class ResolutionSettings : MonoBehaviour
 {
+    public AudioClip ButtonSound;
+    public float ButtonSoundVolume = 0.7f;
+
     public TMP_Dropdown resolutionDropdown;
     public Button ApplyButton;
 
@@ -41,9 +44,10 @@ public class ResolutionSettings : MonoBehaviour
 
     private void ApplySettings()
     {
+        AudioSource.PlayClipAtPoint(ButtonSound, new Vector3(0.0f, 1.0f, -10.0f), ButtonSoundVolume);
         int index = resolutionDropdown.value;
         PlayerPrefs.SetInt("resolutionIndex", index);
-        SetResolution(index);    
+        SetResolution(index);
     }
 
     public void SetResolution(int resolutionIndex)

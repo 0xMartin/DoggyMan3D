@@ -28,14 +28,14 @@ public class Credits : MonoBehaviour
     public void OnCreditsEnd()
     {
         // prejde zpet do menu
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(SceneList.MAIN_MENU);
     }
 
     public void OnBackButtonClick()
     {
         AudioSource.PlayClipAtPoint(ButtonSound, CameraPosition.position, ButtonSoundVolume);
         // prejde zpet do menu
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(SceneList.MAIN_MENU);
     }
 
 }

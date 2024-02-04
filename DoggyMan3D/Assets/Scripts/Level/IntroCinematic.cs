@@ -13,7 +13,7 @@ public class IntroCinematic : MonoBehaviour
 
     public void OnCinematicEnd()
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(SceneList.MAIN_GAME_MANAGER);
     }
 
 }

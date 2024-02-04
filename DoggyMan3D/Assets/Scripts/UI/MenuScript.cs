@@ -138,11 +138,12 @@ public class MenuScript : MonoBehaviour
     {
         // prejde na scenu s titulkama
         AudioSource.PlayClipAtPoint(ButtonSound, new Vector3(0.0f, 1.0f, -10.0f), ButtonSoundVolume);
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene(SceneList.CREDITS);
     }
 
     private void ClickMainSettings()
     {
+        AudioSource.PlayClipAtPoint(ButtonSound, new Vector3(0.0f, 1.0f, -10.0f), ButtonSoundVolume);
         MainSection.SetActive(false);
         SettigsSection?.SetActive(true);
     }
@@ -176,7 +177,7 @@ public class MenuScript : MonoBehaviour
         CircleTransition.ShowOverlay();
         yield return new WaitForSeconds(CircleTransition.Duration);
         // kdyz jde o new game tak prejde to sceny 3 (intro cinematic ... pak po prehrani tohoto intra prejde do sceny game manageru (1))
-        SceneManager.LoadScene(3);
+        SceneManager.LoadScene(SceneList.GAME_INTRO);
     }
 
     // LOAD ################################################################
@@ -186,7 +187,8 @@ public class MenuScript : MonoBehaviour
         MainGameManager.SetPlayerSaveToLoadOnGameManagerStart(savePath);
         CircleTransition.ShowOverlay();
         yield return new WaitForSeconds(CircleTransition.Duration);
-        SceneManager.LoadScene(1);
+        // prejde do sceny main game manageru ktery nacte potrebny level pro hru
+        SceneManager.LoadScene(SceneList.MAIN_GAME_MANAGER);
     }
 
     private void reloadSaveList()

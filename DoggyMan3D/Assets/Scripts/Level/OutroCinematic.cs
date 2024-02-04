@@ -13,7 +13,7 @@ public class OutroCinematic : MonoBehaviour
 
     public void OnCinematicEnd()
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(SceneList.CREDITS);
     }
 
 }

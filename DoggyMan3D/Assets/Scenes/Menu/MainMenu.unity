@@ -330,6 +330,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89968d4ada6be514c85abd7198f2e749, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ButtonSound: {fileID: 8300000, guid: 13d2d485f4b7dc041b821f69da53ac65, type: 3}
+  ButtonSoundVolume: 0.7
   resolutionDropdown: {fileID: 1051265798}
   ApplyButton: {fileID: 587244330}
 --- !u!1 &45462939
