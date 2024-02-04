@@ -3262,7 +3262,7 @@ MonoBehaviour:
   IsEnabledMoving: 1
   IsHitEnabled: 1
   Name: Dragon
-  Lives: 1700
+  Lives: 1900
   MaxStamina: 100000
   AttacksDamages: 16000000
   StaminaDownSpeed: 6.5

@@ -4848,7 +4848,7 @@ MonoBehaviour:
   StartLightIntensity: 8
   ActiveTime: 2
   FadeOutTime: 1.2
-  MaxColliderLength: 8
+  MaxColliderLength: 10
 --- !u!65 &4201034003776028506
 BoxCollider:
   m_ObjectHideFlags: 0
