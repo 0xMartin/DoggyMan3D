@@ -3262,7 +3262,7 @@ MonoBehaviour:
   IsEnabledMoving: 1
   IsHitEnabled: 1
   Name: Dragon
-  Lives: 1900
+  Lives: 1700
   MaxStamina: 100000
   AttacksDamages: 16000000
   StaminaDownSpeed: 6.5
@@ -3299,6 +3299,7 @@ MonoBehaviour:
   MaxBasicAttackDist: 5.2
   MaxFlameAttackDist: 12
   PlayerFarDistance: 18
+  _AI_flameAttack: 0
   MoveSpeed: 2.3
   FlySpeed: 9.5
   SpeedChangeRate: 11
