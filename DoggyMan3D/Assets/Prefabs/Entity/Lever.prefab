@@ -1,0 +1,138 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &5780942840234950274
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1334822194736010765, guid: 1d2cca262a1bd8048a1fb578922ec906,
+        type: 3}
+      propertyPath: m_Name
+      value: LeverPrefab Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 1859402918595939511, guid: 1d2cca262a1bd8048a1fb578922ec906,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 10.347968
+      objectReference: {fileID: 0}
+    - target: {fileID: 1859402918595939511, guid: 1d2cca262a1bd8048a1fb578922ec906,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.1450961
+      objectReference: {fileID: 0}
+    - target: {fileID: 1859402918595939511, guid: 1d2cca262a1bd8048a1fb578922ec906,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 10.923748
+      objectReference: {fileID: 0}
+    - target: {fileID: 1859402918595939511, guid: 1d2cca262a1bd8048a1fb578922ec906,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1859402918595939511, guid: 1d2cca262a1bd8048a1fb578922ec906,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1859402918595939511, guid: 1d2cca262a1bd8048a1fb578922ec906,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1859402918595939511, guid: 1d2cca262a1bd8048a1fb578922ec906,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1859402918595939511, guid: 1d2cca262a1bd8048a1fb578922ec906,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1859402918595939511, guid: 1d2cca262a1bd8048a1fb578922ec906,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1859402918595939511, guid: 1d2cca262a1bd8048a1fb578922ec906,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1334822194736010765, guid: 1d2cca262a1bd8048a1fb578922ec906,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8049803113884777328}
+    - targetCorrespondingSourceObject: {fileID: 1334822194736010765, guid: 1d2cca262a1bd8048a1fb578922ec906,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2116321289852643801}
+  m_SourcePrefab: {fileID: 100100000, guid: 1d2cca262a1bd8048a1fb578922ec906, type: 3}
+--- !u!1 &4808777139845769359 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1334822194736010765, guid: 1d2cca262a1bd8048a1fb578922ec906,
+    type: 3}
+  m_PrefabInstance: {fileID: 5780942840234950274}
+  m_PrefabAsset: {fileID: 0}
+--- !u!143 &8049803113884777328
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4808777139845769359}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Height: 2
+  m_Radius: 0.5
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2116321289852643801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4808777139845769359}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 050752b446189874b832a7545a95a456, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsEntityEnabled: 1
+  IsEnabledMoving: 1
+  IsHitEnabled: 1
+  Name: Lever
+  Lives: 100
+  MaxStamina: 100
+  AttacksDamages: 
+  StaminaDownSpeed: 6.5
+  StaminaUpSpeed: 5
+  StartAddStaminaAfterSeconds: 3
+  DrinkPotionSound: {fileID: 0}
+  DrinkPotionSoundVolume: 1
+  TakeItemSound: {fileID: 0}
+  TakeItemSoundVolume: 1
+  HitTextYOffset: 0.5
+  Text3DPrefab: {fileID: 0}
