@@ -12,12 +12,31 @@ public class LeverScript : MonoBehaviour
 
     private Animator _animator;
     private GameEntityObject _entity;
+    private bool _isSwitchActivated;
 
     void Start()
     {
+        _isSwitchActivated = false;
         _entity = GetComponent<GameEntityObject>();
         _animator = GetComponent<Animator>();
         _animator.SetBool("Switch", false);
+    }
+
+    private void Update()
+    {
+        if (_isSwitchActivated) return;
+
+        if (this.IsActivated)
+        {
+            _isSwitchActivated = true;
+            if (SoundFx != null)
+            {
+                AudioSource.PlayClipAtPoint(SoundFx, transform.position, SoundFxVolume);
+            }
+            _animator.SetBool("Switch", true);
+            _entity.Lives = 0;
+            _entity.OnDeath?.Invoke();
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -27,14 +46,6 @@ public class LeverScript : MonoBehaviour
         if (other.CompareTag("AttackPlayer"))
         {
             this.IsActivated = true;
-            if (SoundFx != null)
-            {
-                AudioSource.PlayClipAtPoint(SoundFx, transform.position, SoundFxVolume);
-            }
-            _animator.SetBool("Switch", true);
-            _entity.Lives = 0;
-            _entity.OnDeath?.Invoke();
-
         }
     }
 
