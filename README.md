@@ -36,7 +36,7 @@ Doggy Man 3D is an open-source RPG created as a collaborative project by the SEM
 
 The tale unfolds as Doggy Man's home is razed to the ground by a powerful dragon. Driven by the flames of vengeance, our hero embarks on a perilous journey to seek justice and slay the mighty beast that wrought destruction upon his abode.
 
-Venture through a treacherous landscape filled with formidable foes, engaging in epic battles and overcoming challenges to reach the heart of the dragon's lair. The game is divided into 5 levels, each progressively more challenging, testing your skills and determination.
+Venture through a treacherous landscape filled with formidable foes, engaging in epic battles and overcoming challenges to reach the heart of the dragon's lair. The game is divided into 6 levels, each progressively more challenging, testing your skills and determination.
 
 Doggy Man game is stylized with a dark aesthetic, immersing players in a visually striking and atmospheric world. Experience the thrill of a classic RPG with a gripping narrative, intense combat, and a satisfying conclusion as Doggy Man fulfills his quest by defeating the formidable dragon.
 
@@ -74,7 +74,7 @@ Within the game, player have the opportunity to collect various items strewn acr
 
 # Levels
 
-Doggy Man 3D features a total of 5 levels, each escalating in difficulty as player progress through the game. With each new level, players encounter increasingly challenging obstacles and enemies, putting their skills and determination to the test.
+Doggy Man 3D features a total of 6 levels, each escalating in difficulty as player progress through the game. With each new level, players encounter increasingly challenging obstacles and enemies, putting their skills and determination to the test. There is also intro and outro story cinematic.
 
 Explore diverse environments, confront formidable foes, and uncover the mysteries that await in each level of this epic adventure.
 
@@ -85,6 +85,7 @@ Explore diverse environments, confront formidable foes, and uncover the mysterie
 </div>
 <div align="center">
   <img src="./DoggyMan3D/Assets/Image/Level/level4.png" width="28%">
+  <img src="./DoggyMan3D/Assets/Image/Level/level5.png" width="28%">
   <img src="./DoggyMan3D/Assets/Image/Level/boss_level.png" width="28%">
 </div>
 
