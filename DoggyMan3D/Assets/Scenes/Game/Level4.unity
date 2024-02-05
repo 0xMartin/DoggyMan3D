@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.003204829, g: 0.0063439845, b: 0.014498586, a: 1}
+  m_IndirectSpecularColor: {r: 0.0031296138, g: 0.0063240584, b: 0.014618333, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2144,7 +2144,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 806280882}
     m_Modifications:
     - target: {fileID: 2105009599278279176, guid: 8459e202f2f568441a925fc7e213d0ac,
         type: 3}
@@ -2154,17 +2154,17 @@ PrefabInstance:
     - target: {fileID: 2106496531831910848, guid: 8459e202f2f568441a925fc7e213d0ac,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 268.84705
+      value: 279.4961
       objectReference: {fileID: 0}
     - target: {fileID: 2106496531831910848, guid: 8459e202f2f568441a925fc7e213d0ac,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 53.140137
+      value: -19.726875
       objectReference: {fileID: 0}
     - target: {fileID: 2106496531831910848, guid: 8459e202f2f568441a925fc7e213d0ac,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 389.37473
+      value: 356.33286
       objectReference: {fileID: 0}
     - target: {fileID: 2106496531831910848, guid: 8459e202f2f568441a925fc7e213d0ac,
         type: 3}
@@ -2206,6 +2206,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8459e202f2f568441a925fc7e213d0ac, type: 3}
+--- !u!4 &208782855 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2106496531831910848, guid: 8459e202f2f568441a925fc7e213d0ac,
+    type: 3}
+  m_PrefabInstance: {fileID: 208782854}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &210672637
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9451,6 +9457,7 @@ Transform:
   - {fileID: 641473129}
   - {fileID: 157842499}
   - {fileID: 692287306}
+  - {fileID: 208782855}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &808009957 stripped
@@ -14164,8 +14171,8 @@ Terrain:
   m_Enabled: 1
   serializedVersion: 6
   m_TerrainData: {fileID: 15600000, guid: c045a4f19b7f933408cc8d918e034b69, type: 2}
-  m_TreeDistance: 300
-  m_TreeBillboardDistance: 200
+  m_TreeDistance: 290
+  m_TreeBillboardDistance: 190
   m_TreeCrossFadeLength: 5
   m_TreeMaximumFullLODCount: 50
   m_DetailObjectDistance: 80
@@ -25179,4 +25186,3 @@ SceneRoots:
   - {fileID: 1120679780}
   - {fileID: 806280882}
   - {fileID: 1514123767}
-  - {fileID: 208782854}
