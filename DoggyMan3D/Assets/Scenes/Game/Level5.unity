@@ -10446,13 +10446,19 @@ PrefabInstance:
     - target: {fileID: 4208043161084127015, guid: a688c8a03f3bc664ab3a22ea5023dc43,
         type: 3}
       propertyPath: Name
-      value: Level 5 - Gates to the final
+      value: Level 5 - The gates crossroad
       objectReference: {fileID: 0}
     - target: {fileID: 4208043161084127015, guid: a688c8a03f3bc664ab3a22ea5023dc43,
         type: 3}
       propertyPath: EndPoint
       value: 
       objectReference: {fileID: 1194706192}
+    - target: {fileID: 4208043161084127015, guid: a688c8a03f3bc664ab3a22ea5023dc43,
+        type: 3}
+      propertyPath: LevelImage
+      value: 
+      objectReference: {fileID: 21300000, guid: ace3d36f759866c45946fc30ad8e346e,
+        type: 3}
     - target: {fileID: 4208043161084127015, guid: a688c8a03f3bc664ab3a22ea5023dc43,
         type: 3}
       propertyPath: SpawnPoint
