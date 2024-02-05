@@ -101,6 +101,7 @@ Explore diverse environments, confront formidable foes, and uncover the mysterie
 * __Ghosts__ - These diminutive creatures are the most common foes, known for their relentless attacks and cunning tactics. While individually weak, they often swarm in numbers, presenting a formidable challenge to the unwary adventurer.
 * __Spiders__ - Larger and more menacing than ghost, spiders lurk in the shadows, ready to ensnare unsuspecting prey with their venomous bites. Agile and resilient, they require skillful maneuvering and precise strikes to overcome.
 * __Skeletons__ - Among the most formidable adversaries, skeletons are reanimated warriors fueled by dark magic. Possessing formidable strength and resilience, they present a formidable challenge to even the most seasoned warriors.
+* __Slender__ - Slender man moves randomly between set points on the map which are visually marked. Slender man cannot be killed. If a player approaches him, player is instantly dead.
 * __Dragon Boss__ - The ultimate foe, the dragon is a towering force of destruction, its fiery breath and massive claws posing a threat to all who dare to challenge it. Defeating this ancient beast will require cunning strategy and unwavering courage.
 
 In addition to these foes, players must navigate treacherous traps and hazards scattered throughout the game world. From hidden pitfalls to lethal spikes, each obstacle presents a new test of the player's skill and agility.
@@ -117,6 +118,10 @@ In addition to these foes, players must navigate treacherous traps and hazards s
 
 <img src="./doc/skeleton.png" width="40%">
 
+### Slender 
+
+<img src="./doc/slender.png" width="40%">
+
 ### Dragon
 
 <img src="./doc/dragon.png" width="40%">
@@ -132,8 +137,15 @@ There are two primary methods by which players can open these gates:
 
 * __Key Activation:__ Certain gates are secured by locks that can only be opened with the corresponding keys. Players must search the environment diligently to locate these keys, using them to unlock the gates and gain access to new areas.
 * __Enemy Defeat:__ In some instances, gates may be guarded by formidable adversaries. By defeating these enemies in combat, players can remove the obstacle blocking their path and advance to the next part of the level.
+* __Lever switch:__ Same principle as killing enemies. The only difference is that the gate opens only when the player switch the lever. 
 
 <img src="./doc/gate.png" width="40%">
+
+# Lever
+
+The lever can be used to open various gates. The lever can be switched by sword strik.
+
+<img src="./doc/lever.png" width="40%">
 
 # Authors
 
