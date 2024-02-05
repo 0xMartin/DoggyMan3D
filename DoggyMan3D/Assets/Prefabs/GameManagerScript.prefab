@@ -47,7 +47,7 @@ MonoBehaviour:
   BgAudioSource: {fileID: 0}
   PlayerRef: {fileID: 0}
   MainCamera: {fileID: 0}
-  LevelsID: 0500000006000000070000000800000009000000
+  LevelsID: 05000000060000000700000008000000090000000a000000
   TimeToShowLevel: 2
   TimeToHideLevel: 2
   LevelInfoObjName: LevelInfoObject
