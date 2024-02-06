@@ -26,8 +26,8 @@
   <img src="./doc/android_logo.png" width="15%">
 </div>
 
-* Run on linux: works correctly only with the Vulkan GPU API (game is builded for Vulkan!), tested on Pop OS
-* Android: Tested on Android 13
+* __Run on linux:__ works correctly only with the Vulkan GPU API (game is builded for Vulkan!), tested on Pop OS
+* __Android:__ Tested on Android 13
 
 ## Teaser Trailer (YouTube)
 
