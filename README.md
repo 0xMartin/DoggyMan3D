@@ -147,6 +147,13 @@ The lever can be used to open various gates. The lever can be switched by sword 
 
 <img src="./doc/lever.png" width="40%">
 
+# Used assets
+
+* Some assets are created by our team
+* All scripts and game logic were created by the team
+* Used soundtrack from MediEvil 1 (remastered)
+* Used free assets from Unity asset store and free sound effects from FreeSounds website
+
 # Authors
 
 [![0xMartin](https://github.com/0xMartin.png?size=100)](https://github.com/0xMartin)
