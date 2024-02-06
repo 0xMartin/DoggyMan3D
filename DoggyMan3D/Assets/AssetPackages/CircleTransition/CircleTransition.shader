@@ -59,7 +59,7 @@ Shader "Custom/CircleTransition"
                 float sqrDistance = pow(uv.x - center.x, 2) + pow(uv.y - center.y, 2);
                 float sqrRadius = pow(radius, 2);
 
-                if(sqrDistance < radius)
+                if(sqrDistance < sqrRadius)
                 {
                     output = smoothstep(sqrRadius, sqrRadius - smoothValue, sqrDistance);
                 }
