@@ -16,7 +16,7 @@ PlayerSettings:
   productName: DoggyMan3D
   defaultCursor: {fileID: 2800000, guid: c0b55e16840fbb642b2d8836c473dc39, type: 3}
   cursorHotspot: {x: 0, y: 0}
-  m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
+  m_SplashScreenBackgroundColor: {r: 0, g: 0, b: 0, a: 1}
   m_ShowUnitySplashScreen: 1
   m_ShowUnitySplashLogo: 1
   m_SplashScreenOverlayOpacity: 1
@@ -141,7 +141,7 @@ PlayerSettings:
   vulkanEnableLateAcquireNextImage: 0
   vulkanEnableCommandBufferRecycling: 1
   loadStoreDebugModeEnabled: 0
-  bundleVersion: 0.2
+  bundleVersion: 0.3.1
   preloadedAssets: []
   metroInputSource: 0
   wsaTransparentSwapchain: 0
@@ -289,7 +289,7 @@ PlayerSettings:
   - m_BuildTarget: 
     m_Icons:
     - serializedVersion: 2
-      m_Icon: {fileID: 2800000, guid: afda7a451fba7da4c81dc6f04c53cb15, type: 3}
+      m_Icon: {fileID: 2800000, guid: a5e374bc401e06846b9b0e8ff076d450, type: 3}
       m_Width: 128
       m_Height: 128
       m_Kind: 0
