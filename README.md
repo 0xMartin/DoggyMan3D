@@ -26,6 +26,9 @@
   <img src="./doc/android_logo.png" width="15%">
 </div>
 
+* Run on linux: works correctly only with the Vulkan GPU API (game is builded for Vulkan!), tested on Pop OS
+* Android: Tested on Android 13
+
 ## Teaser Trailer (YouTube)
 
 [![Crows and Nests Trailer](https://img.youtube.com/vi/iurHWjnuU00/0.jpg)](https://youtu.be/iurHWjnuU00)
