@@ -26,6 +26,7 @@
   <img src="./doc/android_logo.png" width="15%">
 </div>
 
+* __Build:__ Bin files of games always available only for latest release of game. Previous release only source code, it is necessary to build the game yourself, if you need it.
 * __Run on linux:__ works correctly only with the Vulkan GPU API (game is builded for Vulkan!), tested on Pop OS
 * __Android:__ Tested on Android 13
 
