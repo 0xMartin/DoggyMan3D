@@ -17,7 +17,8 @@ public class Slender : MonoBehaviour
         {
             foreach (var point in Points)
             {
-                Instantiate(MarkerPrefab, point.position, Quaternion.identity);
+                GameObject fxObj = Instantiate(MarkerPrefab, point.position, Quaternion.identity);
+                MainGameManager.AddTempGameObject(fxObj);
             }
         }
         SlenderAttack.SetActive(false);
@@ -84,7 +85,8 @@ public class Slender : MonoBehaviour
             if (obj != null)
             {
                 obj.IsEnabledMoving = false;
-                Instantiate(MarkerPrefab, obj.transform.position, Quaternion.identity);
+                GameObject fxObj = Instantiate(MarkerPrefab, obj.transform.position, Quaternion.identity);
+                MainGameManager.AddTempGameObject(fxObj);
             }
         }
         yield return new WaitForSeconds(1.0f);
