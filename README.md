@@ -37,7 +37,7 @@
 
 # About
 
-Doggy Man 3D is an open-source RPG created as a collaborative project by the SEMPA team during their university game-dev course. Immerse yourself in a dark and captivating world as you take on the role of Doggy Man, a valiant warrior on a mission for revenge.
+Doggy Man 3D is an open-source RPG created as a collaborative project by the SEMPA team during university game-dev course. Immerse yourself in a dark and captivating world as you take on the role of Doggy Man, a valiant warrior on a mission for revenge.
 
 The tale unfolds as Doggy Man's home is razed to the ground by a powerful dragon. Driven by the flames of vengeance, our hero embarks on a perilous journey to seek justice and slay the mighty beast that wrought destruction upon his abode.
 
