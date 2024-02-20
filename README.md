@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="./doc/player_icon.png" width="21%">
+  <img src="./DoggyMan3D/Assets/Image/icon.png" width="21%">
   <h1>Doggy Man 3D</h1>
   <div>
     <img alt="Made with Unity" src="https://img.shields.io/badge/Made%20with-Unity-57b9d3.svg?style=flat&logo=unity">
