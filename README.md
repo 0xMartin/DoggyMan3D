@@ -33,7 +33,11 @@
 
 ## Teaser Trailer (YouTube)
 
-[![Crows and Nests Trailer](https://img.youtube.com/vi/iurHWjnuU00/0.jpg)](https://youtu.be/iurHWjnuU00)
+[![Doggy Man 3D Trailer](https://img.youtube.com/vi/iurHWjnuU00/0.jpg)](https://youtu.be/iurHWjnuU00)
+
+## Full game walkthrough
+
+[![Doggy Man 3D - Full game walkthrough](https://img.youtube.com/vi/VHRkJi0dqkY/0.jpg)](https://youtu.be/VHRkJi0dqkY)
 
 # About
 
