@@ -24,6 +24,7 @@
   <img src="./doc/windows_logo.png" width="15%">
   <img src="./doc/linux_logo.png" width="15%">
   <img src="./doc/android_logo.png" width="15%">
+  <img src="./doc/macos-2.png" width="15%">
 </div>
 
 * __Build:__ Bin files of games always available only for latest release of game. Previous release only source code, it is necessary to build the game yourself, if you need it.
