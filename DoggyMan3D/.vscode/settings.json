@@ -52,5 +52,5 @@
         "Temp/": true
     },
     "dotnet.preferCSharpExtension": true,
-    "dotnet.defaultSolution": "DoggyMan3D.sln"
+    "dotnet.defaultSolution": "DoggyMan3D.slnx"
 }

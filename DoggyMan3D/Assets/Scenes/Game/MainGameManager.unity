@@ -13,7 +13,7 @@ OcclusionCullingSettings:
 --- !u!104 &2
 RenderSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 9
+  serializedVersion: 10
   m_Fog: 0
   m_FogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   m_FogMode: 3
@@ -38,13 +38,12 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.0031296138, g: 0.0063240584, b: 0.014618333, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 12
-  m_GIWorkflowMode: 1
+  serializedVersion: 13
+  m_BakeOnSceneLoad: 0
   m_GISettings:
     serializedVersion: 2
     m_BounceScale: 1
@@ -67,9 +66,6 @@ LightmapSettings:
     m_LightmapParameters: {fileID: 0}
     m_LightmapsBakeMode: 1
     m_TextureCompression: 1
-    m_FinalGather: 0
-    m_FinalGatherFiltering: 1
-    m_FinalGatherRayCount: 256
     m_ReflectionCompression: 2
     m_MixedBakeMode: 2
     m_BakeBackend: 1
@@ -140,17 +136,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6165419177288150354, guid: d363a04e145bda04ebcb5162faca0de9,
         type: 3}
-      propertyPath: HitAudioClips.Array.data[0]
+      propertyPath: 'HitAudioClips.Array.data[0]'
       value: 
       objectReference: {fileID: 8300000, guid: 53ffe149252e45249b2cebb85a2c8bf5, type: 3}
     - target: {fileID: 6165419177288150354, guid: d363a04e145bda04ebcb5162faca0de9,
         type: 3}
-      propertyPath: HitAudioClips.Array.data[1]
+      propertyPath: 'HitAudioClips.Array.data[1]'
       value: 
       objectReference: {fileID: 8300000, guid: 981243f4d78d4564085c34e2aa537814, type: 3}
     - target: {fileID: 6165419177288150354, guid: d363a04e145bda04ebcb5162faca0de9,
         type: 3}
-      propertyPath: HitAudioClips.Array.data[2]
+      propertyPath: 'HitAudioClips.Array.data[2]'
       value: 
       objectReference: {fileID: 8300000, guid: 0f11cd97723d0f84aa56c65275893234, type: 3}
     - target: {fileID: 7814174498851932442, guid: d363a04e145bda04ebcb5162faca0de9,
@@ -1180,27 +1176,27 @@ PrefabInstance:
       objectReference: {fileID: 114595027}
     - target: {fileID: 2674418542757172969, guid: 725369b13c815124bb4918c54ad05844,
         type: 3}
-      propertyPath: LevelsID.Array.data[0]
+      propertyPath: 'LevelsID.Array.data[0]'
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2674418542757172969, guid: 725369b13c815124bb4918c54ad05844,
         type: 3}
-      propertyPath: LevelsID.Array.data[1]
+      propertyPath: 'LevelsID.Array.data[1]'
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2674418542757172969, guid: 725369b13c815124bb4918c54ad05844,
         type: 3}
-      propertyPath: LevelsID.Array.data[2]
+      propertyPath: 'LevelsID.Array.data[2]'
       value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 2674418542757172969, guid: 725369b13c815124bb4918c54ad05844,
         type: 3}
-      propertyPath: LevelsID.Array.data[3]
+      propertyPath: 'LevelsID.Array.data[3]'
       value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 2674418542757172969, guid: 725369b13c815124bb4918c54ad05844,
         type: 3}
-      propertyPath: LevelsID.Array.data[4]
+      propertyPath: 'LevelsID.Array.data[4]'
       value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 2674418542757172970, guid: 725369b13c815124bb4918c54ad05844,
@@ -1608,27 +1604,27 @@ PrefabInstance:
       objectReference: {fileID: 6793932081663303116}
     - target: {fileID: 2674418542757172969, guid: 725369b13c815124bb4918c54ad05844,
         type: 3}
-      propertyPath: LevelsID.Array.data[0]
+      propertyPath: 'LevelsID.Array.data[0]'
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2674418542757172969, guid: 725369b13c815124bb4918c54ad05844,
         type: 3}
-      propertyPath: LevelsID.Array.data[1]
+      propertyPath: 'LevelsID.Array.data[1]'
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2674418542757172969, guid: 725369b13c815124bb4918c54ad05844,
         type: 3}
-      propertyPath: LevelsID.Array.data[2]
+      propertyPath: 'LevelsID.Array.data[2]'
       value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 2674418542757172969, guid: 725369b13c815124bb4918c54ad05844,
         type: 3}
-      propertyPath: LevelsID.Array.data[3]
+      propertyPath: 'LevelsID.Array.data[3]'
       value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 2674418542757172969, guid: 725369b13c815124bb4918c54ad05844,
         type: 3}
-      propertyPath: LevelsID.Array.data[4]
+      propertyPath: 'LevelsID.Array.data[4]'
       value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 2674418542757172969, guid: 725369b13c815124bb4918c54ad05844,
@@ -1714,17 +1710,17 @@ PrefabInstance:
     - target: {fileID: 8944336655422409503, guid: f6d148d888ffbf54b9afe9936dfaec1f,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 30.757387
       objectReference: {fileID: 0}
     - target: {fileID: 8944336655422409503, guid: f6d148d888ffbf54b9afe9936dfaec1f,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.0489998
+      value: -34.965427
       objectReference: {fileID: 0}
     - target: {fileID: 8944336655422409503, guid: f6d148d888ffbf54b9afe9936dfaec1f,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -4.3
+      value: -205.54465
       objectReference: {fileID: 0}
     - target: {fileID: 8944336655422409503, guid: f6d148d888ffbf54b9afe9936dfaec1f,
         type: 3}
@@ -1813,7 +1809,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1131904312
 Transform:
   m_ObjectHideFlags: 0
@@ -2059,17 +2055,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6165419177288150354, guid: d363a04e145bda04ebcb5162faca0de9,
         type: 3}
-      propertyPath: HitAudioClips.Array.data[0]
+      propertyPath: 'HitAudioClips.Array.data[0]'
       value: 
       objectReference: {fileID: 8300000, guid: 53ffe149252e45249b2cebb85a2c8bf5, type: 3}
     - target: {fileID: 6165419177288150354, guid: d363a04e145bda04ebcb5162faca0de9,
         type: 3}
-      propertyPath: HitAudioClips.Array.data[1]
+      propertyPath: 'HitAudioClips.Array.data[1]'
       value: 
       objectReference: {fileID: 8300000, guid: 981243f4d78d4564085c34e2aa537814, type: 3}
     - target: {fileID: 6165419177288150354, guid: d363a04e145bda04ebcb5162faca0de9,
         type: 3}
-      propertyPath: HitAudioClips.Array.data[2]
+      propertyPath: 'HitAudioClips.Array.data[2]'
       value: 
       objectReference: {fileID: 8300000, guid: 0f11cd97723d0f84aa56c65275893234, type: 3}
     - target: {fileID: 7814174498851932442, guid: d363a04e145bda04ebcb5162faca0de9,
@@ -2302,6 +2298,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1131904312}
     m_Modifications:
+    - target: {fileID: 733302141208028313, guid: d9e128a17d537054fbcfdeac484aa74d,
+        type: 3}
+      propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
+      value: 1801810542
+      objectReference: {fileID: 0}
     - target: {fileID: 733302141250043721, guid: d9e128a17d537054fbcfdeac484aa74d,
         type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -2357,6 +2358,31 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 329
       objectReference: {fileID: 0}
+    - target: {fileID: 733302141893734251, guid: d9e128a17d537054fbcfdeac484aa74d,
+        type: 3}
+      propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
+      value: 1801810542
+      objectReference: {fileID: 0}
+    - target: {fileID: 733302142200147613, guid: d9e128a17d537054fbcfdeac484aa74d,
+        type: 3}
+      propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
+      value: 1801810542
+      objectReference: {fileID: 0}
+    - target: {fileID: 733302142348564375, guid: d9e128a17d537054fbcfdeac484aa74d,
+        type: 3}
+      propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
+      value: 1801810542
+      objectReference: {fileID: 0}
+    - target: {fileID: 733302142458206860, guid: d9e128a17d537054fbcfdeac484aa74d,
+        type: 3}
+      propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
+      value: 1801810542
+      objectReference: {fileID: 0}
+    - target: {fileID: 733302142508650364, guid: d9e128a17d537054fbcfdeac484aa74d,
+        type: 3}
+      propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
+      value: 1801810542
+      objectReference: {fileID: 0}
     - target: {fileID: 733302142568304294, guid: d9e128a17d537054fbcfdeac484aa74d,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -2381,6 +2407,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 190.79999
+      objectReference: {fileID: 0}
+    - target: {fileID: 733302142945954304, guid: d9e128a17d537054fbcfdeac484aa74d,
+        type: 3}
+      propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
+      value: 1801810542
+      objectReference: {fileID: 0}
+    - target: {fileID: 733302142996585165, guid: d9e128a17d537054fbcfdeac484aa74d,
+        type: 3}
+      propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
+      value: 1801810542
+      objectReference: {fileID: 0}
+    - target: {fileID: 733302143083622785, guid: d9e128a17d537054fbcfdeac484aa74d,
+        type: 3}
+      propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
+      value: 1801810542
       objectReference: {fileID: 0}
     - target: {fileID: 733302143131097292, guid: d9e128a17d537054fbcfdeac484aa74d,
         type: 3}
@@ -2407,6 +2448,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 190.79999
       objectReference: {fileID: 0}
+    - target: {fileID: 3538043467945517882, guid: d9e128a17d537054fbcfdeac484aa74d,
+        type: 3}
+      propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
+      value: 1801810542
+      objectReference: {fileID: 0}
     - target: {fileID: 5157351781085006040, guid: d9e128a17d537054fbcfdeac484aa74d,
         type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -2416,6 +2462,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 331.02023
+      objectReference: {fileID: 0}
+    - target: {fileID: 5591473693391622495, guid: d9e128a17d537054fbcfdeac484aa74d,
+        type: 3}
+      propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
+      value: 1801810542
       objectReference: {fileID: 0}
     - target: {fileID: 5591473694163225002, guid: d9e128a17d537054fbcfdeac484aa74d,
         type: 3}
@@ -2650,7 +2701,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1987931667
 Transform:
   m_ObjectHideFlags: 0
@@ -2821,6 +2872,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1403170486336167605, guid: 2f7f3dde7ae722a4aafffe20691ad702,
+        type: 3}
+      propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
+      value: 1801810542
+      objectReference: {fileID: 0}
+    - target: {fileID: 3991369662502731467, guid: 2f7f3dde7ae722a4aafffe20691ad702,
+        type: 3}
+      propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
+      value: 1801810542
+      objectReference: {fileID: 0}
     - target: {fileID: 4232429131113781086, guid: 2f7f3dde7ae722a4aafffe20691ad702,
         type: 3}
       propertyPath: buttonPressEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
@@ -2841,10 +2902,20 @@ PrefabInstance:
       propertyPath: buttonReleaseEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: VirtualDeactivateKey3Input
       objectReference: {fileID: 0}
+    - target: {fileID: 5802884313255170584, guid: 2f7f3dde7ae722a4aafffe20691ad702,
+        type: 3}
+      propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
+      value: 1801810542
+      objectReference: {fileID: 0}
     - target: {fileID: 6751388636123340836, guid: 2f7f3dde7ae722a4aafffe20691ad702,
         type: 3}
       propertyPath: m_Name
       value: UI_Canvas_StarterAssetsInputs_Joysticks
+      objectReference: {fileID: 0}
+    - target: {fileID: 7397096767663409930, guid: 2f7f3dde7ae722a4aafffe20691ad702,
+        type: 3}
+      propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
+      value: 1801810542
       objectReference: {fileID: 0}
     - target: {fileID: 8817555224461622821, guid: 2f7f3dde7ae722a4aafffe20691ad702,
         type: 3}
