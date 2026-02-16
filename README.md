@@ -7,7 +7,7 @@
     <img alt="GitHub all releases" src="https://img.shields.io/github/downloads/0xMartin/DoggyMan3D/total">
     <img alt="GitHub repo size" src="https://img.shields.io/github/repo-size/0xMartin/DoggyMan3D">
   </div>
-  <i>Unity version: 2022.3.16f1</i>
+  <i>Unity version: 6000.3.8f1</i>
 </div>
 
 <div align="center">
@@ -169,3 +169,4 @@ The lever can be used to open various gates. The lever can be switched by sword 
 [![0xMartin](https://github.com/0xMartin.png?size=100)](https://github.com/0xMartin)
 [![eobadalova](https://github.com/eobadalova.png?size=100)](https://github.com/eobadalova)
 [![PaulieBossCZ](https://github.com/PaulieBossCZ.png?size=100)](https://github.com/PaulieBossCZ)
+
