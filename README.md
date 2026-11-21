@@ -50,7 +50,8 @@ After exhausting stamina, release sprint and press it again once stamina has
 recovered.
 
 On desktop, adjust mouse-look sensitivity under **Settings** in the main menu
-and select **Apply**. The setting is saved between sessions.
+and select **Apply** to save and return to the menu. The setting is saved
+between sessions.
 
 ## Open the Unity project
 

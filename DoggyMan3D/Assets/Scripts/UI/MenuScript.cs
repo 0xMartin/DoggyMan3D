@@ -52,6 +52,7 @@ public class MenuScript : MonoBehaviour
     public CircleTransition CircleTransition;
 
     private List<GameObject> _instantiatedButtons = new List<GameObject>();
+    private ResolutionSettings _resolutionSettings;
 
     void Start()
     {
@@ -84,6 +85,18 @@ public class MenuScript : MonoBehaviour
         // settings
         if (SettingsBack != null)
             SettingsBack.onClick.AddListener(ClickBack);
+        if (SettigsSection != null)
+        {
+            _resolutionSettings = SettigsSection.GetComponent<ResolutionSettings>();
+            if (_resolutionSettings != null)
+                _resolutionSettings.SettingsApplied += ShowMainMenu;
+        }
+    }
+
+    private void OnDestroy()
+    {
+        if (_resolutionSettings != null)
+            _resolutionSettings.SettingsApplied -= ShowMainMenu;
     }
 
 
@@ -110,13 +123,18 @@ public class MenuScript : MonoBehaviour
 
     private void ClickBack()
     {
+        ShowMainMenu();
+        AudioSource.PlayClipAtPoint(ButtonSound, new Vector3(0.0f, 1.0f, -10.0f), ButtonSoundVolume);
+    }
+
+    private void ShowMainMenu()
+    {
         MainSection.SetActive(true);
         NewGameSection.SetActive(false);
         LoadGameSection.SetActive(false);
         AboutSection.SetActive(false);
         if (SettigsSection != null)
             SettigsSection?.SetActive(false);
-        AudioSource.PlayClipAtPoint(ButtonSound, new Vector3(0.0f, 1.0f, -10.0f), ButtonSoundVolume);
     }
 
     // MAIN ################################################################

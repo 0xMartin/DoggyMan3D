@@ -14,12 +14,16 @@ public class MenuSettingsTests
 {
     private bool hadMouseSensitivity;
     private float oldMouseSensitivity;
+    private bool hadResolutionIndex;
+    private int oldResolutionIndex;
 
     [SetUp]
     public void SetUp()
     {
         hadMouseSensitivity = PlayerPrefs.HasKey("mouseSensitivity");
         oldMouseSensitivity = PlayerPrefs.GetFloat("mouseSensitivity", 1f);
+        hadResolutionIndex = PlayerPrefs.HasKey("resolutionIndex");
+        oldResolutionIndex = PlayerPrefs.GetInt("resolutionIndex");
         PlayerPrefs.DeleteKey("mouseSensitivity");
     }
 
@@ -30,6 +34,10 @@ public class MenuSettingsTests
             PlayerPrefs.SetFloat("mouseSensitivity", oldMouseSensitivity);
         else
             PlayerPrefs.DeleteKey("mouseSensitivity");
+        if (hadResolutionIndex)
+            PlayerPrefs.SetInt("resolutionIndex", oldResolutionIndex);
+        else
+            PlayerPrefs.DeleteKey("resolutionIndex");
         PlayerPrefs.Save();
     }
 
@@ -84,9 +92,15 @@ public class MenuSettingsTests
         slider.value = 200;
         apply.onClick.Invoke();
         Assert.That(PlayerPrefs.GetFloat("mouseSensitivity"), Is.EqualTo(2f));
-        back.onClick.Invoke();
+        Assert.That(((GameObject)menuType.GetField("MainSection").GetValue(menu)).activeSelf, Is.True);
+        Assert.That(((GameObject)menuType.GetField("SettigsSection").GetValue(menu)).activeSelf, Is.False);
         settingsButton.onClick.Invoke();
         Assert.That(slider.value, Is.EqualTo(200));
+        slider.value = 150;
+        apply.onClick.Invoke();
+        Assert.That(PlayerPrefs.GetFloat("mouseSensitivity"), Is.EqualTo(1.5f));
+        Assert.That(((GameObject)menuType.GetField("MainSection").GetValue(menu)).activeSelf, Is.True);
+        Assert.That(((GameObject)menuType.GetField("SettigsSection").GetValue(menu)).activeSelf, Is.False);
 
         yield return SceneManager.LoadSceneAsync(0, LoadSceneMode.Single);
         yield return null;
@@ -95,6 +109,6 @@ public class MenuSettingsTests
         settingsButton.onClick.Invoke();
         settings = UnityEngine.Object.FindObjectOfType(settingsType) as Component;
         slider = (Slider)settingsType.GetField("SensitivitySlider").GetValue(settings);
-        Assert.That(slider.value, Is.EqualTo(200));
+        Assert.That(slider.value, Is.EqualTo(150));
     }
 }

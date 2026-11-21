@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -11,6 +12,8 @@ public class ResolutionSettings : MonoBehaviour
 
     public TMP_Dropdown resolutionDropdown;
     public Button ApplyButton;
+
+    public event Action SettingsApplied;
 
     private List<Resolution> resolutions;
 
@@ -48,6 +51,7 @@ public class ResolutionSettings : MonoBehaviour
         int index = resolutionDropdown.value;
         PlayerPrefs.SetInt("resolutionIndex", index);
         SetResolution(index);
+        SettingsApplied?.Invoke();
     }
 
     public void SetResolution(int resolutionIndex)
