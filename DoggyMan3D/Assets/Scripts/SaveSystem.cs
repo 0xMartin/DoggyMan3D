@@ -1,16 +1,30 @@
+using System;
 using System.IO;
-using System.Linq;
 using UnityEngine;
 
 public class SaveSystem
 {
     public static string SavePath => Application.persistentDataPath;
 
-    public static void SavePlayer(PlayerSave playerSave)
+    public static string CreatePlayerSave(PlayerSave playerSave, string directoryPath)
     {
         string json = JsonUtility.ToJson(playerSave);
-        string path = Path.Combine(SavePath, playerSave.Name.Replace(' ', '_') + ".json");
-        File.WriteAllText(path, json);
+        string path = Path.Combine(directoryPath, "save-" + Guid.NewGuid().ToString("N") + ".json");
+        using (StreamWriter writer = new StreamWriter(new FileStream(path, FileMode.CreateNew, FileAccess.Write)))
+        {
+            writer.Write(json);
+        }
+        Debug.Log("Game saved to file: " + path);
+        return path;
+    }
+
+    public static void SavePlayer(PlayerSave playerSave, string path)
+    {
+        string json = JsonUtility.ToJson(playerSave);
+        using (StreamWriter writer = new StreamWriter(new FileStream(path, FileMode.Truncate, FileAccess.Write)))
+        {
+            writer.Write(json);
+        }
         Debug.Log("Game saved to file: " + path);
     }
 
@@ -30,7 +44,7 @@ public class SaveSystem
     {
         if (!Directory.Exists(directoryPath))
         {
-            return null;
+            return Array.Empty<string>();
         }
 
         return Directory.GetFiles(directoryPath);

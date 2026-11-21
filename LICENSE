@@ -2,6 +2,12 @@ MIT License
 
 Copyright (c) 2024 Martin Krčma, Eliška Obadalová, Pavel Ševšík
 
+This license applies only to the original game source code and Unity project
+configuration authored by the copyright holders. It does not apply to game
+assets, including artwork, models, animations, scenes, prefabs, textures,
+audio, or other audiovisual content, or to third-party code and packages.
+Those materials remain subject to their respective rights and licenses.
+
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
 in the Software without restriction, including without limitation the rights

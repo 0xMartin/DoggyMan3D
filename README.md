@@ -1,172 +1,97 @@
 <div align="center">
-  <img src="./DoggyMan3D/Assets/Image/icon.png" width="21%">
+  <img src="./DoggyMan3D/Assets/Image/icon.png" width="21%" alt="Doggy Man 3D icon">
   <h1>Doggy Man 3D</h1>
-  <div>
-    <img alt="Made with Unity" src="https://img.shields.io/badge/Made%20with-Unity-57b9d3.svg?style=flat&logo=unity">
-    <img alt="GitHub release (latest SemVer)" src="https://img.shields.io/github/v/release/0xMartin/DoggyMan3D">
-    <img alt="GitHub all releases" src="https://img.shields.io/github/downloads/0xMartin/DoggyMan3D/total">
-    <img alt="GitHub repo size" src="https://img.shields.io/github/repo-size/0xMartin/DoggyMan3D">
-  </div>
-  <i>Unity version: 6000.3.8f1</i>
+  <img alt="Made with Unity" src="https://img.shields.io/badge/Made%20with-Unity-57b9d3.svg?style=flat&logo=unity">
+  <img alt="Latest release" src="https://img.shields.io/github/v/release/0xMartin/DoggyMan3D">
+  <img alt="Total release downloads" src="https://img.shields.io/github/downloads/0xMartin/DoggyMan3D/total">
+  <p>A third-person RPG created by the SEMPA team as a university project.</p>
 </div>
 
-<div align="center">
-  <img src="./doc/sempa logo.png" width="30%">
-</div>
+## About
 
-<div align="center">
-  <b>Create by SEMPA team</b> as open source university project
-</div>
+After a dragon destroys his home, Doggy Man sets out for revenge. Fight through
+six levels, manage your health and stamina, collect items, and face the dragon.
+The game includes intro and outro cinematics, enemies, traps, gates and a
+four-slot inventory.
 
-## Available on these platforms
+<img src="./doc/game_img_1.png" width="100%" alt="Doggy Man 3D gameplay">
 
-<div align="center">
-  <img src="./doc/windows_logo.png" width="15%">
-  <img src="./doc/linux_logo.png" width="15%">
-  <img src="./doc/android_logo.png" width="15%">
-  <img src="./doc/macos-2.png" width="15%">
-</div>
+See the [game guide](./doc/GAMEPLAY.md) for details on menus, levels, items,
+enemies, gates and screenshots.
 
-* __Build:__ Bin files of games always available only for latest release of game. Previous release only source code, it is necessary to build the game yourself, if you need it.
-* __Run on linux:__ works correctly only with the Vulkan GPU API (game is builded for Vulkan!), tested on Pop OS
-* __Run on linux with Wine:__ ``wine DoggyMan3D.exe`` 
-* __Android:__ Tested on Android 13
+### Videos
 
-## Teaser Trailer (YouTube)
+- [Teaser trailer](https://youtu.be/iurHWjnuU00)
+- [Full game walkthrough](https://youtu.be/VHRkJi0dqkY)
 
-[![Doggy Man 3D Trailer](https://img.youtube.com/vi/iurHWjnuU00/0.jpg)](https://youtu.be/iurHWjnuU00)
+## Download and play
 
-## Full game walkthrough
+Download a build for Windows, macOS, Linux or Android from the
+[latest release](https://github.com/0xMartin/DoggyMan3D/releases/latest), where
+available. Older releases may contain source code only.
 
-[![Doggy Man 3D - Full game walkthrough](https://img.youtube.com/vi/VHRkJi0dqkY/0.jpg)](https://youtu.be/VHRkJi0dqkY)
+- **Linux:** The provided build uses Vulkan; it was tested on Pop!_OS.
+- **Android:** Tested on Android 13.
+- **Windows build on Linux:** Alternatively, run `wine DoggyMan3D.exe` with Wine.
 
-# About
+## Controls
 
-Doggy Man 3D is an open-source RPG created as a collaborative project by the SEMPA team during university game-dev course. Immerse yourself in a dark and captivating world as you take on the role of Doggy Man, a valiant warrior on a mission for revenge.
+| Action | Keyboard and mouse |
+| --- | --- |
+| Move | WASD or arrow keys |
+| Look | Mouse |
+| Sprint | Left Shift |
+| Attack | Left mouse button |
+| Use inventory item | 1-4 |
+| Pause | Escape |
 
-The tale unfolds as Doggy Man's home is razed to the ground by a powerful dragon. Driven by the flames of vengeance, our hero embarks on a perilous journey to seek justice and slay the mighty beast that wrought destruction upon his abode.
+The Android version uses on-screen controls.
 
-Venture through a treacherous landscape filled with formidable foes, engaging in epic battles and overcoming challenges to reach the heart of the dragon's lair. The game is divided into 6 levels, each progressively more challenging, testing your skills and determination.
+## Open the Unity project
 
-Doggy Man game is stylized with a dark aesthetic, immersing players in a visually striking and atmospheric world. Experience the thrill of a classic RPG with a gripping narrative, intense combat, and a satisfying conclusion as Doggy Man fulfills his quest by defeating the formidable dragon.
+1. Install **Unity 6000.3.8f1** through Unity Hub, including the build support
+   module for each target platform you intend to build.
+2. Clone or download this repository.
+3. In Unity Hub, add the [`DoggyMan3D`](./DoggyMan3D) folder as an existing
+   project and open it with that editor version.
+4. Open [`MainMenu.unity`](./DoggyMan3D/Assets/Scenes/Menu/MainMenu.unity) and
+   enter Play mode.
 
-# Menu
+The first import can take some time. Keep Unity `.meta` files with their assets
+when moving or renaming them so scene and prefab references remain intact.
 
-### Main Menu:
-The main menu offers essential options to enhance your gaming experience. From here, you can embark on a new adventure by creating a new game, resume your journey by loading a previous save. You can also adjust the game's resolution to suit your preferences.
+## Build from source
 
-<img src="./doc/menu.png" width="100%">
+In Unity, open **File > Build Profiles**, choose the target platform and switch
+to it if necessary, then build. The enabled scenes and their order are recorded
+in [`EditorBuildSettings.asset`](./DoggyMan3D/ProjectSettings/EditorBuildSettings.asset).
+Android builds also require the Android build support module and its SDK/NDK
+and JDK dependencies.
 
-### In Game Menu:
-The in-game menu provides: reset the current level for a fresh start, or dive back into the action by resuming your adventure or go back to menu.
+## Saved games
 
-<img src="./doc/game_img_2.png" width="100%">
+Start a new game from the main menu or choose an existing save under **Load
+Game**. Progress is saved when a game is created and when advancing to the next
+level.
+Saves are stored under Unity's `Application.persistentDataPath`, which varies
+by platform. Existing saves remain usable; separate games can use the same
+player name.
 
-# Game
+## License and assets
 
-Main character is controlled from a third-person perspective. The player starts with a full number of lives, and if he runs out of lives, his journey ends, requiring a restart of the current level.
+Original game source code and Unity project configuration authored by the
+copyright holders are licensed under the [MIT License](./LICENSE). This does
+not cover game assets such as models, artwork, scenes, prefabs, animations,
+audio and other audiovisual content, or third-party code and packages.
 
-Player have the freedom to traverse the game world by walking or running, but with every dash, his stamina diminishes. When stamina runs out, player is unable to sprint until it replenishes, forcing them to wait for a brief moment. Additionally, low stamina levels decrease the effectiveness of attacks, making strategic management of this vital resource essential.
+The project includes both team-created and third-party assets, including assets
+from the Unity Asset Store and sound effects from Freesound. Their respective
+licenses and permissions must be checked before using or redistributing them;
+their presence in this repository does not grant rights to them.
 
-All pertinent information, including health, stamina, and inventory status, is readily displayed in the game's user interface (UI).
+## Authors
 
-Within the game, player have the opportunity to collect various items strewn across the landscape. These items can prove invaluable on their journey and can be stored in an inventory with a capacity limit of four slots. Once the inventory is full, players must decide which items to keep and which to leave/use, adding an element of strategy to their exploration.
-
-<img src="./doc/in_game.png" width="100%">
-
-### Next screenshot from game:
-
-<img src="./doc/game_img_1.png" width="100%">
-
-### Screenshot from android version of game:
-
-<img src="./doc/android_screenshot.jpg" width="100%">
-
-# Levels
-
-Doggy Man 3D features a total of 6 levels, each escalating in difficulty as player progress through the game. With each new level, players encounter increasingly challenging obstacles and enemies, putting their skills and determination to the test. There is also intro and outro story cinematic.
-
-Explore diverse environments, confront formidable foes, and uncover the mysteries that await in each level of this epic adventure.
-
-<div align="center">
-  <img src="./DoggyMan3D/Assets/Image/Level/level1.png" width="28%">
-  <img src="./DoggyMan3D/Assets/Image/Level/level2.png" width="28%">
-  <img src="./DoggyMan3D/Assets/Image/Level/level3.png" width="28%">
-</div>
-<div align="center">
-  <img src="./DoggyMan3D/Assets/Image/Level/level4.png" width="28%">
-  <img src="./DoggyMan3D/Assets/Image/Level/level5.png" width="28%">
-  <img src="./DoggyMan3D/Assets/Image/Level/boss_level.png" width="28%">
-</div>
-
-# Items
-
-* __Health Potion (Red potion)__ - Recognized by its distinctive red flask, the health potion restores the player's health, providing a much-needed boost in dire situations.
-* __Stamina Potion (Greeb potion)__ - With its revitalizing effects, the stamina potion grants players the ability to sprint without depleting their stamina reserves for a limited duration, allowing for swift maneuvers and escapes when needed most.
-* __Strength Potion (Blue potion)__ - The strength potion, identifiable by its potent aura, temporarily enhances the player's combat prowess, increasing the damage inflicted upon adversaries for a set period.
-* __Key__ - The key serves as the means to unlock gates and doors scattered throughout the game world, granting access to new areas.
-
-# Enemies
-
-* __Ghosts__ - These diminutive creatures are the most common foes, known for their relentless attacks and cunning tactics. While individually weak, they often swarm in numbers, presenting a formidable challenge to the unwary adventurer.
-* __Spiders__ - Larger and more menacing than ghost, spiders lurk in the shadows, ready to ensnare unsuspecting prey with their venomous bites. Agile and resilient, they require skillful maneuvering and precise strikes to overcome.
-* __Skeletons__ - Among the most formidable adversaries, skeletons are reanimated warriors fueled by dark magic. Possessing formidable strength and resilience, they present a formidable challenge to even the most seasoned warriors.
-* __Slender__ - Slender man moves randomly between set points on the map which are visually marked. Slender man cannot be killed. If a player approaches him, player is instantly dead.
-* __Dragon Boss__ - The ultimate foe, the dragon is a towering force of destruction, its fiery breath and massive claws posing a threat to all who dare to challenge it. Defeating this ancient beast will require cunning strategy and unwavering courage.
-
-In addition to these foes, players must navigate treacherous traps and hazards scattered throughout the game world. From hidden pitfalls to lethal spikes, each obstacle presents a new test of the player's skill and agility.
-
-### Ghost
-
-<img src="./doc/ghost.png" width="40%">
-
-### Spider
-
-<img src="./doc/spider.png" width="40%">
-
-### Skeleton
-
-<img src="./doc/skeleton.png" width="40%">
-
-### Slender 
-
-<img src="./doc/slender.png" width="40%">
-
-### Dragon
-
-<img src="./doc/dragon.png" width="40%">
-
-### Trap
-
-<img src="./doc/trap.png" width="40%">
-
-# Gates
-
-Players will encounter gates that obstruct passage to further sections of the level. These gates serve as barriers that must be overcome to progress.
-There are two primary methods by which players can open these gates:
-
-* __Key Activation:__ Certain gates are secured by locks that can only be opened with the corresponding keys. Players must search the environment diligently to locate these keys, using them to unlock the gates and gain access to new areas.
-* __Enemy Defeat:__ In some instances, gates may be guarded by formidable adversaries. By defeating these enemies in combat, players can remove the obstacle blocking their path and advance to the next part of the level.
-* __Lever switch:__ Same principle as killing enemies. The only difference is that the gate opens only when the player switch the lever. 
-
-<img src="./doc/gate.png" width="40%">
-
-# Lever
-
-The lever can be used to open various gates. The lever can be switched by sword strik.
-
-<img src="./doc/lever.png" width="40%">
-
-# Used assets
-
-* Some assets are created by our team
-* All scripts and game logic were created by the team
-* Used soundtrack from MediEvil 1 (remastered)
-* Used free assets from Unity asset store and free sound effects from FreeSounds website
-
-# Authors
-
-[![0xMartin](https://github.com/0xMartin.png?size=100)](https://github.com/0xMartin)
-[![eobadalova](https://github.com/eobadalova.png?size=100)](https://github.com/eobadalova)
-[![PaulieBossCZ](https://github.com/PaulieBossCZ.png?size=100)](https://github.com/PaulieBossCZ)
-
+Created by the SEMPA team:
+[0xMartin](https://github.com/0xMartin),
+[eobadalova](https://github.com/eobadalova), and
+[PaulieBossCZ](https://github.com/PaulieBossCZ).

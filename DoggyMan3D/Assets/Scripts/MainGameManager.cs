@@ -119,6 +119,10 @@ public class MainGameManager : MonoBehaviour
     public static void SetPlayerSaveToLoadOnGameManagerStart(string savePath)
     {
         _playerSaveToLoadPath = savePath;
+        if (savePath != null)
+        {
+            _playerNameToSet = null;
+        }
     }
 
     public static void SetPlayerNameOnGameManagerStart(string name)
@@ -206,12 +210,10 @@ public class MainGameManager : MonoBehaviour
         else
         {
             // load existing game
-            LoadPlayerSave();
-            // rename player in existing save ???
-            if (_playerNameToSet != null)
+            if (!LoadPlayerSave())
             {
-                _playerSave.Name = _playerNameToSet;
-                PlayerRef.GetComponent<GameEntityObject>().Name = _playerSave.Name;
+                SceneManager.LoadScene(SceneList.MAIN_MENU);
+                return;
             }
         }
 
@@ -311,9 +313,9 @@ public class MainGameManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Nacte save/hru ze souboru. Pokud se nacteni nepodari je automaticky vytvoren a nastaven novy save.
+    /// Nacte save/hru ze souboru.
     /// </summary>
-    private void LoadPlayerSave()
+    private bool LoadPlayerSave()
     {
         Debug.Log("Loading player save: " + _playerSaveToLoadPath);
         _playerSave = SaveSystem.LoadPlayer(_playerSaveToLoadPath);
@@ -323,11 +325,12 @@ public class MainGameManager : MonoBehaviour
             _playerSave.PlayerRef = entity;
             entity.Name = _playerSave.Name;
             Debug.Log("Save loading done");
+            return true;
         }
         else
         {
             Debug.LogError("Failed to load player save");
-            CreateNewSave();
+            return false;
         }
     }
 
@@ -543,7 +546,7 @@ public class MainGameManager : MonoBehaviour
             PlayerRef = entity
         };
         entity.Name = _playerSave.Name;
-        SaveSystem.SavePlayer(_playerSave);
+        _playerSaveToLoadPath = SaveSystem.CreatePlayerSave(_playerSave, SaveSystem.SavePath);
         Debug.Log("New save created");
     }
 
@@ -557,7 +560,7 @@ public class MainGameManager : MonoBehaviour
             _playerSave.Level++;
             if (_playerSave.Level < LevelsID.Count())
             {
-                SaveSystem.SavePlayer(_playerSave);
+                SaveSystem.SavePlayer(_playerSave, _playerSaveToLoadPath);
             }
             Debug.Log("Go to next level: " + _playerSave.Level);
         }

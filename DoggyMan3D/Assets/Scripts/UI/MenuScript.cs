@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -202,6 +203,7 @@ public class MenuScript : MonoBehaviour
 
         // Load all saves from game persistent directory
         string[] saveList = SaveSystem.ListFilesInDirectory(SaveSystem.SavePath);
+        Array.Sort(saveList, StringComparer.Ordinal);
 
         // show in list
         int index = 0;
@@ -213,12 +215,14 @@ public class MenuScript : MonoBehaviour
             GameObject fileButton = Instantiate(SaveFileButtonPrefab, scrollViewContent);
 
             TextMeshProUGUI buttonText = fileButton.GetComponentInChildren<TextMeshProUGUI>();
-            buttonText.text = Path.GetFileNameWithoutExtension(savePath).Replace("_", " ");
-
             PlayerSave ps = SaveSystem.LoadPlayer(savePath);
             if (ps != null)
             {
-                buttonText.text += "\nLevel: " + (int)(ps.Level + 1);
+                buttonText.text = ps.Name + " #" + (index + 1) + "\nLevel: " + (ps.Level + 1);
+            }
+            else
+            {
+                buttonText.text = Path.GetFileNameWithoutExtension(savePath).Replace("_", " ");
             }
 
             RectTransform rt = fileButton.GetComponent<RectTransform>();
