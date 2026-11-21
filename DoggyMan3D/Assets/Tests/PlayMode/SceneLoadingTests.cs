@@ -4,6 +4,7 @@ using System.IO;
 using System.Reflection;
 using NUnit.Framework;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.TestTools;
 
@@ -41,6 +42,42 @@ public class SceneLoadingTests
         Component manager = UnityEngine.Object.FindObjectOfType(managerType) as Component;
         Assert.That(manager, Is.Not.Null);
         Assert.That(SceneManager.GetActiveScene().buildIndex, Is.EqualTo(1));
+
+        Type controllerType = Assembly.Load("Assembly-CSharp").GetType("PlayerController", true);
+        Component controller = UnityEngine.Object.FindObjectOfType(controllerType) as Component;
+        Assert.That(controller, Is.Not.Null);
+        PlayerInput playerInput = controller.GetComponent<PlayerInput>();
+        Mouse mouse = InputSystem.AddDevice<Mouse>();
+        Keyboard keyboard = InputSystem.AddDevice<Keyboard>();
+        Gamepad gamepad = InputSystem.AddDevice<Gamepad>();
+        try
+        {
+            playerInput.SwitchCurrentControlScheme("KeyboardMouse", keyboard, mouse);
+            yield return null;
+            FieldInfo yaw = controllerType.GetField("_cinemachineTargetYaw", BindingFlags.Instance | BindingFlags.NonPublic);
+            float previousYaw = (float)yaw.GetValue(controller);
+            Assert.That(playerInput.currentControlScheme, Is.EqualTo("KeyboardMouse"));
+            Component input = controller.GetComponent(Assembly.Load("Assembly-CSharp").GetType("GameInputs", true));
+            input.GetType().GetMethod("LookInput").Invoke(input, new object[] { new Vector2(0.075f, 0f) });
+            controllerType.GetMethod("CameraRotation", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(controller, null);
+            Assert.That((float)yaw.GetValue(controller) - previousYaw, Is.EqualTo(0.075f).Within(0.001f));
+            controllerType.GetField("LockCameraPosition").SetValue(controller, true);
+            controllerType.GetMethod("CameraRotation", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(controller, null);
+            Assert.That((float)yaw.GetValue(controller) - previousYaw, Is.EqualTo(0.075f).Within(0.001f));
+            controllerType.GetField("LockCameraPosition").SetValue(controller, false);
+
+            playerInput.SwitchCurrentControlScheme("Gamepad", gamepad);
+            Assert.That(playerInput.currentControlScheme, Is.EqualTo("Gamepad"));
+            controllerType.GetMethod("CameraRotation", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(controller, null);
+            Assert.That((float)yaw.GetValue(controller) - previousYaw, Is.EqualTo(0.075f).Within(0.001f));
+            input.GetType().GetMethod("LookInput").Invoke(input, new object[] { Vector2.zero });
+        }
+        finally
+        {
+            InputSystem.RemoveDevice(mouse);
+            InputSystem.RemoveDevice(keyboard);
+            InputSystem.RemoveDevice(gamepad);
+        }
 
         managerType.GetMethod("OnLevelFinished").Invoke(manager, null);
         yield return WaitForLevel(6, null);

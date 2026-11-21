@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
 using NUnit.Framework;
+using UnityEditor;
 using UnityEngine;
 
 public class GameplayTests
@@ -23,6 +24,22 @@ public class GameplayTests
     public void TearDown()
     {
         UnityEngine.Object.DestroyImmediate(gameObject);
+    }
+
+    [Test]
+    public void DefaultCursorImportsAtNormalSizeWithValidHotspot()
+    {
+        Texture2D cursor = PlayerSettings.defaultCursor;
+        Assert.That(cursor, Is.Not.Null);
+        Assert.That(cursor.width, Is.EqualTo(32));
+        Assert.That(cursor.height, Is.EqualTo(32));
+
+        var importer = AssetImporter.GetAtPath(AssetDatabase.GetAssetPath(cursor)) as TextureImporter;
+        Assert.That(importer, Is.Not.Null);
+        Assert.That(importer.textureType, Is.EqualTo(TextureImporterType.Cursor));
+        Assert.That(importer.isReadable, Is.True);
+        Assert.That(PlayerSettings.cursorHotspot.x, Is.InRange(0, cursor.width - 1));
+        Assert.That(PlayerSettings.cursorHotspot.y, Is.InRange(0, cursor.height - 1));
     }
 
     [Test]

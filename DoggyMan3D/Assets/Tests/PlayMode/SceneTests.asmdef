@@ -1,4 +1,5 @@
 {
     "name": "SceneTests",
+    "references": ["Unity.InputSystem"],
     "optionalUnityReferences": ["TestAssemblies"]
 }

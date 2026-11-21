@@ -315,11 +315,10 @@ public class PlayerController : MonoBehaviour
     {
         if (MainGameManager.IsGamePaused() || !_gameEntity.IsAlive()) return;
 
-        // if there is an input and camera position is not fixed
-        if (_input.look.sqrMagnitude >= _threshold && !LockCameraPosition)
+        bool isMouse = IsCurrentDeviceMouse;
+        if (!LockCameraPosition && (isMouse ? _input.look.sqrMagnitude > 0f : _input.look.sqrMagnitude >= _threshold))
         {
-            //Don't multiply mouse input by Time.deltaTime;
-            float deltaTimeMultiplier = IsCurrentDeviceMouse ? 1.0f : Time.deltaTime;
+            float deltaTimeMultiplier = isMouse ? 1.0f : Time.deltaTime;
 
             _cinemachineTargetYaw += _input.look.x * deltaTimeMultiplier;
             _cinemachineTargetPitch += _input.look.y * deltaTimeMultiplier;
