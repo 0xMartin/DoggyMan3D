@@ -152,11 +152,7 @@ public class Spider : AICharacterBase
             }
         }
 
-        // apply gravity over time if under terminal (multiply by delta time twice to linearly speed up over time)
-        if (_verticalVelocity < _terminalVelocity)
-        {
-            _verticalVelocity += Gravity * Time.deltaTime;
-        }
+        _verticalVelocity = Mathf.Max(_verticalVelocity + Gravity * Time.deltaTime, -_terminalVelocity);
     }
 
     /*****************************************************************************************************************************************************/

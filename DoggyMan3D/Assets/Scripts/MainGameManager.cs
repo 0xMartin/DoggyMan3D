@@ -340,22 +340,26 @@ public class MainGameManager : MonoBehaviour
     /// <param name="level">Level ktery bude nacten</param>
     private void LoadLevel(int level)
     {
-        if (level < LevelsID.Count())
+        if (level >= 0 && level < LevelsID.Count())
         {
             Debug.Log("Start loading level: " + level);
             StartCoroutine(LoadLevelAsync(LevelsID[level]));
         }
-        else
+        else if (level >= LevelsID.Count())
         {
             Debug.LogError("Level with ID (" + level + ") not exists ... load credits scene");
             // prejde na scenu s titulkama
             StartCoroutine(GoToCreditsScene());
         }
+        else
+        {
+            FailLevelLoad("Invalid saved level index: " + level);
+        }
     }
 
     private IEnumerator LoadLevelAsync(int levelId)
     {
-        if (levelId >= FirstLevelSceneID)
+        if (levelId >= FirstLevelSceneID && Application.CanStreamedLevelBeLoaded(levelId))
         {
             _levelLoadingDone = false;
 
@@ -388,11 +392,16 @@ public class MainGameManager : MonoBehaviour
 
             // najde LevelInfo objekt a ziska Level deskriptor
             GameObject levelInfo = GameObject.Find(LevelInfoObjName);
-            if (levelInfo != null)
+            if (levelInfo != null && levelInfo.scene.buildIndex == levelId)
             {
                 _currentLevel = levelInfo.GetComponent<Level>();
                 if (_currentLevel != null)
                 {
+                    if (_currentLevel.SpawnPoint == null)
+                    {
+                        FailLevelLoad("Spawnpoint not found in level " + levelId);
+                        yield break;
+                    }
                     // zobrazi nahled levelu
                     LevelScreen.ShowScreen(_currentLevel.Name, _currentLevel.LevelImage);
                     yield return new WaitForSeconds(LevelScreen.Duration);
@@ -424,20 +433,29 @@ public class MainGameManager : MonoBehaviour
                 }
                 else
                 {
-                    Debug.LogError("Failed to get Level descriptor");
+                    FailLevelLoad("Failed to get Level descriptor in scene " + levelId);
+                    yield break;
                 }
             }
             else
             {
-                Debug.LogError("LevelInfo not found");
+                FailLevelLoad("LevelInfo not found in scene " + levelId);
+                yield break;
             }
 
             _levelLoadingDone = true;
         }
         else
         {
-            Debug.LogError("Invalid scene ID");
+            FailLevelLoad("Invalid or unavailable level scene ID: " + levelId);
         }
+    }
+
+    private void FailLevelLoad(string message)
+    {
+        _levelLoadingDone = false;
+        Debug.LogError(message + ". Returning to the main menu.");
+        SceneManager.LoadScene(SceneList.MAIN_MENU);
     }
 
     /// <summary>
@@ -448,6 +466,11 @@ public class MainGameManager : MonoBehaviour
     private void ReloadCurrentLevel(int level)
     {
         // overeni existence levelu, ktery ma byt nacten
+        if (level < 0)
+        {
+            FailLevelLoad("Invalid level index: " + level);
+            return;
+        }
         if (level >= LevelsID.Count())
         {
             Debug.LogError("Level with ID (" + level + ") not exists ... load credits scene");
@@ -461,7 +484,7 @@ public class MainGameManager : MonoBehaviour
 
         // spusti reload sceny
         Scene sceneToUnload = SceneManager.GetSceneByBuildIndex(_currentLevelId);
-        if (sceneToUnload == null)
+        if (!sceneToUnload.IsValid() || !sceneToUnload.isLoaded)
         {
             // aktualne neni nactena zadna scena/level ve hre => zavola metoda pro nacteni levelu
             Debug.Log("No scene to unload! Calling load level function ...");
@@ -471,10 +494,7 @@ public class MainGameManager : MonoBehaviour
         {
             // spusti reaload sceny (prvni odstani aktlualne nactenou scenu ve hre a pak nacte pozadovanou scenu/level)
             Debug.Log("Start realoading scene");
-            if (sceneToUnload.isLoaded)
-            {
-                StartCoroutine(ReloadSceneAsync(sceneToUnload, LevelsID[level]));
-            }
+            StartCoroutine(ReloadSceneAsync(sceneToUnload, LevelsID[level]));
         }
     }
 

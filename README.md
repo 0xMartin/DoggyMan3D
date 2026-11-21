@@ -46,6 +46,8 @@ available. Older releases may contain source code only.
 | Pause | Escape |
 
 The Android version uses on-screen controls.
+After exhausting stamina, release sprint and press it again once stamina has
+recovered.
 
 ## Open the Unity project
 
@@ -75,7 +77,7 @@ Game**. Progress is saved when a game is created and when advancing to the next
 level.
 Saves are stored under Unity's `Application.persistentDataPath`, which varies
 by platform. Existing saves remain usable; separate games can use the same
-player name.
+player name. The inventory is cleared when starting or restarting a level.
 
 ## License and assets
 

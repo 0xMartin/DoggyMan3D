@@ -66,6 +66,20 @@ public class SaveSystemTests
     }
 
     [Test]
+    public void FailedReplacementLeavesOtherSavesAndNoTemporaryFile()
+    {
+        string existingPath = Path.Combine(directory, "existing.json");
+        File.WriteAllText(existingPath, "{\"Name\":\"Existing\",\"Level\":2}");
+        string missingPath = Path.Combine(directory, "missing.json");
+
+        Assert.Throws<TargetInvocationException>(() => Call("SavePlayer", NewSave("New"), missingPath));
+
+        Assert.That(File.ReadAllText(existingPath), Is.EqualTo("{\"Name\":\"Existing\",\"Level\":2}"));
+        Assert.That(File.Exists(missingPath), Is.False);
+        Assert.That(Directory.GetFiles(directory), Has.Length.EqualTo(1));
+    }
+
+    [Test]
     public void SelectingSaveClearsNameFromPreviousNewGame()
     {
         Type manager = saveSystem.Assembly.GetType("MainGameManager", true);

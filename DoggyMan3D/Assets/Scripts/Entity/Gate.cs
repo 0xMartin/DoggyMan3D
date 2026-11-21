@@ -73,6 +73,8 @@ public class Gate : MonoBehaviour
 
     public void OpenGate()
     {
+        if (_isOpened) return;
+        _isOpened = true;
         _animator.SetBool("Open", true);
         AudioSource.PlayClipAtPoint(OpenSound, this.transform.position + Vector3.up * 1.0f, OpenSoundVolume);
     }
@@ -83,13 +85,12 @@ public class Gate : MonoBehaviour
         if (_entityDeathCount <= 0)
         {
             OpenGate();
-            _isOpened = true;
         }
     }
 
     private bool OnPlayerItemUse(Item.ItemData item, GameEntityObject sender)
     {
-        if (sender == null || item == null)
+        if (_isOpened || sender == null || item == null)
         {
             return false;
         }
@@ -103,7 +104,6 @@ public class Gate : MonoBehaviour
                     if (item.ParameterValues[0] == KeyID)
                     {
                         OpenGate();
-                        _isOpened = true;
                         return true;
                     }
                 }

@@ -409,11 +409,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        // apply gravity over time if under terminal (multiply by delta time twice to linearly speed up over time)
-        if (_verticalVelocity < _terminalVelocity)
-        {
-            _verticalVelocity += Gravity * Time.deltaTime;
-        }
+        _verticalVelocity = Mathf.Max(_verticalVelocity + Gravity * Time.deltaTime, -_terminalVelocity);
     }
 
     private static float ClampAngle(float lfAngle, float lfMin, float lfMax)

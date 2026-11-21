@@ -21,9 +21,24 @@ public class SaveSystem
     public static void SavePlayer(PlayerSave playerSave, string path)
     {
         string json = JsonUtility.ToJson(playerSave);
-        using (StreamWriter writer = new StreamWriter(new FileStream(path, FileMode.Truncate, FileAccess.Write)))
+        string temporaryPath = path + "." + Guid.NewGuid().ToString("N") + ".tmp";
+        try
         {
-            writer.Write(json);
+            using (FileStream stream = new FileStream(temporaryPath, FileMode.CreateNew, FileAccess.Write))
+            using (StreamWriter writer = new StreamWriter(stream))
+            {
+                writer.Write(json);
+                writer.Flush();
+                stream.Flush(true);
+            }
+            File.Replace(temporaryPath, path, null);
+        }
+        finally
+        {
+            if (File.Exists(temporaryPath))
+            {
+                File.Delete(temporaryPath);
+            }
         }
         Debug.Log("Game saved to file: " + path);
     }

@@ -41,6 +41,7 @@ public class GameEntityObject : MonoBehaviour
     private bool _hit = false;
     private bool _isMoving = false;
     private bool _isSprinting = false;
+    private bool _sprintExhausted = false;
     private float _stamina;
     private float _noSprintTime = 0.0f;
     private List<Item.ItemData> _activePotions = new List<Item.ItemData>();
@@ -66,35 +67,14 @@ public class GameEntityObject : MonoBehaviour
     {
         if (!IsEntityEnabled) return;
 
-        // vypocet staminy
-        if (_isSprinting)
-        {
-            this._stamina = Math.Max(0, this._stamina - this.StaminaDownSpeed * Time.deltaTime);
-            _noSprintTime = 0.0f;
-        }
-        else
-        {
-            if (_noSprintTime > StartAddStaminaAfterSeconds)
-            {
-                if (this._stamina <= 3)
-                {
-                    // pokud je stamina vycerpana uplne bude nabev pomalejsi, sprintovat hrac muze jen kdyz je stamina vyssi jak 3
-                    this._stamina = Math.Min(this.MaxStamina, this._stamina + 0.5f * Time.deltaTime * (_isMoving ? 1 : 2));
-                }
-                else
-                {
-                    this._stamina = Math.Min(this.MaxStamina, this._stamina + this.StaminaUpSpeed * Time.deltaTime * (_isMoving ? 1 : 2));
-                }
-            }
-            else
-            {
-                _noSprintTime += Time.deltaTime;
-            }
-        }
-        // potion effect
         if (this._activePotions.Any(p => p.Type == Item.ItemType.STAMINA_POTION))
         {
             this._stamina = this.MaxStamina;
+            _sprintExhausted = false;
+        }
+        else
+        {
+            UpdateStamina(Time.deltaTime);
         }
 
         // vyprseni ucinku lektvaru
@@ -114,6 +94,47 @@ public class GameEntityObject : MonoBehaviour
                     this._activePotions.Remove(potion);
                     break;
                 }
+            }
+        }
+    }
+
+    private void UpdateStamina(float deltaTime)
+    {
+        if (!_isSprinting)
+        {
+            _sprintExhausted = false;
+        }
+        else if (_isMoving && _stamina <= 3)
+        {
+            _sprintExhausted = true;
+        }
+
+        if (IsSprinting())
+        {
+            this._stamina = Math.Max(0, this._stamina - this.StaminaDownSpeed * deltaTime);
+            if (_stamina <= 3)
+            {
+                _sprintExhausted = true;
+            }
+            _noSprintTime = 0.0f;
+        }
+        else
+        {
+            if (_noSprintTime > StartAddStaminaAfterSeconds)
+            {
+                if (this._stamina <= 3)
+                {
+                    // pokud je stamina vycerpana uplne bude nabev pomalejsi, sprintovat hrac muze jen kdyz je stamina vyssi jak 3
+                    this._stamina = Math.Min(this.MaxStamina, this._stamina + 0.5f * deltaTime * (_isMoving ? 1 : 2));
+                }
+                else
+                {
+                    this._stamina = Math.Min(this.MaxStamina, this._stamina + this.StaminaUpSpeed * deltaTime * (_isMoving ? 1 : 2));
+                }
+            }
+            else
+            {
+                _noSprintTime += deltaTime;
             }
         }
     }
@@ -173,6 +194,8 @@ public class GameEntityObject : MonoBehaviour
             this._doAttackID = 0;
             this._isMoving = false;
             this._isSprinting = false;
+            this._sprintExhausted = false;
+            this._noSprintTime = 0.0f;
             this.IsEnabledMoving = true;
             this.IsHitEnabled = true;
             this.IsEntityEnabled = true;
@@ -278,7 +301,7 @@ public class GameEntityObject : MonoBehaviour
 
     public bool IsSprinting()
     {
-        return this._isSprinting && this._stamina > 3 && !MainGameManager.IsGamePaused() && IsAlive() && this.IsEntityEnabled && this.IsEnabledMoving;
+        return this._isMoving && this._isSprinting && !this._sprintExhausted && this._stamina > 3 && !MainGameManager.IsGamePaused() && IsAlive() && this.IsEntityEnabled && this.IsEnabledMoving;
     }
 
     public bool IsAlive()
