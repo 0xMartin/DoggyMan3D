@@ -13,7 +13,7 @@ OcclusionCullingSettings:
 --- !u!104 &2
 RenderSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 9
+  serializedVersion: 10
   m_Fog: 0
   m_FogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   m_FogMode: 3
@@ -38,13 +38,12 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.0031296138, g: 0.0063240584, b: 0.014618333, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 12
-  m_GIWorkflowMode: 1
+  serializedVersion: 13
+  m_BakeOnSceneLoad: 0
   m_GISettings:
     serializedVersion: 2
     m_BounceScale: 1
@@ -67,9 +66,6 @@ LightmapSettings:
     m_LightmapParameters: {fileID: 0}
     m_LightmapsBakeMode: 1
     m_TextureCompression: 1
-    m_FinalGather: 0
-    m_FinalGatherFiltering: 1
-    m_FinalGatherRayCount: 256
     m_ReflectionCompression: 2
     m_MixedBakeMode: 2
     m_BakeBackend: 1
@@ -97,7 +93,8 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: b231a424b3c4e4045aabec19d5bc2375,
+    type: 2}
   m_LightingSettings: {fileID: 4890085278179872738, guid: ef920a85b204d5245a8e4a188d35ca73,
     type: 2}
 --- !u!196 &4
@@ -5727,7 +5724,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1941876338804595086, guid: a7e0ca1b5b0629743b8e209e30b5432c,
         type: 3}
-      propertyPath: ParameterValues.Array.data[0]
+      propertyPath: 'ParameterValues.Array.data[0]'
       value: 1234
       objectReference: {fileID: 0}
     - target: {fileID: 2288761228623724514, guid: a7e0ca1b5b0629743b8e209e30b5432c,
@@ -8407,6 +8404,7 @@ Terrain:
   m_DetailObjectDensity: 1
   m_HeightmapPixelError: 5
   m_SplatMapDistance: 1000
+  m_HeightmapMinimumLODSimplification: 0
   m_HeightmapMaximumLOD: 0
   m_ShadowCastingMode: 2
   m_DrawHeightmap: 1
@@ -10082,7 +10080,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1941876338804595086, guid: a7e0ca1b5b0629743b8e209e30b5432c,
         type: 3}
-      propertyPath: ParameterValues.Array.data[0]
+      propertyPath: 'ParameterValues.Array.data[0]'
       value: 123
       objectReference: {fileID: 0}
     - target: {fileID: 2288761228623724514, guid: a7e0ca1b5b0629743b8e209e30b5432c,
@@ -14544,28 +14542,28 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2774609971162784871, guid: a688c8a03f3bc664ab3a22ea5023dc43,
         type: 3}
-      propertyPath: audioClips.Array.data[0]
+      propertyPath: 'audioClips.Array.data[0]'
       value: 
       objectReference: {fileID: 8300000, guid: 12b927aec08f89f4c8eb67a7eae6f052, type: 3}
     - target: {fileID: 2774609971162784871, guid: a688c8a03f3bc664ab3a22ea5023dc43,
         type: 3}
-      propertyPath: audioClips.Array.data[1]
+      propertyPath: 'audioClips.Array.data[1]'
       value: 
       objectReference: {fileID: 8300000, guid: 12b927aec08f89f4c8eb67a7eae6f052, type: 3}
     - target: {fileID: 2774609971162784871, guid: a688c8a03f3bc664ab3a22ea5023dc43,
         type: 3}
-      propertyPath: musicClips.Array.data[0]
+      propertyPath: 'musicClips.Array.data[0]'
       value: 
       objectReference: {fileID: 8300000, guid: 807c86aa22a9a494b962175e04e15498, type: 3}
     - target: {fileID: 2774609971162784871, guid: a688c8a03f3bc664ab3a22ea5023dc43,
         type: 3}
-      propertyPath: musicClips.Array.data[1]
+      propertyPath: 'musicClips.Array.data[1]'
       value: 
       objectReference: {fileID: 8300000, guid: 192447343276e314aa426be16eceb1c7, type: 3}
     - target: {fileID: 4208043161084127015, guid: a688c8a03f3bc664ab3a22ea5023dc43,
         type: 3}
       propertyPath: Name
-      value: Level 1 - Home in fire
+      value: Level 1 - Home on fire
       objectReference: {fileID: 0}
     - target: {fileID: 4208043161084127015, guid: a688c8a03f3bc664ab3a22ea5023dc43,
         type: 3}
