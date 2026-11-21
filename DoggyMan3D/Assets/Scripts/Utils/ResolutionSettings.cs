@@ -19,6 +19,7 @@ public class ResolutionSettings : MonoBehaviour
 
     void Start()
     {
+        // The sensitivity listener is registered in Awake and saves before this one.
         ApplyButton.onClick.AddListener(ApplySettings);
 
         resolutions = new List<Resolution>(Screen.resolutions);

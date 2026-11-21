@@ -25,6 +25,7 @@ public class MenuSettingsTests
         hadResolutionIndex = PlayerPrefs.HasKey("resolutionIndex");
         oldResolutionIndex = PlayerPrefs.GetInt("resolutionIndex");
         PlayerPrefs.DeleteKey("mouseSensitivity");
+        PlayerPrefs.DeleteKey("resolutionIndex");
     }
 
     [TearDown]

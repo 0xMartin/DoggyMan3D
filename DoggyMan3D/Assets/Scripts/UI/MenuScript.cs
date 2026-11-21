@@ -90,6 +90,8 @@ public class MenuScript : MonoBehaviour
             _resolutionSettings = SettigsSection.GetComponent<ResolutionSettings>();
             if (_resolutionSettings != null)
                 _resolutionSettings.SettingsApplied += ShowMainMenu;
+            else
+                Debug.LogError("Settings section is missing ResolutionSettings.", this);
         }
     }
 
