@@ -5,6 +5,7 @@ using System.Reflection;
 using NUnit.Framework;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.TestTools;
 
 public class GameplayTests
 {
@@ -24,6 +25,36 @@ public class GameplayTests
     public void TearDown()
     {
         UnityEngine.Object.DestroyImmediate(gameObject);
+    }
+
+    [Test]
+    public void MouseSensitivityUsesDefaultAndRejectsInvalidSavedValues()
+    {
+        const string key = "mouseSensitivity";
+        bool hadValue = PlayerPrefs.HasKey(key);
+        float previousValue = PlayerPrefs.GetFloat(key);
+        MethodInfo getSensitivity = gameAssembly.GetType("MouseSensitivitySettings", true).GetMethod("GetSensitivity");
+        try
+        {
+            PlayerPrefs.DeleteKey(key);
+            Assert.That((float)getSensitivity.Invoke(null, null), Is.EqualTo(1f));
+
+            PlayerPrefs.SetFloat(key, 99f);
+            LogAssert.Expect(LogType.Warning, "Mouse sensitivity in PlayerPrefs is outside the supported range; clamping it.");
+            Assert.That((float)getSensitivity.Invoke(null, null), Is.EqualTo(3f));
+
+            PlayerPrefs.SetFloat(key, float.NaN);
+            LogAssert.Expect(LogType.Warning, "Invalid mouse sensitivity in PlayerPrefs; using the default.");
+            Assert.That((float)getSensitivity.Invoke(null, null), Is.EqualTo(1f));
+        }
+        finally
+        {
+            if (hadValue)
+                PlayerPrefs.SetFloat(key, previousValue);
+            else
+                PlayerPrefs.DeleteKey(key);
+            PlayerPrefs.Save();
+        }
     }
 
     [Test]

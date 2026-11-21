@@ -49,9 +49,8 @@ The Android version uses on-screen controls.
 After exhausting stamina, release sprint and press it again once stamina has
 recovered.
 
-To adjust mouse-look sensitivity in the Unity project, edit the `ScaleVector2`
-processor on the `Player / Look` pointer binding in
-[InputSystemConfig.inputactions](DoggyMan3D/Assets/InputSystem/InputSystemConfig.inputactions).
+On desktop, adjust mouse-look sensitivity under **Settings** in the main menu
+and select **Apply**. The setting is saved between sessions.
 
 ## Open the Unity project
 

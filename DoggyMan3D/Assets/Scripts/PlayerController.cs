@@ -73,6 +73,7 @@ public class PlayerController : MonoBehaviour
     // cinemachine
     private float _cinemachineTargetYaw;
     private float _cinemachineTargetPitch;
+    private float _mouseSensitivity = MouseSensitivitySettings.DefaultSensitivity;
 
     // entity info
     private GameEntityObject _gameEntity;
@@ -123,6 +124,7 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
+        _mouseSensitivity = MouseSensitivitySettings.GetSensitivity();
         _cinemachineTargetYaw = CinemachineCameraTarget.transform.rotation.eulerAngles.y;
 
         _gameEntity = GetComponent<GameEntityObject>();
@@ -318,7 +320,7 @@ public class PlayerController : MonoBehaviour
         bool isMouse = IsCurrentDeviceMouse;
         if (!LockCameraPosition && (isMouse ? _input.look.sqrMagnitude > 0f : _input.look.sqrMagnitude >= _threshold))
         {
-            float deltaTimeMultiplier = isMouse ? 1.0f : Time.deltaTime;
+            float deltaTimeMultiplier = isMouse ? _mouseSensitivity : Time.deltaTime;
 
             _cinemachineTargetYaw += _input.look.x * deltaTimeMultiplier;
             _cinemachineTargetPitch += _input.look.y * deltaTimeMultiplier;

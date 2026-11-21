@@ -12,6 +12,8 @@ public class SceneLoadingTests
 {
     private string savePath;
     private Type managerType;
+    private bool hadMouseSensitivity;
+    private float oldMouseSensitivity;
 
     [SetUp]
     public void SetUp()
@@ -20,6 +22,9 @@ public class SceneLoadingTests
         File.WriteAllText(savePath, "{\"Name\":\"Scene test\",\"Level\":0,\"Inventory\":[]}");
         managerType = Assembly.Load("Assembly-CSharp").GetType("MainGameManager", true);
         managerType.GetMethod("SetPlayerSaveToLoadOnGameManagerStart").Invoke(null, new object[] { savePath });
+        hadMouseSensitivity = PlayerPrefs.HasKey("mouseSensitivity");
+        oldMouseSensitivity = PlayerPrefs.GetFloat("mouseSensitivity", 1f);
+        PlayerPrefs.SetFloat("mouseSensitivity", 2f);
     }
 
     [TearDown]
@@ -27,6 +32,11 @@ public class SceneLoadingTests
     {
         Time.timeScale = 1f;
         managerType.GetMethod("SetPlayerSaveToLoadOnGameManagerStart").Invoke(null, new object[] { null });
+        if (hadMouseSensitivity)
+            PlayerPrefs.SetFloat("mouseSensitivity", oldMouseSensitivity);
+        else
+            PlayerPrefs.DeleteKey("mouseSensitivity");
+        PlayerPrefs.Save();
         if (File.Exists(savePath))
         {
             File.Delete(savePath);
@@ -60,16 +70,16 @@ public class SceneLoadingTests
             Component input = controller.GetComponent(Assembly.Load("Assembly-CSharp").GetType("GameInputs", true));
             input.GetType().GetMethod("LookInput").Invoke(input, new object[] { new Vector2(0.075f, 0f) });
             controllerType.GetMethod("CameraRotation", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(controller, null);
-            Assert.That((float)yaw.GetValue(controller) - previousYaw, Is.EqualTo(0.075f).Within(0.001f));
+            Assert.That((float)yaw.GetValue(controller) - previousYaw, Is.EqualTo(0.15f).Within(0.001f));
             controllerType.GetField("LockCameraPosition").SetValue(controller, true);
             controllerType.GetMethod("CameraRotation", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(controller, null);
-            Assert.That((float)yaw.GetValue(controller) - previousYaw, Is.EqualTo(0.075f).Within(0.001f));
+            Assert.That((float)yaw.GetValue(controller) - previousYaw, Is.EqualTo(0.15f).Within(0.001f));
             controllerType.GetField("LockCameraPosition").SetValue(controller, false);
 
             playerInput.SwitchCurrentControlScheme("Gamepad", gamepad);
             Assert.That(playerInput.currentControlScheme, Is.EqualTo("Gamepad"));
             controllerType.GetMethod("CameraRotation", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(controller, null);
-            Assert.That((float)yaw.GetValue(controller) - previousYaw, Is.EqualTo(0.075f).Within(0.001f));
+            Assert.That((float)yaw.GetValue(controller) - previousYaw, Is.EqualTo(0.15f).Within(0.001f));
             input.GetType().GetMethod("LookInput").Invoke(input, new object[] { Vector2.zero });
         }
         finally
