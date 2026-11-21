@@ -37,7 +37,7 @@ public class Sign : MonoBehaviour
         if (_textInstance == null)
         {
             _textInstance = Instantiate(Text3DPrefab);
-            _textInstance.transform.position = transform.position + new Vector3(0.0f, 1.2f, 0.0f); ;
+            _textInstance.transform.position = transform.position + new Vector3(0.0f, 2.0f, 0.0f); ;
             Text3D text = _textInstance.GetComponent<Text3D>();
             if (text != null)
             {
