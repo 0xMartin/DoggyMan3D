@@ -26140,10 +26140,10 @@ Terrain:
   m_TreeDistance: 320
   m_TreeBillboardDistance: 200
   m_TreeCrossFadeLength: 5
-  m_TreeMaximumFullLODCount: 225
-  m_DetailObjectDistance: 210
+  m_TreeMaximumFullLODCount: 50
+  m_DetailObjectDistance: 80
   m_DetailObjectDensity: 1
-  m_HeightmapPixelError: 1
+  m_HeightmapPixelError: 5
   m_SplatMapDistance: 701
   m_HeightmapMinimumLODSimplification: 0
   m_HeightmapMaximumLOD: 0

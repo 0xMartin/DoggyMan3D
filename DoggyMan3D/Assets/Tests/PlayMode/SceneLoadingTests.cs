@@ -52,6 +52,17 @@ public class SceneLoadingTests
         Component manager = UnityEngine.Object.FindObjectOfType(managerType) as Component;
         Assert.That(manager, Is.Not.Null);
         Assert.That(SceneManager.GetActiveScene().buildIndex, Is.EqualTo(1));
+        Assert.That(RenderSettings.fog, Is.True);
+        Assert.That(RenderSettings.fogMode, Is.EqualTo(FogMode.Linear));
+        Assert.That(RenderSettings.fogColor, Is.EqualTo(new Color(0.12f, 0.16f, 0.2f, 1f)));
+        Assert.That(RenderSettings.fogStartDistance, Is.EqualTo(70f));
+        Assert.That(RenderSettings.fogEndDistance, Is.EqualTo(350f));
+
+        object firstLevel = managerType.GetMethod("GetCurrentLevel").Invoke(null, null);
+        managerType.GetMethod("OnLevelReset").Invoke(manager, null);
+        yield return WaitForLevel(5, firstLevel);
+        Assert.That(RenderSettings.fog, Is.True);
+        Assert.That(RenderSettings.fogStartDistance, Is.EqualTo(70f));
 
         Type controllerType = Assembly.Load("Assembly-CSharp").GetType("PlayerController", true);
         Component controller = UnityEngine.Object.FindObjectOfType(controllerType) as Component;
@@ -92,14 +103,28 @@ public class SceneLoadingTests
         managerType.GetMethod("OnLevelFinished").Invoke(manager, null);
         yield return WaitForLevel(6, null);
         Assert.That(SceneManager.GetSceneByBuildIndex(5).isLoaded, Is.False);
+        Assert.That(RenderSettings.fog, Is.False);
+        Assert.That(RenderSettings.fogMode, Is.EqualTo(FogMode.ExponentialSquared));
+        Assert.That(RenderSettings.fogColor, Is.EqualTo(new Color(0.5f, 0.5f, 0.5f, 1f)));
+        Assert.That(RenderSettings.fogStartDistance, Is.EqualTo(0f));
+        Assert.That(RenderSettings.fogEndDistance, Is.EqualTo(300f));
         Assert.That(File.ReadAllText(savePath), Does.Contain("\"Level\":1"));
 
         object oldLevel = managerType.GetMethod("GetCurrentLevel").Invoke(null, null);
         managerType.GetMethod("OnLevelReset").Invoke(manager, null);
         yield return WaitForLevel(6, oldLevel);
 
+        managerType.GetMethod("OnLevelFinished").Invoke(manager, null);
+        yield return WaitForLevel(7, null);
+        Terrain terrain = Array.Find(Terrain.activeTerrains, t => t.gameObject.scene.buildIndex == 7);
+        Assert.That(terrain, Is.Not.Null);
+        Assert.That(terrain.detailObjectDistance, Is.EqualTo(80f));
+        Assert.That(terrain.treeMaximumFullLODCount, Is.EqualTo(50));
+        Assert.That(terrain.heightmapPixelError, Is.EqualTo(5f));
+        Assert.That(RenderSettings.fog, Is.False);
+
         managerType.GetField("LevelInfoObjName").SetValue(manager, "Missing level descriptor");
-        LogAssert.Expect(LogType.Error, "LevelInfo not found in scene 6. Returning to the main menu.");
+        LogAssert.Expect(LogType.Error, "LevelInfo not found in scene 7. Returning to the main menu.");
         managerType.GetMethod("OnLevelReset").Invoke(manager, null);
         float deadline = Time.realtimeSinceStartup + 60f;
         while (SceneManager.GetActiveScene().buildIndex != 0 && Time.realtimeSinceStartup < deadline)
@@ -107,6 +132,15 @@ public class SceneLoadingTests
             yield return null;
         }
         Assert.That(SceneManager.GetActiveScene().buildIndex, Is.EqualTo(0));
+        Assert.That(RenderSettings.fog, Is.False);
+
+        File.WriteAllText(savePath, "{\"Name\":\"Scene test\",\"Level\":0,\"Inventory\":[]}");
+        managerType.GetMethod("SetPlayerSaveToLoadOnGameManagerStart").Invoke(null, new object[] { savePath });
+        yield return SceneManager.LoadSceneAsync(1, LoadSceneMode.Single);
+        yield return WaitForLevel(5, null);
+        Assert.That(RenderSettings.fog, Is.True);
+        yield return SceneManager.LoadSceneAsync(0, LoadSceneMode.Single);
+        Assert.That(RenderSettings.fog, Is.False);
     }
 
     private IEnumerator WaitForLevel(int buildIndex, object previousLevel)
