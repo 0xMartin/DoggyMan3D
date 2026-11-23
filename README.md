@@ -87,8 +87,8 @@ player name. The inventory is cleared when starting or restarting a level.
 
 Original game source code and Unity project configuration authored by the
 copyright holders are licensed under the [MIT License](./LICENSE). This does
-not cover game assets such as models, artwork, scenes, prefabs, animations,
-audio and other audiovisual content, or third-party code and packages from Unity Asset Store.
+not cover game assets such as models, animations,
+audio or third-party code and packages from Unity Asset Store.
 
 The project includes both team-created and third-party assets, including assets
 from the Unity Asset Store and sound effects from Freesound. Their respective
