@@ -70,3 +70,13 @@ crashlytics-build.properties
 # Temporary auto-generated Android Assets
 /DoggyMan3D/[Aa]ssets/[Ss]treamingAssets/aa.meta
 /DoggyMan3D/[Aa]ssets/[Ss]treamingAssets/aa/*
+
+# macOS and Windows system files
+*.DS_Store
+*.AppleDouble
+*.LSOverride
+Icon?
+._*
+Thumbs.db
+ehthumbs.db
+Desktop.ini
