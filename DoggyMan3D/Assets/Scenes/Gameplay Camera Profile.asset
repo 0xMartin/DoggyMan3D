@@ -148,6 +148,9 @@ MonoBehaviour:
   thicknessModifier:
     overrideState: 1
     value: 2
+  zBias:
+    overrideState: 0
+    value: 0.0001
   directLightingStrength:
     overrideState: 0
     value: 0
@@ -222,16 +225,16 @@ MonoBehaviour:
     value: -32
   saturation:
     overrideState: 1
-    value: -10
+    value: -9
   brightness:
     overrideState: 0
     value: 0
   postExposure:
-    overrideState: 1
+    overrideState: 0
     value: 0.1
   contrast:
     overrideState: 1
-    value: 8
+    value: 22
   mixerRedOutRedIn:
     overrideState: 0
     value: 77
