@@ -63,6 +63,8 @@ public class MenuSettingsTests
         Assert.That(wash.raycastTarget, Is.False);
         Assert.That(accent.raycastTarget, Is.False);
         float normalAlpha = wash.color.a;
+        Assert.That(normalAlpha, Is.Zero);
+        Assert.That(accent.color.a, Is.Zero);
 
         Canvas.ForceUpdateCanvases();
         var corners = new Vector3[4];
@@ -77,6 +79,10 @@ public class MenuSettingsTests
         ExecuteEvents.Execute(button.gameObject, pointer, ExecuteEvents.pointerEnterHandler);
         yield return new WaitForSecondsRealtime(0.25f);
         Assert.That(wash.color.a, Is.GreaterThan(normalAlpha + 0.1f));
+        Assert.That(wash.color.r, Is.EqualTo(wash.color.g));
+        Assert.That(wash.color.g, Is.EqualTo(wash.color.b));
+        Assert.That(accent.color.r, Is.EqualTo(accent.color.g));
+        Assert.That(accent.color.g, Is.EqualTo(accent.color.b));
 
         ExecuteEvents.Execute(button.gameObject, pointer, ExecuteEvents.pointerDownHandler);
         ExecuteEvents.Execute(button.gameObject, pointer, ExecuteEvents.pointerUpHandler);

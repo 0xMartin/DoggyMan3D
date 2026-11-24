@@ -7,7 +7,6 @@ using UnityEngine.UI;
 public class MenuButtonFeedback : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler,
     IPointerDownHandler, IPointerUpHandler, ISelectHandler, IDeselectHandler
 {
-    private static readonly Color Accent = new Color(0.95f, 0.66f, 0.32f);
     private Button _button;
     private Image _wash;
     private Image _accentBar;
@@ -70,8 +69,8 @@ public class MenuButtonFeedback : MonoBehaviour, IPointerEnterHandler, IPointerE
 
     private void UpdateVisual()
     {
-        _wash.color = new Color(Accent.r, Accent.g, Accent.b, Mathf.Lerp(0.035f, 0.19f, _highlight));
-        _accentBar.color = new Color(Accent.r, Accent.g, Accent.b, Mathf.Lerp(0.45f, 1f, _highlight));
+        _wash.color = new Color(1f, 1f, 1f, 0.16f * _highlight);
+        _accentBar.color = new Color(1f, 1f, 1f, 0.8f * _highlight);
     }
 
     private void OnDisable()
