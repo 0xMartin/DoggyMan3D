@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Reflection;
 using NUnit.Framework;
 using TMPro;
@@ -8,6 +9,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.TestTools;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem.UI;
 using UnityEngine.UI;
 
 public class MenuSettingsTests
@@ -40,6 +42,109 @@ public class MenuSettingsTests
         else
             PlayerPrefs.DeleteKey("resolutionIndex");
         PlayerPrefs.Save();
+    }
+
+    [UnityTest]
+    public IEnumerator MenuButtonFeedbackRespondsToPointerKeyboardAndDisabledStates()
+    {
+#if !UNITY_STANDALONE && !UNITY_EDITOR
+        Assert.Ignore("The desktop menu is not available on this platform.");
+#endif
+        yield return SceneManager.LoadSceneAsync(0, LoadSceneMode.Single);
+        yield return null;
+
+        Type menuType = Assembly.Load("Assembly-CSharp").GetType("MenuScript", true);
+        Component menu = UnityEngine.Object.FindFirstObjectByType(menuType) as Component;
+        var button = (Button)menuType.GetField("MainNewGame").GetValue(menu);
+        Type feedbackType = Assembly.Load("Assembly-CSharp").GetType("MenuButtonFeedback", true);
+        Assert.That(button.GetComponent(feedbackType), Is.Not.Null);
+        var wash = button.transform.Find("Menu Button Wash").GetComponent<Image>();
+        var accent = button.transform.Find("Menu Button Accent").GetComponent<Image>();
+        Assert.That(wash.raycastTarget, Is.False);
+        Assert.That(accent.raycastTarget, Is.False);
+        float normalAlpha = wash.color.a;
+
+        Canvas.ForceUpdateCanvases();
+        var corners = new Vector3[4];
+        button.GetComponent<RectTransform>().GetWorldCorners(corners);
+        Vector2 center = RectTransformUtility.WorldToScreenPoint(null, (corners[0] + corners[2]) / 2f);
+        var hits = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(new PointerEventData(EventSystem.current) { position = center }, hits);
+        Assert.That(hits.Count, Is.GreaterThan(0));
+        Assert.That(ExecuteEvents.GetEventHandler<IPointerClickHandler>(hits[0].gameObject), Is.EqualTo(button.gameObject));
+
+        var pointer = new PointerEventData(EventSystem.current) { button = PointerEventData.InputButton.Left };
+        ExecuteEvents.Execute(button.gameObject, pointer, ExecuteEvents.pointerEnterHandler);
+        yield return new WaitForSecondsRealtime(0.25f);
+        Assert.That(wash.color.a, Is.GreaterThan(normalAlpha + 0.1f));
+
+        ExecuteEvents.Execute(button.gameObject, pointer, ExecuteEvents.pointerDownHandler);
+        ExecuteEvents.Execute(button.gameObject, pointer, ExecuteEvents.pointerUpHandler);
+        ExecuteEvents.Execute(button.gameObject, pointer, ExecuteEvents.pointerExitHandler);
+        yield return new WaitForSecondsRealtime(0.25f);
+        Assert.That(wash.color.a, Is.EqualTo(normalAlpha).Within(0.001f));
+
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(button.gameObject);
+        yield return new WaitForSecondsRealtime(0.25f);
+        Assert.That(wash.color.a, Is.GreaterThan(normalAlpha + 0.1f));
+        button.interactable = false;
+        yield return new WaitForSecondsRealtime(0.25f);
+        Assert.That(wash.color.a, Is.EqualTo(normalAlpha).Within(0.001f));
+        button.interactable = true;
+        EventSystem.current.SetSelectedGameObject(null);
+
+        var touch = new ExtendedPointerEventData(EventSystem.current)
+        {
+            button = PointerEventData.InputButton.Left,
+            pointerType = UIPointerType.Touch
+        };
+        ExecuteEvents.Execute(button.gameObject, touch, ExecuteEvents.pointerEnterHandler);
+        yield return new WaitForSecondsRealtime(0.25f);
+        Assert.That(wash.color.a, Is.EqualTo(normalAlpha).Within(0.001f));
+        ExecuteEvents.Execute(button.gameObject, touch, ExecuteEvents.pointerDownHandler);
+        yield return new WaitForSecondsRealtime(0.25f);
+        Assert.That(wash.color.a, Is.GreaterThan(normalAlpha + 0.05f));
+        ExecuteEvents.Execute(button.gameObject, touch, ExecuteEvents.pointerUpHandler);
+        yield return new WaitForSecondsRealtime(0.25f);
+        Assert.That(wash.color.a, Is.EqualTo(normalAlpha).Within(0.001f));
+
+        ExecuteEvents.Execute(button.gameObject, pointer, ExecuteEvents.pointerEnterHandler);
+        yield return new WaitForSecondsRealtime(0.25f);
+        button.gameObject.SetActive(false);
+        button.gameObject.SetActive(true);
+        Assert.That(wash.color.a, Is.EqualTo(normalAlpha).Within(0.001f));
+    }
+
+    [UnityTest]
+    public IEnumerator SaveButtonsAlsoReceiveFeedback()
+    {
+#if !UNITY_STANDALONE && !UNITY_EDITOR
+        Assert.Ignore("The desktop menu is not available on this platform.");
+#endif
+        Directory.CreateDirectory(Application.persistentDataPath);
+        string path = Path.Combine(Application.persistentDataPath, "menu-feedback-test-" + Guid.NewGuid().ToString("N") + ".json");
+        File.WriteAllText(path, "{\"Name\":\"Menu feedback test\",\"Level\":0,\"Inventory\":[]}");
+        try
+        {
+            yield return SceneManager.LoadSceneAsync(0, LoadSceneMode.Single);
+            yield return null;
+            Type menuType = Assembly.Load("Assembly-CSharp").GetType("MenuScript", true);
+            Component menu = UnityEngine.Object.FindFirstObjectByType(menuType) as Component;
+            ((Button)menuType.GetField("MainLoadGame").GetValue(menu)).onClick.Invoke();
+            yield return null;
+
+            var content = (Transform)menuType.GetField("scrollViewContent").GetValue(menu);
+            Type feedbackType = Assembly.Load("Assembly-CSharp").GetType("MenuButtonFeedback", true);
+            Button[] saveButtons = content.GetComponentsInChildren<Button>();
+            Assert.That(saveButtons.Length, Is.GreaterThan(0));
+            foreach (Button saveButton in saveButtons)
+                Assert.That(saveButton.GetComponent(feedbackType), Is.Not.Null);
+        }
+        finally
+        {
+            File.Delete(path);
+        }
     }
 
     [UnityTest]

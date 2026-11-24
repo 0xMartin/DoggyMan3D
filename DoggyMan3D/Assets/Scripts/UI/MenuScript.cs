@@ -56,6 +56,13 @@ public class MenuScript : MonoBehaviour
 
     void Start()
     {
+        foreach (GameObject section in new[] { MainSection, NewGameSection, LoadGameSection, AboutSection, SettigsSection })
+        {
+            if (section == null) continue;
+            foreach (Button button in section.GetComponentsInChildren<Button>(true))
+                MenuButtonFeedback.Attach(button);
+        }
+
         MainSection.SetActive(true);
         NewGameSection.SetActive(false);
         LoadGameSection.SetActive(false);
@@ -253,6 +260,7 @@ public class MenuScript : MonoBehaviour
             _instantiatedButtons.Add(fileButton);
 
             Button button = fileButton.GetComponent<Button>();
+            MenuButtonFeedback.Attach(button);
             button.onClick.AddListener(() =>
             {
                 AudioSource.PlayClipAtPoint(ButtonSound, new Vector3(0.0f, 1.0f, -10.0f), ButtonSoundVolume);
