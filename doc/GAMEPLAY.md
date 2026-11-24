@@ -6,6 +6,7 @@
   - [Menus](#menus)
   - [Gameplay](#gameplay)
       - [Desktop Controls](#desktop-controls)
+      - [Android Controls](#android-controls)
     - [Android](#android)
   - [Levels](#levels)
   - [Items](#items)
@@ -53,12 +54,12 @@ items at a time. When the inventory is full, use an item to make space for new o
 | Use inventory item | 1-4 |
 | Pause | Escape |
 
-#### Android Controls
+#### Android Controls
 
 On Android, use the on-screen controls to move, look around, attack, use inventory items, and pause the game.
 
-<img src="./in_game.png" width="100%" alt="Gameplay interface">
-<img src="./game_img_1.png" width="100%" alt="Gameplay screenshot">
+<img src="./game_img_3.png" width="100%" alt="Gameplay interface">
+<img src="./game_img_4.png" width="100%" alt="Gameplay screenshot">
 
 ### Android
 
