@@ -21,7 +21,6 @@ enemies, gates and screenshots.
 
 ### Videos
 
-- [Teaser trailer](https://youtu.be/iurHWjnuU00)
 - [Full game walkthrough](https://youtu.be/VHRkJi0dqkY)
 
 ## Download and play
@@ -65,6 +64,10 @@ between sessions.
 
 The first import can take some time. Keep Unity `.meta` files with their assets
 when moving or renaming them so scene and prefab references remain intact.
+
+Gameplay uses a separate post-processing profile from the menu and cinematics.
+On Android, gameplay uses FXAA, fast bloom and disables screen-space ambient
+occlusion; baked ambient occlusion remains in the lightmaps.
 
 ## Build from source
 

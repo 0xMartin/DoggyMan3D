@@ -5,6 +5,7 @@ using System.Reflection;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering.PostProcessing;
 using UnityEngine.SceneManagement;
 using UnityEngine.TestTools;
 
@@ -41,6 +42,59 @@ public class SceneLoadingTests
         {
             File.Delete(savePath);
         }
+    }
+
+    [UnityTest]
+    public IEnumerator GameplayPostProcessingIsIsolatedAndMobileSettingsPreserveSharedProfile()
+    {
+#if UNITY_ANDROID && !UNITY_EDITOR
+        Assert.Ignore("This test simulates Android settings from a desktop player or editor.");
+#endif
+        yield return SceneManager.LoadSceneAsync(0, LoadSceneMode.Single);
+        yield return null;
+        var menuVolume = Camera.main.GetComponent<PostProcessVolume>();
+        Assert.That(menuVolume, Is.Not.Null);
+        var menuProfile = menuVolume.sharedProfile;
+
+        yield return SceneManager.LoadSceneAsync(1, LoadSceneMode.Single);
+        yield return WaitForLevel(5, null);
+        var camera = Camera.main;
+        var volume = camera.GetComponent<PostProcessVolume>();
+        var layer = camera.GetComponent<PostProcessLayer>();
+        Assert.That(volume.sharedProfile, Is.Not.Null);
+        Assert.That(volume.sharedProfile, Is.Not.SameAs(menuProfile));
+        Assert.That(layer.antialiasingMode, Is.EqualTo(PostProcessLayer.Antialiasing.SubpixelMorphologicalAntialiasing));
+        Assert.That(volume.sharedProfile.TryGetSettings(out AmbientOcclusion sharedOcclusion), Is.True);
+        Assert.That(volume.sharedProfile.TryGetSettings(out Bloom sharedBloom), Is.True);
+        Assert.That(sharedOcclusion.enabled.value, Is.True);
+        Assert.That(sharedBloom.fastMode.value, Is.False);
+
+        Type settingsType = Assembly.Load("Assembly-CSharp").GetType("GameplayPostProcessing", true);
+        Component settings = camera.GetComponent(settingsType);
+        Assert.That(settings, Is.Not.Null);
+        settingsType.GetMethod("ApplyMobileSettings", BindingFlags.Instance | BindingFlags.NonPublic)
+            .Invoke(settings, null);
+        Assert.That(layer.antialiasingMode, Is.EqualTo(PostProcessLayer.Antialiasing.FastApproximateAntialiasing));
+        Assert.That(volume.profile.TryGetSettings(out AmbientOcclusion mobileOcclusion), Is.True);
+        Assert.That(volume.profile.TryGetSettings(out Bloom mobileBloom), Is.True);
+        Assert.That(mobileOcclusion.enabled.overrideState, Is.True);
+        Assert.That(mobileOcclusion.enabled.value, Is.False);
+        Assert.That(mobileBloom.fastMode.overrideState, Is.True);
+        Assert.That(mobileBloom.fastMode.value, Is.True);
+        Assert.That(sharedOcclusion.enabled.value, Is.True);
+        Assert.That(sharedBloom.fastMode.value, Is.False);
+
+        Component manager = UnityEngine.Object.FindObjectOfType(managerType) as Component;
+        managerType.GetMethod("OnLevelFinished").Invoke(manager, null);
+        yield return WaitForLevel(6, null);
+        Assert.That(Camera.main, Is.SameAs(camera));
+        Assert.That(layer.antialiasingMode, Is.EqualTo(PostProcessLayer.Antialiasing.FastApproximateAntialiasing));
+        Assert.That(volume.profile, Is.Not.SameAs(volume.sharedProfile));
+        Assert.That(mobileOcclusion.enabled.value, Is.False);
+
+        yield return SceneManager.LoadSceneAsync(0, LoadSceneMode.Single);
+        yield return null;
+        Assert.That(Camera.main.GetComponent<PostProcessVolume>().sharedProfile, Is.SameAs(menuProfile));
     }
 
     [UnityTest]

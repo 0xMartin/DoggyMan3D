@@ -1,5 +1,5 @@
 {
     "name": "SceneTests",
-    "references": ["Unity.InputSystem", "Unity.TextMeshPro", "Unity.ugui"],
+    "references": ["Unity.InputSystem", "Unity.TextMeshPro", "Unity.ugui", "Unity.Postprocessing.Runtime"],
     "optionalUnityReferences": ["TestAssemblies"]
 }
