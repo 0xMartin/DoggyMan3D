@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Glow
+  m_Name: GlowSmall
   m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -80,6 +80,6 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _EmissionColor: {r: 2.9960783, g: 2.9134662, b: 0.7490195, a: 1}
+    - _EmissionColor: {r: 11.984316, g: 11.653868, b: 2.9960778, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
