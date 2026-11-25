@@ -9,6 +9,8 @@
 
 ## About
 
+[Full game walkthrough Video](https://youtu.be/1B6dUw6L1_M)
+
 After a dragon destroys his home, Doggy Man sets out for revenge. Fight through
 six levels, manage your health and stamina, collect items, and face the dragon.
 The game includes intro and outro cinematics, enemies, traps, gates and a
@@ -18,10 +20,6 @@ four-slot inventory.
 
 See the [game guide](./doc/GAMEPLAY.md) for details on menus, levels, items,
 enemies, gates and screenshots.
-
-### Videos
-
-- [Full game walkthrough](https://youtu.be/VHRkJi0dqkY)
 
 ## Download and play
 
