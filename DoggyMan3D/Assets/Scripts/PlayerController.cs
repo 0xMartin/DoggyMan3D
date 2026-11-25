@@ -315,7 +315,14 @@ public class PlayerController : MonoBehaviour
 
     private void CameraRotation()
     {
+        Vector2 lookDelta = _input.ConsumeLookDelta();
         if (MainGameManager.IsGamePaused() || !_gameEntity.IsAlive()) return;
+
+        if (!LockCameraPosition)
+        {
+            _cinemachineTargetYaw += lookDelta.x;
+            _cinemachineTargetPitch += lookDelta.y;
+        }
 
         bool isMouse = IsCurrentDeviceMouse;
         if (!LockCameraPosition && (isMouse ? _input.look.sqrMagnitude > 0f : _input.look.sqrMagnitude >= _threshold))

@@ -56,7 +56,10 @@ items at a time. When the inventory is full, use an item to make space for new o
 
 #### Android Controls
 
-On Android, use the on-screen controls to move, look around, attack, use inventory items, and pause the game.
+On Android, use the left joystick to move. Drag anywhere outside the on-screen
+controls to look around; you can move and rotate the camera with separate fingers
+at the same time. The camera stops turning when you stop dragging.
+Use the buttons to attack, use inventory items, and pause the game.
 
 <img src="./game_img_3.png" width="100%" alt="Gameplay interface">
 <img src="./game_img_4.png" width="100%" alt="Gameplay screenshot">

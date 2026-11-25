@@ -24,6 +24,25 @@ public class GameInputs : MonoBehaviour
 	public bool cursorLocked = true;
 	public bool cursorInputForLook = true;
 
+	private Vector2 _lookDelta;
+
+	public void AddLookDelta(Vector2 delta)
+	{
+		_lookDelta += delta;
+	}
+
+	public Vector2 ConsumeLookDelta()
+	{
+		Vector2 delta = _lookDelta;
+		_lookDelta = Vector2.zero;
+		return delta;
+	}
+
+	public void ClearLookDelta()
+	{
+		_lookDelta = Vector2.zero;
+	}
+
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
 	public void OnMove(InputValue value)
 	{

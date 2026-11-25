@@ -197,6 +197,70 @@ public class SceneLoadingTests
         Assert.That(RenderSettings.fog, Is.False);
     }
 
+    [UnityTest]
+    public IEnumerator TouchCameraDeltaIsConsumedOnceAndDesktopLookIsPreserved()
+    {
+        yield return SceneManager.LoadSceneAsync(1, LoadSceneMode.Single);
+        yield return WaitForLevel(5, null);
+        Type controllerType = Assembly.Load("Assembly-CSharp").GetType("PlayerController", true);
+        Component controller = UnityEngine.Object.FindFirstObjectByType(controllerType) as Component;
+        Component input = controller.GetComponent(Assembly.Load("Assembly-CSharp").GetType("GameInputs", true));
+        MethodInfo rotate = controllerType.GetMethod("CameraRotation", BindingFlags.Instance | BindingFlags.NonPublic);
+        MethodInfo addDelta = input.GetType().GetMethod("AddLookDelta");
+        MethodInfo lookInput = input.GetType().GetMethod("LookInput");
+        FieldInfo yaw = controllerType.GetField("_cinemachineTargetYaw", BindingFlags.Instance | BindingFlags.NonPublic);
+        FieldInfo paused = managerType.GetField("_gamePauseMenuIsVisible", BindingFlags.Static | BindingFlags.NonPublic);
+        PlayerInput playerInput = controller.GetComponent<PlayerInput>();
+        Mouse mouse = InputSystem.AddDevice<Mouse>();
+        Keyboard keyboard = InputSystem.AddDevice<Keyboard>();
+        Gamepad gamepad = InputSystem.AddDevice<Gamepad>();
+        try
+        {
+            playerInput.SwitchCurrentControlScheme("Gamepad", gamepad);
+            lookInput.Invoke(input, new object[] { Vector2.zero });
+            float previousYaw = (float)yaw.GetValue(controller);
+            addDelta.Invoke(input, new object[] { new Vector2(12f, 0f) });
+            rotate.Invoke(controller, null);
+            Assert.That((float)yaw.GetValue(controller) - previousYaw, Is.EqualTo(12f).Within(0.001f));
+            rotate.Invoke(controller, null);
+            Assert.That((float)yaw.GetValue(controller) - previousYaw, Is.EqualTo(12f).Within(0.001f));
+
+            controllerType.GetField("LockCameraPosition").SetValue(controller, true);
+            addDelta.Invoke(input, new object[] { new Vector2(12f, 0f) });
+            rotate.Invoke(controller, null);
+            controllerType.GetField("LockCameraPosition").SetValue(controller, false);
+            rotate.Invoke(controller, null);
+            Assert.That((float)yaw.GetValue(controller) - previousYaw, Is.EqualTo(12f).Within(0.001f));
+
+            paused.SetValue(null, true);
+            addDelta.Invoke(input, new object[] { new Vector2(12f, 0f) });
+            rotate.Invoke(controller, null);
+            paused.SetValue(null, false);
+            rotate.Invoke(controller, null);
+            Assert.That((float)yaw.GetValue(controller) - previousYaw, Is.EqualTo(12f).Within(0.001f));
+
+            playerInput.SwitchCurrentControlScheme("KeyboardMouse", keyboard, mouse);
+            previousYaw = (float)yaw.GetValue(controller);
+            lookInput.Invoke(input, new object[] { new Vector2(0.075f, 0f) });
+            rotate.Invoke(controller, null);
+            Assert.That((float)yaw.GetValue(controller) - previousYaw, Is.EqualTo(0.15f).Within(0.001f));
+
+            playerInput.SwitchCurrentControlScheme("Gamepad", gamepad);
+            lookInput.Invoke(input, new object[] { new Vector2(20f, 0f) });
+            previousYaw = (float)yaw.GetValue(controller);
+            rotate.Invoke(controller, null);
+            Assert.That((float)yaw.GetValue(controller) - previousYaw, Is.EqualTo(20f * Time.deltaTime).Within(0.001f));
+        }
+        finally
+        {
+            paused.SetValue(null, false);
+            lookInput.Invoke(input, new object[] { Vector2.zero });
+            InputSystem.RemoveDevice(mouse);
+            InputSystem.RemoveDevice(keyboard);
+            InputSystem.RemoveDevice(gamepad);
+        }
+    }
+
     private IEnumerator WaitForLevel(int buildIndex, object previousLevel)
     {
         FieldInfo loadingDone = managerType.GetField("_levelLoadingDone", BindingFlags.Static | BindingFlags.NonPublic);
